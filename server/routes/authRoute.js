@@ -4,10 +4,12 @@ const router = express.Router();
 // Require controller modules.
 var authController = require("../controllers/authController");
 
-//GET a posts
+//Signup
+//Link: /api/user/signup
 router.post("/signup", authController.signupUser);
 
-//GET a posts
+//Signin
+//Link: /api/user/signin
 router.post("/signin", authController.signinUser);
 
 module.exports = router;
