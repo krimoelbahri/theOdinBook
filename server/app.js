@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -18,9 +19,11 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 //setting up passport
 app.use(passport.initialize());
 app.use(passport.session());
