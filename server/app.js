@@ -27,8 +27,8 @@ app.use(cookieParser());
 //setting up passport
 app.use(passport.initialize());
 app.use(passport.session());
-
 passport.use(Local);
+
 //Using routes
 app.use("/api/posts", postsRouter);
 app.use("/api/user", authRouter);
