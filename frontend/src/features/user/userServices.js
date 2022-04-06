@@ -9,7 +9,7 @@ const signup = async function (userData) {
 	return response.data;
 };
 const signin = async function (userData) {
-	let response = await axios.post(URL + "signin", userData);
+	let response = await axios.post(URL + "auth/local", userData);
 	if (response.data) {
 		localStorage.setItem("user", JSON.stringify(response.data));
 	}
