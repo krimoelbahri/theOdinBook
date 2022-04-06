@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
@@ -40,25 +41,30 @@ exports.signupUser = asyncHandler(async function (req, res) {
 	}
 });
 
-exports.signinUser = asyncHandler(async function (req, res, next) {
-	const { email, password } = req.body;
-
-	// Check for user email
-	const user = await User.findOne({ email });
-
-	if (user && (await bcrypt.compare(password, user.password))) {
-		res.json({
-			_id: user.id,
-			name: user.name,
-			email: user.email,
-			token: generateToken(user.id),
+exports.localSigninUser = function (req, res, next) {
+	passport.authenticate("local", function (err, user, info) {
+		if (err) {
+			res.status(400);
+			return next(Error(err));
+		}
+		if (!user) {
+			res.status(400);
+			return next(Error("no user"));
+		}
+		req.login(user, (loginErr) => {
+			if (loginErr) {
+				res.status(400);
+				return next(Error(loginErr));
+			}
+			res.json({
+				_id: req.user.id,
+				name: req.user.name,
+				email: req.user.email,
+				token: generateToken(req.user.id),
+			});
 		});
-	} else {
-		res.status(400);
-		throw new Error("Invalid credentials");
-	}
-});
-
+	})(req, res, next);
+};
 // Generate JWT
 const generateToken = (id) => {
 	return jwt.sign({ id }, process.env.JWT_SECRET, {
