@@ -8,7 +8,7 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 const { Local } = require("./middleware/passport");
 const authRouter = require("./routes/authRoute");
 const postsRouter = require("./routes/postsRoute");
-
+const User = require("./models/user");
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -19,15 +19,24 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+//setting up passport
+passport.use(Local);
+passport.serializeUser(function (user, done) {
+	done(null, user.id);
+});
+passport.deserializeUser(function (id, done) {
+	console.log(id);
+	User.findById(id, function (err, user) {
+		done(err, user);
+	});
+});
+//----------------
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-//setting up passport
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(Local);
 
 //Using routes
 app.use("/api/posts", postsRouter);
