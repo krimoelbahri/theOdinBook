@@ -38,7 +38,7 @@ let userSlice = createSlice({
 			state.isLoading = false;
 			state.message = "";
 		},
-		logout: () => {
+		logout: (state) => {
 			userServices.logout();
 			state.user = null;
 		},
