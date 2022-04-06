@@ -7,9 +7,10 @@ var authController = require("../controllers/authController");
 //Signup
 //Link: /api/user/signup
 router.post("/signup", authController.signupUser);
-
 //Signin
-//Link: /api/user/signin
-router.post("/signin", authController.signinUser);
+
+//local Signin
+//Link: /api/user/auth/local
+router.post("/auth/local", authController.localSigninUser);
 
 module.exports = router;
