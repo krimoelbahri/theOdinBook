@@ -14,7 +14,6 @@ export const signup = createAsyncThunk("register/user", async (data, thunkAPI) =
 		let response = await userServices.signup(data);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return thunkAPI.rejectWithValue(error.response.data.message);
 	}
 });
@@ -23,7 +22,6 @@ export const signin = createAsyncThunk("signin/user", async (data, thunkAPI) => 
 		let response = await userServices.signin(data);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return thunkAPI.rejectWithValue(error.response.data.message);
 	}
 });
