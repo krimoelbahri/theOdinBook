@@ -29,8 +29,8 @@ const Signin = () => {
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor='email'>Email</label>
-				<input type='email' name='email' id='email' onChange={handleData} />
+				<label htmlFor='username'>Email</label>
+				<input type='email' name='username' id='username' onChange={handleData} />
 				<label htmlFor='password'>Password</label>
 				<input type='password' name='password' id='password' onChange={handleData} />
 				<button type='submit' disabled={isLoading}>
