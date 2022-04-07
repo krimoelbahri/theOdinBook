@@ -15,8 +15,12 @@ const signin = async function (userData) {
 	}
 	return response.data;
 };
-const logout = () => {
-	localStorage.removeItem("user");
+const logout = async () => {
+	let response = await axios.get(URL + "auth/logout");
+	if (response.data) {
+		localStorage.removeItem("user");
+	}
+	return response.data;
 };
 
 let userServices = { signup, signin, logout };
