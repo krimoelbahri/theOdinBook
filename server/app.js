@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const { errorHandler } = require("./middleware/errorMiddleware");
-const { Local } = require("./middleware/passport");
+const { Local, Facebook } = require("./middleware/passport");
 const authRouter = require("./routes/authRoute");
 const postsRouter = require("./routes/postsRoute");
 const User = require("./models/user");
@@ -21,11 +21,11 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 //setting up passport
 passport.use(Local);
+passport.use(Facebook);
 passport.serializeUser(function (user, done) {
 	done(null, user.id);
 });
 passport.deserializeUser(function (id, done) {
-	console.log(id);
 	User.findById(id, function (err, user) {
 		done(err, user);
 	});
