@@ -1,4 +1,5 @@
 const LocalStrategy = require("passport-local").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const Local = new LocalStrategy((username, password, done) => {
@@ -20,4 +21,31 @@ const Local = new LocalStrategy((username, password, done) => {
 		});
 	});
 });
-module.exports = { Local };
+const Facebook = new FacebookStrategy(
+	{
+		clientID: process.env.FACEBOOK_APP_ID,
+		clientSecret: process.env.FACEBOOK_APP_SECRET,
+		callbackURL: "http://localhost:5000/api/user/auth/facebook/callback",
+		profileFields: ["id", "displayName", "photos", "email"],
+	},
+	function (accessToken, refreshToken, profile, cb) {
+		User.findOne({ facebookId: profile.id }, function (err, user) {
+			if (!user) {
+				User.create(
+					{
+						name: profile.displayName,
+						email: profile.emails ? profile.emails[0] : null,
+						facebookId: profile.id,
+						profilePic: profile.photos[0].value,
+					},
+					(err, user) => {
+						return cb(err, user);
+					},
+				);
+			} else {
+				return cb(err, user);
+			}
+		});
+	},
+);
+module.exports = { Local, Facebook };
