@@ -25,6 +25,14 @@ export const signin = createAsyncThunk("signin/user", async (data, thunkAPI) => 
 		return thunkAPI.rejectWithValue(error.response.data.message);
 	}
 });
+export const logout = createAsyncThunk("logout/user", async (_, thunkAPI) => {
+	try {
+		let response = await userServices.logout();
+		return response;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error.response.data.message);
+	}
+});
 
 let userSlice = createSlice({
 	name: "user",
@@ -35,10 +43,6 @@ let userSlice = createSlice({
 			state.isDone = false;
 			state.isLoading = false;
 			state.message = "";
-		},
-		logout: (state) => {
-			userServices.logout();
-			state.user = null;
 		},
 	},
 	extraReducers(builder) {
@@ -70,8 +74,21 @@ let userSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 				state.user = null;
+			})
+			.addCase(logout.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(logout.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isDone = true;
+				state.user = action.payload.user;
+			})
+			.addCase(logout.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
 			});
 	},
 });
-export const { reset, logout } = userSlice.actions;
+export const { reset } = userSlice.actions;
 export default userSlice.reducer;
