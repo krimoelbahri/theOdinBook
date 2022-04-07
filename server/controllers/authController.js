@@ -4,6 +4,13 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 
+// Generate JWT
+const generateToken = (id) => {
+	return jwt.sign({ id }, process.env.JWT_SECRET, {
+		expiresIn: "30d",
+	});
+};
+
 exports.signupUser = asyncHandler(async function (req, res) {
 	const { name, email, password, confirmPassword } = req.body;
 	if (!name || !email || !password || !confirmPassword) {
@@ -65,9 +72,27 @@ exports.localSigninUser = function (req, res, next) {
 		});
 	})(req, res, next);
 };
-// Generate JWT
-const generateToken = (id) => {
-	return jwt.sign({ id }, process.env.JWT_SECRET, {
-		expiresIn: "30d",
-	});
+exports.facebookSigninUser = passport.authenticate("facebook");
+exports.facebookSigninUserCB = function (req, res, next) {
+	passport.authenticate("facebook", function (err, user, info) {
+		if (err) {
+			res.status(400);
+			return next(Error(err));
+		}
+		if (!user) {
+			res.status(400);
+			return next(Error("no user"));
+		}
+		res.json({
+			_id: user.id,
+			name: user.name,
+			email: user.email,
+			token: generateToken(user.id),
+		});
+	})(req, res, next);
+};
+
+exports.logout = function (req, res) {
+	req.logout();
+	res.json({ user: req.user });
 };
