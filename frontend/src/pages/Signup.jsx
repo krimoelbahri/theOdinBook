@@ -1,4 +1,4 @@
-import { signup, reset } from "../features/user/userSlice";
+import { signup, reset } from "../features/auth/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

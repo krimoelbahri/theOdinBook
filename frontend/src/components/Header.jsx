@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { logout } from "../features/user/userSlice";
+import { logout } from "../features/auth/userSlice";
 
 function Header() {
 	const dispatch = useDispatch();
