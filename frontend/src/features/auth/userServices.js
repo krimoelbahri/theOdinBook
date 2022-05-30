@@ -15,6 +15,14 @@ const signin = async function (userData) {
 	}
 	return response.data;
 };
+const facebookSignin = async function () {
+	let response = await axios.get(URL + "auth/facebook");
+	console.log(response);
+	if (response.data) {
+		localStorage.setItem("user", JSON.stringify(response.data));
+	}
+	return response.data;
+};
 const logout = async () => {
 	let response = await axios.get(URL + "auth/logout");
 	if (response.data) {
@@ -23,5 +31,5 @@ const logout = async () => {
 	return response.data;
 };
 
-let userServices = { signup, signin, logout };
+let userServices = { signup, signin, facebookSignin, logout };
 export default userServices;
