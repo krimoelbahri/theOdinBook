@@ -1,7 +1,8 @@
-import { signup, reset } from "../features/auth/userSlice";
+import { signup, reset, facebookSignin } from "../features/auth/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { Container, Form, FacebookButton } from "../styles/signin.signup.styled";
 
 const Signup = () => {
 	const [userData, setUserData] = useState({});
@@ -11,6 +12,9 @@ const Signup = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(signup(userData));
+	};
+	const handleFacebooklogin = () => {
+		dispatch(facebookSignin());
 	};
 	const handleData = (e) => {
 		setUserData({
@@ -27,8 +31,8 @@ const Signup = () => {
 	}, [user, isDone, dispatch, navigate]);
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
+		<Container>
+			<Form onSubmit={handleSubmit}>
 				<label htmlFor='name'>Name</label>
 				<input type='text' name='name' id='name' onChange={handleData} />
 				<label htmlFor='email'>Email</label>
@@ -45,9 +49,13 @@ const Signup = () => {
 				<button type='submit' disabled={isLoading}>
 					Register
 				</button>
-			</form>
+				<p>
+					Already have an account <Link to='/signin'>Log in</Link>
+				</p>
+			</Form>
+			<FacebookButton onClick={handleFacebooklogin}>Sign In with Facebook</FacebookButton>
 			<p>{isError && message}</p>
-		</div>
+		</Container>
 	);
 };
 
