@@ -25,6 +25,14 @@ export const signin = createAsyncThunk("signin/user", async (data, thunkAPI) => 
 		return thunkAPI.rejectWithValue(error.response.data.message);
 	}
 });
+export const facebookSignin = createAsyncThunk("facebokSignin/user", async (_, thunkAPI) => {
+	try {
+		let response = await userServices.facebookSignin();
+		return response;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error.response.data.message);
+	}
+});
 export const logout = createAsyncThunk("logout/user", async (_, thunkAPI) => {
 	try {
 		let response = await userServices.logout();
@@ -70,6 +78,20 @@ let userSlice = createSlice({
 				state.user = action.payload;
 			})
 			.addCase(signin.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+				state.user = null;
+			})
+			.addCase(facebookSignin.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(facebookSignin.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isDone = true;
+				state.user = action.payload;
+			})
+			.addCase(facebookSignin.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
