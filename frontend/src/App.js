@@ -4,7 +4,7 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Header from "./components/Header";
-
+import GlobalFonts from "./fonts/fonts";
 function App() {
 	return (
 		<>
@@ -14,6 +14,7 @@ function App() {
 				<Route path='/signup' element={<Signup />} />
 				<Route path='/signin' element={<Signin />} />
 			</Routes>
+			<GlobalFonts />
 		</>
 	);
 }
