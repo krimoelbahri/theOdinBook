@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	width: 60%;
-	height: 90vh;
 	margin: 10px auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	@media (max-width: 600px) {
+		width: 90%;
+	}
 `;
 export const Form = styled.form`
 	width: 100%;
@@ -15,24 +17,38 @@ export const Form = styled.form`
 	flex-direction: column;
 	align-items: center;
 	input,
-	label {
-		width: 50%;
+	label,
+	button {
+		width: 400px;
 		height: 30px;
 		line-height: 20px;
 		margin: 1px 0 3px 0;
 		font-size: 15px;
+		@media (max-width: 600px) {
+			width: 70%;
+		}
 	}
 	button {
-		width: 50%;
-		height: 30px;
-		margin: 5px 0;
+		background-color: #2d9dd3;
+		border: 1px solid blue;
+		cursor: pointer;
+		color: white;
+		font-family: "klavika";
+		font-weight: bold;
+		font-size: medium;
 	}
 `;
 export const FacebookButton = styled.button`
-	width: 50%;
+	width: 400px;
 	height: 30px;
 	margin: 5px 0;
 	border: none;
 	background-color: blue;
 	color: white;
+	font-family: "klavika";
+	font-weight: bold;
+	font-size: medium;
+	@media (max-width: 600px) {
+		width: 70%;
+	}
 `;
