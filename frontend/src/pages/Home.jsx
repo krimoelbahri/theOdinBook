@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LeftBar, RightBar, Main } from "../components/home components";
+import { Container } from "../styles/home.styled";
 
 const Home = () => {
 	const { user } = useSelector((state) => state.user);
@@ -11,11 +12,11 @@ const Home = () => {
 	}, [user, navigate]);
 
 	return (
-		<>
+		<Container>
 			<LeftBar />
 			<Main />
 			<RightBar />
-		</>
+		</Container>
 	);
 };
 

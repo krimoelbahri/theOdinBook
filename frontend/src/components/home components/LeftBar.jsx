@@ -1,7 +1,8 @@
 import React from "react";
+import { LBContainer } from "../../styles/home.styled";
 
 function LeftBar() {
-	return <div>LeftBar</div>;
+	return <LBContainer>LeftBar</LBContainer>;
 }
 
 export default LeftBar;

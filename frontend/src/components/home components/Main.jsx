@@ -1,7 +1,8 @@
 import React from "react";
+import { MainContainer } from "../../styles/home.styled";
 
 function Main() {
-	return <div>Main</div>;
+	return <MainContainer>Main</MainContainer>;
 }
 
 export default Main;
