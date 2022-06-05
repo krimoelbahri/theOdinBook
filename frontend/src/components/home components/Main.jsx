@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { MainContainer, CreatePostContainer } from "../../styles/home.styled";
+import Post from "../post components";
 
 function Main() {
 	const { user } = useSelector((state) => state.user);
@@ -16,6 +17,7 @@ function Main() {
 					<p>Photo/Video</p>
 				</div>
 			</CreatePostContainer>
+			<Post />
 		</MainContainer>
 	);
 }
