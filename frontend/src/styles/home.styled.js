@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { PostContainer } from "./Post.styled";
 
 /*Variables*/
 let boxShadow = "0px 0px 4px 1px rgba(209, 194, 194, 1)";
@@ -9,15 +10,6 @@ const SideBarContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
-`;
-const PostContainer = styled.div`
-	width: 100%;
-	border-radius: 10px;
-	background-color: white;
-	padding: 10px 20px;
-	box-shadow: ${boxShadow};
-	-webkit-box-shadow: ${boxShadow};
-	-moz-box-shadow: ${boxShadow};
 `;
 
 /* Home Container*/
@@ -140,11 +132,5 @@ export const CreatePostContainer = styled(PostContainer)`
 	}
 	.down:hover {
 		background-color: #d9d1d3;
-	}
-	.b-b {
-		border-bottom: 1px solid #efefef;
-	}
-	.c-p {
-		cursor: pointer;
 	}
 `;
