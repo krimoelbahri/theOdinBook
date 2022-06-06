@@ -1,7 +1,11 @@
-import React from "react";
+import { PostDescriptionContainer } from "../../../styles/Post.styled";
 
 function PostDescription() {
-	return <div>PostDescription</div>;
+	return (
+		<PostDescriptionContainer>
+			<p>Description</p>
+		</PostDescriptionContainer>
+	);
 }
 
 export default PostDescription;
