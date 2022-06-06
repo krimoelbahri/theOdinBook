@@ -8,7 +8,7 @@ function RightBar() {
 				<h5>Contacts</h5>
 				<i className='fa-solid fa-address-book'></i>
 			</div>
-			<div className='subDiv types'>
+			<div className='subDiv types b-b'>
 				<div>
 					<h6>Primary</h6>
 				</div>
