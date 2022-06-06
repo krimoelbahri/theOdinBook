@@ -68,7 +68,6 @@ export const RBContainer = styled(SideBarContainer)`
 		align-items: center;
 	}
 	.types {
-		border-bottom: 1px solid #efefef;
 		div {
 			height: 100%;
 			padding: 5px;
