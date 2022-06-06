@@ -1,7 +1,11 @@
-import React from "react";
+import { PostImgContainer } from "../../../styles/Post.styled";
 
 function PostImg() {
-	return <div>PostImg</div>;
+	return (
+		<PostImgContainer>
+			<img src='' alt='Post' />
+		</PostImgContainer>
+	);
 }
 
 export default PostImg;
