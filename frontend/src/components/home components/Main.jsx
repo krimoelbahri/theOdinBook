@@ -10,7 +10,7 @@ function Main() {
 			<CreatePostContainer>
 				<div className='subdiv up b-b'>
 					<img className='c-p' src='' alt='Pr' />
-					<p className='c-p'>What's on your mind, {user.name}?</p>
+					{user && <p className='c-p'>What's on your mind, {user.name}?</p>}
 				</div>
 				<div className='subdiv down c-p'>
 					<i className='fa-solid fa-photo-film'></i>
