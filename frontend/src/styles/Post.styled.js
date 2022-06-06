@@ -43,3 +43,11 @@ export const ProfileDiv = styled.div`
 		width: fit-content;
 	}
 `;
+/* Post description */
+export const PostDescriptionContainer = styled.div`
+	width: 100%;
+	margin: 5px 0;
+	p {
+		padding: 5px;
+	}
+`;
