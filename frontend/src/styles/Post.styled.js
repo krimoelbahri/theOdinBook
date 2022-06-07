@@ -11,7 +11,7 @@ export const PostContainer = styled.div`
 	-webkit-box-shadow: ${boxShadow};
 	-moz-box-shadow: ${boxShadow};
 `;
-/*Post header*/
+/* Post header */
 export const PostHeaderContainer = styled.div`
 	width: 100%;
 	margin-bottom: 5px;
@@ -51,7 +51,7 @@ export const PostDescriptionContainer = styled.div`
 		padding: 5px;
 	}
 `;
-/* Post description */
+/* Post images */
 export const PostImgContainer = styled.div`
 	width: calc(100% + 40px);
 	margin: 5px 0 5px -20px;
@@ -60,7 +60,7 @@ export const PostImgContainer = styled.div`
 		width: 100%;
 	}
 `;
-/* Post description */
+/* Post Reactions */
 export const PostReactionContainer = styled.div`
 	width: 100%;
 	margin: 5px 0;
@@ -111,5 +111,103 @@ export const ReactionButtonsDiv = styled.div`
 	}
 	p {
 		font-weight: bolder;
+	}
+`;
+/* Post comments */
+export const PostCommentsContainer = styled.div`
+	width: 100%;
+	border-top: 1px solid #c9c4c4;
+	display: flex;
+	flex-direction: column;
+`;
+export const ShowCommentsDiv = styled.div`
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+`;
+export const AddCommentsDiv = styled.div`
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	img {
+		height: 30px;
+		width: 30px;
+		border-radius: 50%;
+		border: 1px solid;
+		margin-right: 10px;
+	}
+	div {
+		width: 100%;
+		height: 30px;
+		border-radius: 20px;
+		background-color: #f0f2f5;
+		form {
+			display: flex;
+			width: 100%;
+			height: 100%;
+			padding: 5px 10px;
+			input {
+				flex: auto;
+				height: 100%;
+				outline: none;
+				border: none;
+				background-color: transparent;
+			}
+			button {
+				border: none;
+				background-color: transparent;
+			}
+		}
+	}
+`;
+export const CommentsDiv = styled.div`
+	width: 100%;
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	div {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		img {
+			height: 30px;
+			width: 30px;
+			border-radius: 50%;
+			border: 1px solid;
+			margin-right: 10px;
+		}
+		div {
+			max-width: 100%;
+			margin-right: 10px;
+			padding: 5px;
+			border-radius: 10px;
+			background-color: #f0f2f5;
+			div {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				p {
+					font-size: 14px;
+					line-height: 16px;
+					margin-bottom: 10px;
+					:hover {
+						text-decoration: underline;
+					}
+				}
+				span {
+					font-size: 14px;
+				}
+			}
+		}
+		i {
+			align-self: center;
+			padding: 7px;
+			border-radius: 50%;
+			:hover {
+				background-color: #f0f2f5;
+			}
+		}
 	}
 `;
