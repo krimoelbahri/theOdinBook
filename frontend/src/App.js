@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
-import Header from "./components/Header";
+import Header from "./components/header components";
 import GlobalFonts from "./fonts/fonts";
 function App() {
 	return (
