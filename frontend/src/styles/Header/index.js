@@ -4,7 +4,7 @@ import { SearchContainer } from "./SearchInput.styled";
 import {
 	SettingsContainer,
 	ArrowContainer,
-	SettingsDropDown,
+	SettingsDropDownContainer,
 	SettingsDiv,
 	IconContainer,
 } from "./SettingsAccount-styled";
@@ -17,7 +17,7 @@ export {
 	ShortcutsContainer,
 	SettingsContainer,
 	ArrowContainer,
-	SettingsDropDown,
+	SettingsDropDownContainer,
 	SettingsDiv,
 	IconContainer,
 };
