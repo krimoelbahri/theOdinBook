@@ -19,11 +19,11 @@ export const ArrowContainer = styled.div`
 	align-items: center;
 	:hover {
 		cursor: pointer;
-		background-color: rgb(191, 191, 191);
+		background-color: ${(props) => (props.active ? null : "rgb(191, 191, 191)")};
 	}
 	i {
 		font-size: 20px;
-		color: #2d9dd3; //TODO : turn blue when active
+		color: ${(props) => (props.active ? "#2d9dd3" : "black")};
 	}
 `;
 export const SettingsDropDownContainer = styled.div`
