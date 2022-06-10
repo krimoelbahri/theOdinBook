@@ -26,13 +26,13 @@ export const ArrowContainer = styled.div`
 		color: #2d9dd3; //TODO : turn blue when active
 	}
 `;
-export const SettingsDropDown = styled.div`
+export const SettingsDropDownContainer = styled.div`
 	min-height: 100px;
 	padding: 10px;
 	margin-top: -5px;
 	border-radius: 10px;
 	background-color: white;
-	display: flex;
+	display: ${(props) => (props.active ? "flex" : "none")};
 	flex-direction: column;
 	hr {
 		background: #dadde1;
