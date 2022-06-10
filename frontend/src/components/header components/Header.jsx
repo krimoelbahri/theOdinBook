@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/auth/userSlice";
 import { Container } from "../../styles/Header";
-import { SearchInput, Logo } from "./subcomponents";
+import { SearchInput, Logo, Shortcuts, Setting } from "./subcomponents";
 
 function Header() {
 	const dispatch = useDispatch();
@@ -12,6 +12,8 @@ function Header() {
 			{user && (
 				<>
 					<SearchInput />
+					<Shortcuts />
+					<Setting />
 					<div>
 						<button
 							onClick={() => {
