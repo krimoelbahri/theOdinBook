@@ -9,7 +9,7 @@ export const LogoContainer = styled.div`
 	position: fixed;
 	left: 0;
 	h4 {
-		padding: 8px 7px;
+		padding: 9px 7px;
 		font-size: 20px;
 		font-style: italic;
 		font-weight: bold;
