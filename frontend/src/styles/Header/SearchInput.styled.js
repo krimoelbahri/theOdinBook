@@ -16,14 +16,14 @@ export const DDheader = styled.div`
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-evenly;
-	.arrow {
-		border-radius: 50%;
-		padding: 10px;
-		display: block;
-		:hover {
-			background-color: #efefef;
-			cursor: pointer;
-		}
+`;
+export const Arrow = styled.div`
+	border-radius: 50%;
+	padding: 10px;
+	display: block;
+	:hover {
+		background-color: #efefef;
+		cursor: pointer;
 	}
 `;
 
