@@ -9,26 +9,26 @@ export const ShortcutsContainer = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	div {
-		width: 22%;
-		height: 100%;
-		border-bottom: 4px solid white; //TODO: only when active
-		.item-holder {
-			width: 100%;
-			height: 54px;
-			margin-top: 2px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			border-radius: 5px;
-			:hover {
-				cursor: pointer;
-				background-color: rgb(180 180 180 / 50%);
-			}
-			i {
-				font-size: 23px;
-				color: white;
-			}
+`;
+export const ShortcutDiv = styled.div`
+	width: 22%;
+	height: 100%;
+	border-bottom: ${(props) => (props.active ? "4px solid white" : null)};
+	.item-holder {
+		width: 100%;
+		height: 54px;
+		margin-top: 2px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 5px;
+		:hover {
+			cursor: pointer;
+			background-color: ${(props) => (props.active ? null : "rgb(180 180 180 / 50%)")};
+		}
+		i {
+			font-size: 23px;
+			color: ${(props) => (props.active ? "white" : "black")};
 		}
 	}
 `;
