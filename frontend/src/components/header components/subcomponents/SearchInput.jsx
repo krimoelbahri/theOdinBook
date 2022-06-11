@@ -1,12 +1,24 @@
 import React from "react";
-import { SearchContainer } from "../../../styles/Header";
+import { SearchContainer, SearchDDContainer, DDheader, SearchDD } from "../../../styles/Header";
 
 function SearchInput() {
 	return (
-		<SearchContainer>
-			<i className='fa-solid fa-magnifying-glass'></i>
-			<input type='text' placeholder='Search B-Social' />
-		</SearchContainer>
+		<SearchDDContainer>
+			<DDheader>
+				<div className='arrow'>
+					<i className='fa-solid fa-arrow-left'></i>
+				</div>
+				<SearchContainer>
+					<i className='fa-solid fa-magnifying-glass'></i>
+					<input type='text' placeholder='Search B-Social' />
+				</SearchContainer>
+			</DDheader>
+			<SearchDD>
+				<div className='recent'>
+					<h4>Recent Searches</h4>
+				</div>
+			</SearchDD>
+		</SearchDDContainer>
 	);
 }
 
