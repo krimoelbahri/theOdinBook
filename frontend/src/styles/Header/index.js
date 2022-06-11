@@ -8,13 +8,14 @@ import {
 	SettingsDiv,
 	IconContainer,
 } from "./SettingsAccount-styled";
-import { ShortcutsContainer } from "./shortcuts.styled";
+import { ShortcutsContainer, ShortcutDiv } from "./shortcuts.styled";
 
 export {
 	LogoContainer,
 	Container,
 	SearchContainer,
 	ShortcutsContainer,
+	ShortcutDiv,
 	SettingsContainer,
 	ArrowContainer,
 	SettingsDropDownContainer,
