@@ -2,7 +2,7 @@ import styled from "styled-components";
 export const SearchDDContainer = styled.div`
 	width: 320px;
 	border-radius: 0 10px 10px 10px;
-	background-color: white;
+	background-color: ${({ active }) => (active ? "white" : "transparent")};
 	position: fixed;
 	left: 0px;
 	display: flex;
@@ -11,7 +11,7 @@ export const SearchDDContainer = styled.div`
 `;
 export const DDheader = styled.div`
 	height: 60px;
-	//margin-left: 60px;
+	margin-left: ${({ active }) => (active ? "0px" : "60px")};
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -20,7 +20,7 @@ export const DDheader = styled.div`
 export const Arrow = styled.div`
 	border-radius: 50%;
 	padding: 10px;
-	display: block;
+	display: ${({ active }) => (active ? "block" : "none")};
 	:hover {
 		background-color: #efefef;
 		cursor: pointer;
@@ -54,12 +54,13 @@ export const SearchContainer = styled.div`
 	i {
 		margin: 0px 5px;
 		opacity: 0.4;
-		display: block;
+		display: ${({ icon }) => (icon ? "block" : "none")};
+		cursor: pointer;
 	}
 `;
 export const SearchDD = styled.div`
 	width: 100%;
-	display: flex;
+	display: ${({ active }) => (active ? "flex" : "none")};
 	flex-direction: column;
 	.recent {
 		height: 40px;
