@@ -1,6 +1,12 @@
 import { Container } from "./header.styled";
 import { LogoContainer } from "./logo.styled";
-import { SearchContainer, SearchDDContainer, DDheader, SearchDD } from "./SearchInput.styled";
+import {
+	SearchContainer,
+	SearchDDContainer,
+	DDheader,
+	SearchDD,
+	Arrow,
+} from "./SearchInput.styled";
 import {
 	SettingsContainer,
 	ArrowContainer,
@@ -17,6 +23,7 @@ export {
 	SearchDDContainer,
 	ShortcutsContainer,
 	SearchDD,
+	Arrow,
 	DDheader,
 	ShortcutDiv,
 	SettingsContainer,
