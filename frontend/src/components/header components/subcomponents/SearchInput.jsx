@@ -1,13 +1,20 @@
-import React from "react";
-import { SearchContainer, SearchDDContainer, DDheader, SearchDD } from "../../../styles/Header";
+import { useState } from "react";
+import {
+	SearchContainer,
+	SearchDDContainer,
+	DDheader,
+	SearchDD,
+	Arrow,
+} from "../../../styles/Header";
 
 function SearchInput() {
+	const [active, setActive] = useState(false);
 	return (
-		<SearchDDContainer>
+		<SearchDDContainer active={active}>
 			<DDheader>
-				<div className='arrow'>
+				<Arrow>
 					<i className='fa-solid fa-arrow-left'></i>
-				</div>
+				</Arrow>
 				<SearchContainer>
 					<i className='fa-solid fa-magnifying-glass'></i>
 					<input type='text' placeholder='Search B-Social' />
