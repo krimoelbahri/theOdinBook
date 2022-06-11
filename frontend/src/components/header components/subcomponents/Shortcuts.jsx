@@ -1,23 +1,26 @@
-import { ShortcutsContainer } from "../../../styles/Header";
+import { ShortcutsContainer, ShortcutDiv } from "../../../styles/Header";
+import { useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Shortcuts() {
+	let location = useLocation();
 	return (
 		<ShortcutsContainer>
-			<div>
-				<span className='item-holder'>
+			<ShortcutDiv active={location.pathname === "/" ? true : false}>
+				<NavLink to={"/"} className='item-holder'>
 					<i className='fa-solid fa-house'></i>
-				</span>
-			</div>
-			<div>
-				<span className='item-holder'>
+				</NavLink>
+			</ShortcutDiv>
+			<ShortcutDiv active={location.pathname === "/friends" ? true : false}>
+				<NavLink to={"/friends"} className='item-holder'>
 					<i className='fa-solid fa-user-group' />
-				</span>
-			</div>
-			<div>
-				<span className='item-holder'>
+				</NavLink>
+			</ShortcutDiv>
+			<ShortcutDiv active={location.pathname === "/watch" ? true : false}>
+				<NavLink to={"/watch"} className='item-holder'>
 					<i className='fa-solid fa-tv'></i>
-				</span>
-			</div>
+				</NavLink>
+			</ShortcutDiv>
 		</ShortcutsContainer>
 	);
 }
