@@ -47,22 +47,24 @@ export const SearchContainer = styled.div`
 		width: ${({ active }) => (active ? "240px" : "40px")};
 		border-radius: ${({ active }) => (active ? "20px" : "50%")};
 		cursor: pointer;
-		input {
-			display: ${({ active }) => (active ? "block" : "none")};
-		}
 	}
 	input {
 		background-color: #efefef;
-		width: ${({ opacity }) => (opacity ? "200px" : "210px")};
+		width: ${({ iconOpacity }) => (iconOpacity ? "200px" : "210px")};
 		height: 90%;
 		border: none;
 		outline: none;
 		transition: all 0.2s;
+		@media (max-width: 1000px) {
+			width: ${({ active }) => {
+				if (!active) return "0";
+			}};
+		}
 	}
 	i {
-		width: ${({ opacity }) => (opacity ? "16px" : "0")};
+		width: ${({ iconOpacity }) => (iconOpacity ? "16px" : "0")};
 		margin: 0px 5px;
-		opacity: ${({ opacity }) => (opacity ? "0.4" : "0")};
+		opacity: ${({ iconOpacity }) => (iconOpacity ? "0.4" : "0")};
 		transition: all 0.2s;
 		cursor: pointer;
 	}
