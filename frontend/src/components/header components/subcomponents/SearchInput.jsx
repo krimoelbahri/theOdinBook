@@ -24,7 +24,7 @@ function SearchInput() {
 				<Arrow active={active} onClick={hideDD}>
 					<i className='fa-solid fa-arrow-left'></i>
 				</Arrow>
-				<SearchContainer onClick={showDD} opacity={opacity} active={active}>
+				<SearchContainer onClick={showDD} iconOpacity={opacity} active={active}>
 					<i className='fa-solid fa-magnifying-glass'></i>
 					<input
 						type='text'
