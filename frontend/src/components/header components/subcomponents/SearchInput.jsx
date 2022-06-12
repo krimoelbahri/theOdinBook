@@ -9,7 +9,7 @@ import {
 
 function SearchInput() {
 	const [active, setActive] = useState(false);
-	const [icon, setIcon] = useState(true);
+	const [opacity, setOpacity] = useState(true);
 
 	function showDD() {
 		if (!active) setActive(true);
@@ -24,13 +24,13 @@ function SearchInput() {
 				<Arrow active={active} onClick={hideDD}>
 					<i className='fa-solid fa-arrow-left'></i>
 				</Arrow>
-				<SearchContainer onClick={showDD} icon={icon} active={active}>
+				<SearchContainer onClick={showDD} opacity={opacity} active={active}>
 					<i className='fa-solid fa-magnifying-glass'></i>
 					<input
 						type='text'
 						placeholder='Search B-Social'
-						onFocus={() => setIcon(false)}
-						onBlur={() => setIcon(true)}
+						onFocus={() => setOpacity(false)}
+						onBlur={() => setOpacity(true)}
 					/>
 				</SearchContainer>
 			</DDheader>
