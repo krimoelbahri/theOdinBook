@@ -9,6 +9,9 @@ export const ShortcutsContainer = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	@media (max-width: 700px) {
+		display: none;
+	}
 `;
 export const ShortcutDiv = styled.div`
 	width: 22%;
