@@ -4,7 +4,7 @@ import { PostContainer } from "./Post.styled";
 /*Variables*/
 let boxShadow = "0px 0px 4px 1px rgba(209, 194, 194, 1)";
 const SideBarContainer = styled.div`
-	width: 25%;
+	width: 270px;
 	padding: 10px 20px;
 	position: fixed;
 	display: flex;
@@ -21,16 +21,32 @@ export const Container = styled.div`
 	padding-top: 20px;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: center;
+	@media (max-width: 1000px) {
+		justify-content: start;
+	}
+	@media (max-width: 800px) {
+		justify-content: center;
+	}
 `;
 /* Main styling */
 export const MainContainer = styled.div`
-	width: 40%;
+	width: 450px;
 	min-height: 100%;
+	@media (max-width: 1000px) {
+		margin-left: 60px;
+	}
+	@media (max-width: 800px) {
+		margin-left: 0px;
+	}
 `;
 /* LeftBar styling */
 export const LBContainer = styled(SideBarContainer)`
 	left: 10px;
+	@media (max-width: 1000px) {
+		display: none;
+	}
+
 	li {
 		height: 30px;
 		margin-bottom: 10px;
@@ -53,12 +69,15 @@ export const LBContainer = styled(SideBarContainer)`
 /* RightBar styling */
 export const RBContainer = styled(SideBarContainer)`
 	right: 10px;
-	min-width: 200px;
 	background-color: white;
 	border-radius: 20px 20px 0 0;
 	box-shadow: ${boxShadow};
 	-webkit-box-shadow: ${boxShadow};
 	-moz-box-shadow: ${boxShadow};
+	@media (max-width: 800px) {
+		display: none;
+	}
+
 	.subDiv {
 		display: flex;
 		height: 30px;
