@@ -1,8 +1,11 @@
 import styled from "styled-components";
+let boxShadow = "0px 0px 4px 1px rgba(209, 194, 194, 1)";
+
 export const SearchDDContainer = styled.div`
 	width: 320px;
 	border-radius: 0 10px 10px 10px;
 	background-color: ${({ active }) => (active ? "white" : "transparent")};
+	box-shadow: ${({ active }) => (active ? boxShadow : null)};
 	position: fixed;
 	left: 0px;
 	display: flex;
@@ -28,14 +31,16 @@ export const Arrow = styled.div`
 `;
 
 export const SearchContainer = styled.div`
-	width: 240px;
+	width: ${({ active }) => (active ? "240px" : "220px")};
 	height: 40px;
-	padding: 4px 10px;
+	padding: 4px 5px;
 	background-color: #efefef;
 	border-radius: 20px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	transition: width 0.2s;
+
 	@media (max-width: 1000px) {
 		width: 40px;
 		border-radius: 50%;
@@ -46,15 +51,17 @@ export const SearchContainer = styled.div`
 	}
 	input {
 		background-color: #efefef;
-		width: 100%;
+		width: ${({ opacity }) => (opacity ? "200px" : "210px")};
 		height: 90%;
 		border: none;
 		outline: none;
+		transition: all 0.2s;
 	}
 	i {
+		width: ${({ opacity }) => (opacity ? "16px" : "0")};
 		margin: 0px 5px;
-		opacity: 0.4;
-		display: ${({ icon }) => (icon ? "block" : "none")};
+		opacity: ${({ opacity }) => (opacity ? "0.4" : "0")};
+		transition: all 0.2s;
 		cursor: pointer;
 	}
 `;
