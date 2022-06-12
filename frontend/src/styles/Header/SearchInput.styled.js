@@ -8,6 +8,7 @@ export const SearchDDContainer = styled.div`
 	box-shadow: ${({ active }) => (active ? boxShadow : null)};
 	position: fixed;
 	left: 0px;
+	z-index: 10;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -18,11 +19,12 @@ export const DDheader = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: start;
 `;
 export const Arrow = styled.div`
 	border-radius: 50%;
 	padding: 10px;
+	margin: 0 10px;
 	display: ${({ active }) => (active ? "block" : "none")};
 	:hover {
 		background-color: #efefef;
@@ -42,11 +44,11 @@ export const SearchContainer = styled.div`
 	transition: width 0.2s;
 
 	@media (max-width: 1000px) {
-		width: 40px;
-		border-radius: 50%;
+		width: ${({ active }) => (active ? "240px" : "40px")};
+		border-radius: ${({ active }) => (active ? "20px" : "50%")};
 		cursor: pointer;
 		input {
-			display: none;
+			display: ${({ active }) => (active ? "block" : "none")};
 		}
 	}
 	input {
