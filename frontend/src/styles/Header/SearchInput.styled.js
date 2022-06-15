@@ -35,13 +35,13 @@ export const Arrow = styled.div`
 export const SearchContainer = styled.div`
 	width: ${({ active }) => (active ? "240px" : "220px")};
 	height: 40px;
-	padding: 4px 5px;
+	padding: 5px 5px;
 	background-color: #efefef;
 	border-radius: 20px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	transition: width 0.2s;
+	//transition: width 0.1s;
 
 	@media (max-width: 1000px) {
 		width: ${({ active }) => (active ? "240px" : "40px")};
@@ -54,10 +54,10 @@ export const SearchContainer = styled.div`
 		height: 90%;
 		border: none;
 		outline: none;
-		transition: all 0.2s;
+		transition: width 0.2s;
 		@media (max-width: 1000px) {
-			width: ${({ active }) => {
-				if (!active) return "0";
+			display: ${({ active }) => {
+				if (!active) return "none";
 			}};
 		}
 	}
