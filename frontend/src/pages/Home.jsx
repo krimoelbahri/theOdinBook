@@ -13,9 +13,13 @@ const Home = () => {
 
 	return (
 		<Container>
-			<LeftBar />
-			<Main />
-			<RightBar />
+			{user && (
+				<>
+					<LeftBar />
+					<Main />
+					<RightBar />
+				</>
+			)}
 		</Container>
 	);
 };
