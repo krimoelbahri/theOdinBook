@@ -33,6 +33,7 @@ export const Container = styled.div`
 export const MainContainer = styled.div`
 	width: 450px;
 	min-height: 100%;
+	margin-right: 20px;
 	@media (max-width: 1000px) {
 		margin-left: 60px;
 	}
@@ -47,7 +48,7 @@ export const LBContainer = styled(SideBarContainer)`
 		display: none;
 	}
 
-	li {
+	a {
 		height: 30px;
 		margin-bottom: 10px;
 		display: flex;
@@ -55,8 +56,10 @@ export const LBContainer = styled(SideBarContainer)`
 		justify-content: start;
 		align-items: center;
 		border-radius: 5px 0 0 5px;
+		color: inherit;
+		text-decoration: none;
 	}
-	li:hover {
+	a:hover {
 		background-color: #d9d1d3;
 		cursor: pointer;
 	}
