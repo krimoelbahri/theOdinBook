@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/auth/userSlice";
 import {
 	ProfileDiv,
@@ -8,11 +8,12 @@ import {
 
 function SettingDropDown() {
 	const dispatch = useDispatch();
+	const { user } = useSelector((state) => state.user);
 
 	return (
 		<>
 			<ProfileDiv>
-				<img className='c-p' src='' alt='' />
+				<img className='c-p' src={user.profilePic} alt='profile' />
 				<div>
 					<p className='name '>Profile name</p>
 					<p className='date '>see your profile</p>
