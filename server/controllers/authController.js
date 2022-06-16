@@ -12,7 +12,7 @@ const generateToken = (id) => {
 };
 
 exports.signupUser = asyncHandler(async function (req, res) {
-	const { name, email, password, confirmPassword } = req.body;
+	const { name, email, password, confirmPassword, profilePic } = req.body;
 	if (!name || !email || !password || !confirmPassword) {
 		res.status(400);
 		throw new Error("all fields are required");
@@ -34,12 +34,18 @@ exports.signupUser = asyncHandler(async function (req, res) {
 	const salt = await bcrypt.genSalt(10);
 	const hashedPassword = await bcrypt.hash(password, salt);
 
-	const user = await User.create({ name, email, password: hashedPassword });
+	const user = await User.create({
+		name,
+		email,
+		password: hashedPassword,
+		profilePic: profilePic || process.env.USER_PIC,
+	});
 	if (user) {
 		res.status(201).json({
 			_id: user.id,
 			name: user.name,
 			email: user.email,
+			profilePic: user.profilePic,
 			token: generateToken(user.id),
 		});
 	} else {
@@ -67,6 +73,7 @@ exports.localSigninUser = function (req, res, next) {
 				_id: req.user.id,
 				name: req.user.name,
 				email: req.user.email,
+				profilePic: user.profilePic,
 				token: generateToken(req.user.id),
 			});
 		});
