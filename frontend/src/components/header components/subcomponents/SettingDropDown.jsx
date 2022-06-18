@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../../features/auth/userSlice";
 import {
 	ProfileDiv,
@@ -8,11 +9,12 @@ import {
 
 function SettingDropDown() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { user } = useSelector((state) => state.user);
 
 	return (
 		<>
-			<ProfileDiv>
+			<ProfileDiv onClick={() => navigate(`/${user._id}`)}>
 				<img className='c-p' src={user.profilePic} alt='profile' />
 				<div>
 					<p className='name '>Profile name</p>
