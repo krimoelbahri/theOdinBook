@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Friends, Signin, Signup, Watch, Home, HeaderDashboeard } from "./pages";
+import { Friends, Signin, Signup, Watch, Home, HeaderDashboeard, Profile } from "./pages";
 import GlobalFonts from "./fonts/fonts";
 function App() {
 	return (
@@ -12,6 +12,7 @@ function App() {
 					<Route path='watch' element={<Watch />} />
 					<Route path='signup' element={<Signup />} />
 					<Route path='signin' element={<Signin />} />
+					<Route path=':id' element={<Profile />} />
 				</Route>
 			</Routes>
 			<GlobalFonts />
