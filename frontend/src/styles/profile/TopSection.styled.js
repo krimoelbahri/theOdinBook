@@ -59,10 +59,47 @@ export const ProfileInfoWrapper = styled.div`
 export const ProfilePicWrapper = styled.div`
 	width: 200px;
 	height: 200px;
+	margin-right: 20px;
 	border-radius: 50%;
+	border: 2px solid white;
+	background-color: white;
 	z-index: 1;
 	img {
 		width: 100%;
 		height: 100%;
+	}
+`;
+export const ProfileName = styled.div`
+	height: 100%;
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	h1 {
+		font-size: 2rem;
+	}
+`;
+export const ProfilButtons = styled.div`
+	height: 100%;
+	width: auto;
+	flex-grow: 1;
+	position: relative;
+	button {
+		width: 120px;
+		height: 30px;
+		position: absolute;
+		bottom: 30%;
+		right: 5%;
+	}
+`;
+export const LineWrapper = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	div {
+		width: 100%;
+		max-width: 900px;
+		border-top: 0.1mm solid grey;
 	}
 `;
