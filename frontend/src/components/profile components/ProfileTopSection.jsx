@@ -1,4 +1,9 @@
-import { TopSectionContainer, CoverPicWrapper, ProfileInfoWrapper } from "../../styles/profile";
+import {
+	TopSectionContainer,
+	CoverPicWrapper,
+	ProfileInfoWrapper,
+	LineWrapper,
+} from "../../styles/profile";
 import CoverPic from "./subcomponents/CoverPic";
 import ProfileInfo from "./subcomponents/ProfileInfo";
 
@@ -11,6 +16,9 @@ function ProfileTopSection() {
 			<ProfileInfoWrapper>
 				<ProfileInfo />
 			</ProfileInfoWrapper>
+			<LineWrapper>
+				<div></div>
+			</LineWrapper>
 		</TopSectionContainer>
 	);
 }
