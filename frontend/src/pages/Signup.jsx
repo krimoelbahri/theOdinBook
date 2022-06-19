@@ -39,7 +39,7 @@ const Signup = () => {
 				<input type='email' name='email' id='email' onChange={handleData} />
 				<label htmlFor='password'>Password</label>
 				<input type='password' name='password' id='password' onChange={handleData} />
-				<label htmlFor='confirmPassword'>Name</label>
+				<label htmlFor='confirmPassword'>Confirm Password</label>
 				<input
 					type='password'
 					name='confirmPassword'
