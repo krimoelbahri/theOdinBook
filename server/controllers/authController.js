@@ -12,7 +12,7 @@ const generateToken = (id) => {
 };
 
 exports.signupUser = asyncHandler(async function (req, res) {
-	const { name, email, password, confirmPassword, profilePic } = req.body;
+	const { name, email, password, confirmPassword } = req.body;
 	if (!name || !email || !password || !confirmPassword) {
 		res.status(400);
 		throw new Error("all fields are required");
@@ -38,7 +38,8 @@ exports.signupUser = asyncHandler(async function (req, res) {
 		name,
 		email,
 		password: hashedPassword,
-		profilePic: profilePic || process.env.USER_PIC,
+		profilePic: process.env.USER_PIC,
+		coverPic: process.env.COVER_PIC,
 	});
 	if (user) {
 		res.status(201).json({
@@ -46,6 +47,7 @@ exports.signupUser = asyncHandler(async function (req, res) {
 			name: user.name,
 			email: user.email,
 			profilePic: user.profilePic,
+			coverPic: user.coverPic,
 			token: generateToken(user.id),
 		});
 	} else {
@@ -74,6 +76,7 @@ exports.localSigninUser = function (req, res, next) {
 				name: req.user.name,
 				email: req.user.email,
 				profilePic: user.profilePic,
+				coverPic: user.coverPic,
 				token: generateToken(req.user.id),
 			});
 		});
