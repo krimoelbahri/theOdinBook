@@ -7,9 +7,9 @@ import {
 import CoverPic from "./subcomponents/CoverPic";
 import ProfileInfo from "./subcomponents/ProfileInfo";
 
-function ProfileTopSection() {
+function ProfileTopSection({ element }) {
 	return (
-		<TopSectionContainer>
+		<TopSectionContainer ref={element}>
 			<CoverPicWrapper>
 				<CoverPic />
 			</CoverPicWrapper>
