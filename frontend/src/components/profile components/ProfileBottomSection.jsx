@@ -1,7 +1,14 @@
-import React from "react";
+import { BottomSectionContainer } from "../../styles/profile";
 
 function ProfileBottomSection() {
-	return <div>ProfileBottomSection</div>;
+	return (
+		<BottomSectionContainer>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</BottomSectionContainer>
+	);
 }
 
 export default ProfileBottomSection;
