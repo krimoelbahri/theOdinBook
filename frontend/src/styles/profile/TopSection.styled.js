@@ -4,7 +4,8 @@ export const TopSectionContainer = styled.div`
 	width: 100%;
 	height: calc(100vh - 135px);
 	position: relative;
-	top: 60px;
+	margin-top: 60px;
+	margin-bottom: 1px;
 	display: flex;
 	flex-direction: column;
 `;
@@ -46,7 +47,7 @@ export const ProfileInfoWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	.wrapper {
-		max-width: 950px;
+		max-width: 900px;
 		width: 100%;
 		height: 100%;
 		padding: 0 20px;
@@ -95,11 +96,12 @@ export const ProfilButtons = styled.div`
 `;
 export const LineWrapper = styled.div`
 	width: 100%;
+	background-color: white;
 	display: flex;
 	justify-content: center;
 	div {
 		width: 100%;
-		max-width: 900px;
+		max-width: 850px;
 		border-top: 0.1mm solid grey;
 	}
 `;
