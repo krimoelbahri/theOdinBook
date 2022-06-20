@@ -1,3 +1,5 @@
+import { BottomSectionContainer } from "./bottomSection.styled";
+import { NavSectionContainer, NavWraper, NavLink } from "./NavSection.styled";
 import {
 	TopSectionContainer,
 	CoverPicWrapper,
@@ -16,4 +18,8 @@ export {
 	ProfilButtons,
 	ProfileName,
 	LineWrapper,
+	NavSectionContainer,
+	NavWraper,
+	BottomSectionContainer,
+	NavLink,
 };
