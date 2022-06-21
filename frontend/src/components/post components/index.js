@@ -1,3 +1,3 @@
 import Post from "./Post";
-
-export default Post;
+import CreatePost from "./CreatePost";
+export { Post, CreatePost };
