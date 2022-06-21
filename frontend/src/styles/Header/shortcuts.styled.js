@@ -1,5 +1,4 @@
 import styled from "styled-components";
-let boxShadow = "0px 0px 4px 1px rgba(209, 194, 194, 1)";
 
 export const ShortcutsContainer = styled.div`
 	width: 34%;
@@ -12,8 +11,8 @@ export const ShortcutsContainer = styled.div`
 	align-items: center;
 	@media (max-width: 700px) {
 		width: 100%;
-		background-color: transparent;
-		box-shadow: ${boxShadow};
+		background-color: ${({ theme }) => theme.cardsBGC};
+		box-shadow: ${({ theme }) => theme.mainBS};
 		padding: 5px 30px;
 		bottom: 0;
 		margin: 0;
@@ -24,7 +23,7 @@ export const ShortcutDiv = styled.div`
 	height: 100%;
 	border-bottom: ${(props) => (props.active ? "4px solid white" : null)};
 	@media (max-width: 700px) {
-		border-bottom: ${(props) => (props.active ? "4px solid #2d9dd3" : null)};
+		border-bottom: ${({ theme, active }) => (active ? `4px solid ${theme.headerBGC}` : null)};
 	}
 	.item-holder {
 		width: 100%;
@@ -36,13 +35,13 @@ export const ShortcutDiv = styled.div`
 		border-radius: 5px;
 		:hover {
 			cursor: pointer;
-			background-color: ${(props) => (props.active ? null : "rgb(180 180 180 / 50%)")};
+			background-color: ${({ theme, active }) => (active ? null : theme.hoverBGC)};
 		}
 		i {
 			font-size: 23px;
 			color: ${(props) => (props.active ? "white" : "black")};
 			@media (max-width: 700px) {
-				color: ${(props) => (props.active ? "#2d9dd3" : "black")};
+				color: ${({ theme, active }) => (active ? theme.headerBGC : "black")};
 			}
 		}
 	}
