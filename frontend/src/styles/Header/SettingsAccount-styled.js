@@ -13,17 +13,17 @@ export const ArrowContainer = styled.div`
 	height: 40px;
 	margin: 10px 0;
 	border-radius: 50%;
-	background-color: rgb(215, 215, 215);
+	background-color: ${({ theme }) => theme.searchBGC};
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	:hover {
 		cursor: pointer;
-		background-color: ${(props) => (props.active ? null : "rgb(191, 191, 191)")};
+		background-color: ${({ theme, active }) => (active ? null : theme.hoverBGC)};
 	}
 	i {
 		font-size: 20px;
-		color: ${(props) => (props.active ? "#2d9dd3" : "black")};
+		color: ${({ theme, active }) => (active ? theme.headerBGC : "black")};
 	}
 `;
 export const SettingsDropDownContainer = styled.div`
@@ -31,7 +31,7 @@ export const SettingsDropDownContainer = styled.div`
 	padding: 10px;
 	margin-top: -5px;
 	border-radius: 10px;
-	background-color: white;
+	background-color: ${({ theme }) => theme.cardsBGC};
 	display: ${(props) => (props.active ? "flex" : "none")};
 	flex-direction: column;
 	hr {
@@ -51,7 +51,7 @@ export const ProfileDiv = styled.div`
 	align-items: center;
 	:hover {
 		cursor: pointer;
-		background-color: rgba(215, 215, 215, 0.3);
+		background-color: ${({ theme }) => theme.hoverBGC};
 	}
 	img {
 		width: 60px;
@@ -82,7 +82,7 @@ export const SettingsDiv = styled.div`
 		border-radius: 10px;
 		:hover {
 			cursor: pointer;
-			background-color: rgba(215, 215, 215, 0.3);
+			background-color: ${({ theme }) => theme.hoverBGC};
 		}
 	}
 	div.fr-sb {
@@ -100,7 +100,7 @@ export const IconContainer = styled.div`
 	height: 35px;
 	margin: 0 10px 0 0;
 	border-radius: 50%;
-	background-color: rgb(215, 215, 215);
+	background-color: ${({ theme }) => theme.iconBGC};
 	display: flex;
 	justify-content: center;
 	align-items: center;
