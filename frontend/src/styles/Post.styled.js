@@ -1,15 +1,14 @@
 import styled from "styled-components";
-let boxShadow = "0px 0px 4px 1px rgba(209, 194, 194, 1)";
 
 export const PostContainer = styled.div`
 	width: 100%;
 	border-radius: 10px;
-	background-color: white;
+	background-color: ${({ theme }) => theme.cardsBGC};
 	padding: 10px 20px;
 	margin-bottom: 20px;
-	box-shadow: ${boxShadow};
-	-webkit-box-shadow: ${boxShadow};
-	-moz-box-shadow: ${boxShadow};
+	box-shadow: ${({ theme }) => theme.mainBS};
+	-webkit-box-shadow: ${({ theme }) => theme.mainBS};
+	-moz-box-shadow: ${({ theme }) => theme.mainBS};
 `;
 /* Post header */
 export const PostHeaderContainer = styled.div`
@@ -103,7 +102,7 @@ export const ReactionButtonsDiv = styled.div`
 		flex-direction: row;
 	}
 	div:hover {
-		background-color: rgb(1 1 1 / 5%);
+		background-color: ${({ theme }) => theme.hoverBGC};
 		cursor: pointer;
 	}
 	i {
@@ -142,7 +141,7 @@ export const AddCommentsDiv = styled.div`
 		width: 100%;
 		height: 30px;
 		border-radius: 20px;
-		background-color: #f0f2f5;
+		background-color: ${({ theme }) => theme.commentsBGC};
 		form {
 			display: flex;
 			width: 100%;
@@ -183,12 +182,13 @@ export const CommentsDiv = styled.div`
 			margin-right: 10px;
 			padding: 5px;
 			border-radius: 10px;
-			background-color: #f0f2f5;
+			background-color: ${({ theme }) => theme.commentsBGC};
 			div {
 				display: flex;
 				flex-direction: column;
 				align-items: flex-start;
 				p {
+					//profile name
 					font-size: 14px;
 					line-height: 16px;
 					margin-bottom: 10px;
@@ -197,6 +197,7 @@ export const CommentsDiv = styled.div`
 					}
 				}
 				span {
+					//comment body
 					font-size: 14px;
 				}
 			}
@@ -206,7 +207,7 @@ export const CommentsDiv = styled.div`
 			padding: 7px;
 			border-radius: 50%;
 			:hover {
-				background-color: #f0f2f5;
+				background-color: ${({ theme }) => theme.commentsBGC};
 			}
 		}
 	}
