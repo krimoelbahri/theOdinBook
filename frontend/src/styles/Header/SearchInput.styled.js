@@ -1,11 +1,10 @@
 import styled from "styled-components";
-let boxShadow = "0px 0px 4px 1px rgba(209, 194, 194, 1)";
 
 export const SearchDDContainer = styled.div`
 	width: 320px;
 	border-radius: 0 10px 10px 10px;
-	background-color: ${({ active }) => (active ? "white" : "transparent")};
-	box-shadow: ${({ active }) => (active ? boxShadow : null)};
+	background-color: ${({ theme, active }) => (active ? theme.cardsBGC : "transparent")};
+	box-shadow: ${({ theme, active }) => (active ? theme.mainBSb : null)};
 	position: fixed;
 	left: 0px;
 	z-index: 10;
@@ -27,7 +26,7 @@ export const Arrow = styled.div`
 	margin: 0 10px;
 	display: ${({ active }) => (active ? "block" : "none")};
 	:hover {
-		background-color: #efefef;
+		background-color: ${({ theme }) => theme.hoverBGC};
 		cursor: pointer;
 	}
 `;
@@ -36,7 +35,7 @@ export const SearchContainer = styled.div`
 	width: ${({ active }) => (active ? "240px" : "220px")};
 	height: 40px;
 	padding: 5px 5px;
-	background-color: #efefef;
+	background-color: ${({ theme }) => theme.searchBGC};
 	border-radius: 20px;
 	display: flex;
 	flex-direction: row;
@@ -49,7 +48,7 @@ export const SearchContainer = styled.div`
 		cursor: pointer;
 	}
 	input {
-		background-color: #efefef;
+		background-color: ${({ theme }) => theme.searchBGC};
 		width: ${({ iconOpacity }) => (iconOpacity ? "200px" : "210px")};
 		height: 90%;
 		border: none;
