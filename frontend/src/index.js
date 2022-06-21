@@ -6,15 +6,19 @@ import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import "./index.css";
 import App from "./App";
+import { ThemeProvider } from "styled-components";
+import theme from "./styles/theme";
 
 const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
+			<ThemeProvider theme={theme}>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</ThemeProvider>
 		</Provider>
 	</React.StrictMode>,
 );
