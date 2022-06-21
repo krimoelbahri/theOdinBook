@@ -43,7 +43,7 @@ export const CoverPicWrapper = styled.div`
 export const ProfileInfoWrapper = styled.div`
 	width: 100%;
 	height: 30%;
-	background-color: white;
+	background-color: ${({ theme }) => theme.cardsBGC};
 	display: flex;
 	justify-content: center;
 	.wrapper {
@@ -63,7 +63,7 @@ export const ProfilePicWrapper = styled.div`
 	margin-right: 20px;
 	border-radius: 50%;
 	border: 2px solid white;
-	background-color: white;
+	background-color: ${({ theme }) => theme.cardsBGC};
 	z-index: 1;
 	img {
 		width: 100%;
@@ -96,7 +96,7 @@ export const ProfilButtons = styled.div`
 `;
 export const LineWrapper = styled.div`
 	width: 100%;
-	background-color: white;
+	background-color: ${({ theme }) => theme.cardsBGC};
 	display: flex;
 	justify-content: center;
 	div {
