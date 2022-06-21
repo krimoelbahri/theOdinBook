@@ -6,5 +6,5 @@ export const Container = styled.div`
 	position: fixed;
 	top: 0;
 	z-index: 10;
-	background-color: #2d9dd3;
+	background-color: ${({ theme }) => theme.headerBGC};
 `;
