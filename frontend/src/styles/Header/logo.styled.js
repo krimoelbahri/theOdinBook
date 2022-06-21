@@ -5,7 +5,7 @@ export const LogoContainer = styled.div`
 	height: 40px;
 	margin: 10px 10px;
 	border-radius: 50%;
-	background-color: white;
+	background-color: ${({ theme }) => theme.cardsBGC};
 	position: fixed;
 	left: 0;
 	h4 {
@@ -14,6 +14,6 @@ export const LogoContainer = styled.div`
 		font-style: italic;
 		font-weight: bold;
 		font-family: "klavika";
-		color: #2d9dd3;
+		color: ${({ theme }) => theme.headerBGC};
 	}
 `;
