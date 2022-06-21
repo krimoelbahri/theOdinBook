@@ -31,7 +31,7 @@ export const Form = styled.form`
 		}
 	}
 	button {
-		background-color: #2d9dd3;
+		background-color: ${({ theme }) => theme.headerBGC};
 		border: 1px solid blue;
 		cursor: pointer;
 		color: white;
