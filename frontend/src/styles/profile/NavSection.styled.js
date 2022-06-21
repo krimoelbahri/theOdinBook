@@ -6,7 +6,7 @@ export const NavSectionContainer = styled.div`
 	height: 60px;
 	position: sticky;
 	top: 60px;
-	background-color: white;
+	background-color: ${({ theme }) => theme.cardsBGC};
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -40,7 +40,7 @@ export const NavLink = styled(Link)`
 		color: gray;
 		font-weight: bold;
 		:hover {
-			background-color: rgba(215, 215, 215, 0.5);
+			background-color: ${({ theme }) => theme.hoverBGC};
 			cursor: pointer;
 		}
 	}
