@@ -1,4 +1,8 @@
-import { BottomSectionContainer } from "./bottomSection.styled";
+import {
+	BottomSectionContainer,
+	ProfileLeftBar,
+	ProfilePostsWrapper,
+} from "./bottomSection.styled";
 import { NavSectionContainer, NavWraper, NavLink } from "./NavSection.styled";
 import {
 	TopSectionContainer,
@@ -22,4 +26,6 @@ export {
 	NavWraper,
 	BottomSectionContainer,
 	NavLink,
+	ProfileLeftBar,
+	ProfilePostsWrapper,
 };
