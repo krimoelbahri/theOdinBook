@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { PostContainer } from "./Post.styled";
 
 /*Variables*/
-let boxShadow = "0px 0px 4px 1px rgba(209, 194, 194, 1)";
 const SideBarContainer = styled.div`
-	width: 270px;
+	width: 300px;
 	padding: 10px 20px;
-	position: fixed;
+	position: sticky;
+	top: 80px;
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
@@ -17,13 +17,13 @@ export const Container = styled.div`
 	width: 100%;
 	position: relative;
 	top: 60px;
-	height: calc(100% - 60px);
 	padding-top: 20px;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
-	@media (max-width: 1000px) {
-		justify-content: start;
+	justify-content: space-between;
+	align-items: flex-start;
+	@media (max-width: 1100px) {
+		justify-content: space-around;
 	}
 	@media (max-width: 800px) {
 		justify-content: center;
@@ -33,18 +33,11 @@ export const Container = styled.div`
 export const MainContainer = styled.div`
 	width: 450px;
 	min-height: 100%;
-	margin-right: 20px;
-	@media (max-width: 1000px) {
-		margin-left: 60px;
-	}
-	@media (max-width: 800px) {
-		margin-left: 0px;
-	}
 `;
 /* LeftBar styling */
 export const LBContainer = styled(SideBarContainer)`
 	left: 10px;
-	@media (max-width: 1000px) {
+	@media (max-width: 1100px) {
 		display: none;
 	}
 
@@ -60,7 +53,7 @@ export const LBContainer = styled(SideBarContainer)`
 		text-decoration: none;
 	}
 	a:hover {
-		background-color: #d9d1d3;
+		background-color: ${({ theme }) => theme.hoverBGC};
 		cursor: pointer;
 	}
 	i {
@@ -72,11 +65,11 @@ export const LBContainer = styled(SideBarContainer)`
 /* RightBar styling */
 export const RBContainer = styled(SideBarContainer)`
 	right: 10px;
-	background-color: white;
+	background-color: ${({ theme }) => theme.cardsBGC};
 	border-radius: 20px 20px 0 0;
-	box-shadow: ${boxShadow};
-	-webkit-box-shadow: ${boxShadow};
-	-moz-box-shadow: ${boxShadow};
+	box-shadow: ${({ theme }) => theme.mainBS};
+	-webkit-box-shadow: ${({ theme }) => theme.mainBS};
+	-moz-box-shadow: ${({ theme }) => theme.mainBS};
 	@media (max-width: 800px) {
 		display: none;
 	}
@@ -93,10 +86,9 @@ export const RBContainer = styled(SideBarContainer)`
 		div {
 			height: 100%;
 			padding: 5px;
-			//border-bottom: 1px solid black;
 		}
 		div:hover {
-			background-color: #d9d1d3;
+			background-color: ${({ theme }) => theme.hoverBGC};
 			border-bottom: 1px solid black;
 			border-radius: 5px 5px 0 0;
 			cursor: pointer;
@@ -142,16 +134,17 @@ export const CreatePostContainer = styled(PostContainer)`
 			line-height: 20px;
 			padding: 10px 20px;
 			border-radius: 20px;
-			background-color: #efefef;
+			background-color: ${({ theme }) => theme.commentsBGC};
 		}
 	}
 	.down {
-		height: 50px;
+		height: 40px;
 		width: fit-content;
-		border-radius: 5px 5px 0 0;
+		border-radius: 5px;
 		padding: 5px 10px;
+		margin-top: 10px;
 	}
 	.down:hover {
-		background-color: #d9d1d3;
+		background-color: ${({ theme }) => theme.hoverBGC};
 	}
 `;
