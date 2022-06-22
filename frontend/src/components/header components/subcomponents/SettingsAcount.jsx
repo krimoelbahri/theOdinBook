@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { showSettingDD, hideSettingDD } from "../../../features/dropDown/dropDownSlice";
+
 import {
 	SettingsContainer,
 	ArrowContainer,
@@ -7,16 +9,18 @@ import {
 import SettingDropDown from "./SettingDropDown";
 
 function Setting() {
-	const [showDD, setShowDD] = useState(false); //DD = DropDown
+	const { settingsDD } = useSelector((state) => state.dropDown);
+	const dispatch = useDispatch();
 	function handleDropDown() {
-		setShowDD(!showDD);
+		if (settingsDD) dispatch(hideSettingDD());
+		if (!settingsDD) dispatch(showSettingDD());
 	}
 	return (
 		<SettingsContainer>
-			<ArrowContainer onClick={handleDropDown} active={showDD}>
+			<ArrowContainer onClick={handleDropDown} active={settingsDD}>
 				<i className='fa-solid fa-caret-down'></i>
 			</ArrowContainer>
-			<SettingsDropDownContainer active={showDD}>
+			<SettingsDropDownContainer active={settingsDD}>
 				<SettingDropDown />
 			</SettingsDropDownContainer>
 		</SettingsContainer>
