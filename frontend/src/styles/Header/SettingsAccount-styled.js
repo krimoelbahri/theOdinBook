@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const SettingsContainer = styled.div`
 	position: fixed;
+	z-index: 12;
 	right: 0;
 	margin-right: 20px;
 	display: flex;
