@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import {
 	ProfileTopSection,
 	ProfileNavSection,
@@ -7,11 +8,11 @@ import { useElementOnScreen } from "../hooks/intersectionObserver";
 
 function Profile() {
 	const [ref, isVisible] = useElementOnScreen({ rootMargin: "-60px" });
-
+	const location = useLocation();
 	return (
 		<>
 			<ProfileTopSection element={ref} />
-			<ProfileNavSection visible={isVisible} />
+			<ProfileNavSection visible={isVisible} location={location} />
 			<ProfileBottomSection />
 		</>
 	);
