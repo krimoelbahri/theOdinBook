@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { showSearchDD, hideSearchDD } from "../../../features/dropDown/dropDownSlice";
 import {
 	SearchContainer,
 	SearchDDContainer,
@@ -8,23 +10,22 @@ import {
 } from "../../../styles/Header";
 
 function SearchInput() {
-	const [active, setActive] = useState(false);
 	const [opacity, setOpacity] = useState(true);
-
-	function showDD() {
-		if (!active) setActive(true);
+	const { searchDD } = useSelector((state) => state.dropDown);
+	const dispatch = useDispatch();
+	function hideDropDown() {
+		if (searchDD) dispatch(hideSearchDD());
 	}
-	function hideDD() {
-		if (active) setActive(false);
+	function showDropDown() {
+		if (!searchDD) dispatch(showSearchDD());
 	}
-
 	return (
-		<SearchDDContainer active={active}>
-			<DDheader active={active}>
-				<Arrow active={active} onClick={hideDD}>
+		<SearchDDContainer active={searchDD}>
+			<DDheader active={searchDD}>
+				<Arrow active={searchDD} onClick={hideDropDown}>
 					<i className='fa-solid fa-arrow-left'></i>
 				</Arrow>
-				<SearchContainer onClick={showDD} iconOpacity={opacity} active={active}>
+				<SearchContainer onClick={showDropDown} iconOpacity={opacity} active={searchDD}>
 					<i className='fa-solid fa-magnifying-glass'></i>
 					<input
 						type='text'
@@ -34,7 +35,7 @@ function SearchInput() {
 					/>
 				</SearchContainer>
 			</DDheader>
-			<SearchDD active={active}>
+			<SearchDD active={searchDD}>
 				<div className='recent'>
 					<h4>Recent Searches</h4>
 				</div>
