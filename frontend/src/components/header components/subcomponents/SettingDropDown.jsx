@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../features/auth/userSlice";
+import { hideSettingDD } from "../../../features/dropDown/dropDownSlice";
 import {
 	ProfileDiv,
 	SettingsDiv,
@@ -14,7 +15,12 @@ function SettingDropDown() {
 
 	return (
 		<>
-			<ProfileDiv onClick={() => navigate(`/${user._id}`)}>
+			<ProfileDiv
+				onClick={() => {
+					dispatch(hideSettingDD());
+					navigate(`/${user._id}`);
+				}}
+			>
 				<img className='c-p' src={user.profilePic} alt='profile' />
 				<div>
 					<p className='name '>Profile name</p>
