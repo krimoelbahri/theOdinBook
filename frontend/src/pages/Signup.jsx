@@ -14,7 +14,7 @@ const Signup = () => {
 		dispatch(signup(userData));
 	};
 	const handleFacebooklogin = () => {
-		dispatch(facebookSignin());
+		//dispatch(facebookSignin());
 	};
 	const handleData = (e) => {
 		setUserData({
