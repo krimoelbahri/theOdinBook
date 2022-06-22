@@ -1,27 +1,51 @@
-import { NavSectionContainer, NavWraper, NavLink } from "../../styles/profile";
+import { NavSectionContainer, NavWraper, ProfileNavLink } from "../../styles/profile";
 import { ProfileDiv } from "../../styles/Post.styled";
 
-function ProfileNavSection({ visible }) {
+function ProfileNavSection({ visible, location }) {
 	return (
 		<NavSectionContainer>
-			<NavWraper visible={visible} pos={"relative"}>
-				<NavLink to={"/"}>
+			<NavWraper visible={visible} transform={"up"}>
+				<ProfileNavLink
+					to={`/62af5a0d2b41db9d923ba62d?sf=posts`}
+					state={{ data: "posts" }}
+					isactive={
+						location.state?.data === "posts" || location.state === null
+							? "true"
+							: undefined
+					}
+				>
 					<div className='wrapper'>Posts</div>
-				</NavLink>
-				<NavLink to={"/"}>
+				</ProfileNavLink>
+				<ProfileNavLink
+					to={`/62af5a0d2b41db9d923ba62d?sf=about`}
+					state={{ data: "about" }}
+					isactive={location.state?.data === "about" ? "true" : undefined}
+				>
 					<div className='wrapper'>About</div>
-				</NavLink>
-				<NavLink to={"/"}>
+				</ProfileNavLink>
+				<ProfileNavLink
+					to={`/62af5a0d2b41db9d923ba62d?sf=friends`}
+					state={{ data: "friends" }}
+					isactive={location.state?.data === "friends" ? "true" : undefined}
+				>
 					<div className='wrapper'>Friends</div>
-				</NavLink>
-				<NavLink to={"/"}>
+				</ProfileNavLink>
+				<ProfileNavLink
+					to={`/62af5a0d2b41db9d923ba62d?sf=photos`}
+					state={{ data: "photos" }}
+					isactive={location.state?.data === "photos" ? "true" : undefined}
+				>
 					<div className='wrapper'>Photos</div>
-				</NavLink>
-				<NavLink to={"/"}>
+				</ProfileNavLink>
+				<ProfileNavLink
+					to={`/62af5a0d2b41db9d923ba62d?sf=videos`}
+					state={{ data: "videos" }}
+					isactive={location.state?.data === "videos" ? "true" : undefined}
+				>
 					<div className='wrapper'>Videos</div>
-				</NavLink>
+				</ProfileNavLink>
 			</NavWraper>
-			<NavWraper visible={!visible} pos={"absolute"}>
+			<NavWraper visible={!visible} transform={"down"}>
 				<ProfileDiv>
 					<img className='c-p' src='' alt='' />
 					<div>
