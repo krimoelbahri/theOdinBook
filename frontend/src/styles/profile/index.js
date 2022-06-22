@@ -2,8 +2,9 @@ import {
 	BottomSectionContainer,
 	ProfileLeftBar,
 	ProfilePostsWrapper,
+	FriendsContainer,
 } from "./bottomSection.styled";
-import { NavSectionContainer, NavWraper, NavLink } from "./NavSection.styled";
+import { NavSectionContainer, NavWraper, ProfileNavLink } from "./NavSection.styled";
 import {
 	TopSectionContainer,
 	CoverPicWrapper,
@@ -25,7 +26,8 @@ export {
 	NavSectionContainer,
 	NavWraper,
 	BottomSectionContainer,
-	NavLink,
+	ProfileNavLink,
 	ProfileLeftBar,
 	ProfilePostsWrapper,
+	FriendsContainer,
 };
