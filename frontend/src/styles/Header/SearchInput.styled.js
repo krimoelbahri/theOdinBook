@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const SearchDDContainer = styled.div`
 	width: 320px;
+	z-index: 12;
 	border-radius: 0 10px 10px 10px;
 	background-color: ${({ theme, active }) => (active ? theme.cardsBGC : "transparent")};
 	box-shadow: ${({ theme, active }) => (active ? theme.mainBSb : null)};
 	position: fixed;
 	left: 0px;
-	z-index: 10;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
