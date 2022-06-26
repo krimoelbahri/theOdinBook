@@ -40,13 +40,16 @@ export const ModalHeader = styled.div`
 		height: 35px;
 		padding: 5px;
 		border-radius: 50%;
-		background-color: gray;
+		background-color: ${({ theme }) => theme.iconBGC};
 		position: absolute;
 		right: 15px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		cursor: pointer;
+		:hover {
+			background-color: ${({ theme }) => theme.hoverBGC};
+		}
 		i {
 			font-size: 1.3em;
 		}
@@ -119,10 +122,53 @@ export const TextareaPlaceHolder = styled.div`
 export const ModalMediaarea = styled.div`
 	width: 100%;
 	min-height: 200px;
+	position: relative;
 	display: ${({ active }) => (active ? "flex" : "none")};
 	border: 1px solid gray;
 	border-radius: 10px;
-	padding: 5px;
+	padding: 7px;
+	.item {
+		width: 25px;
+		height: 25px;
+		z-index: 1;
+		padding: 5px;
+		border-radius: 50%;
+		background-color: ${({ theme }) => theme.cardsBGC};
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		i {
+			font-size: 1em;
+		}
+	}
+`;
+export const AddPhotoContainer = styled.div`
+	width: 100%;
+	min-height: 100%;
+	position: relative;
+	background-color: ${({ theme }) => theme.iconBGC};
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	:hover {
+		background-color: ${({ theme }) => theme.hoverBGC};
+	}
+`;
+export const AddPhotoInput = styled.div`
+	height: 70px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	i {
+		font-size: x-large;
+	}
 `;
 export const ModalBottomSectionContainer = styled.div`
 	width: 100%;
