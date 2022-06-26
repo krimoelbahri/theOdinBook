@@ -1,28 +1,37 @@
 import { useSelector, useDispatch } from "react-redux";
-import { showSettingDD, hideSettingDD } from "../../../features/dropDown/dropDownSlice";
-
-import {
-	SettingsContainer,
-	ArrowContainer,
-	SettingsDropDownContainer,
-} from "../../../styles/Header/SettingsAccount-styled";
+import { handleSettingDD } from "../../../features/dropDown/dropDownSlice";
+import { SettingsContainer, ArrowContainer } from "../../../styles/Header/SettingsAccount-styled";
 import SettingDropDown from "./SettingDropDown";
 
 function Setting() {
 	const { settingsDD } = useSelector((state) => state.dropDown);
 	const dispatch = useDispatch();
 	function handleDropDown() {
-		if (settingsDD) dispatch(hideSettingDD());
-		if (!settingsDD) dispatch(showSettingDD());
+		if (settingsDD) dispatch(handleSettingDD(false));
+		if (!settingsDD) {
+			dispatch(handleSettingDD(true));
+		}
+	}
+	function handleBlur(e) {
+		const currentTarget = e.currentTarget;
+		setTimeout(() => {
+			if (!currentTarget.contains(document.activeElement)) {
+				dispatch(handleSettingDD(false));
+			}
+		}, 0);
 	}
 	return (
-		<SettingsContainer>
+		<SettingsContainer
+			tabIndex={"1"}
+			onFocus={() => console.log("focused")}
+			onBlur={handleBlur}
+		>
 			<ArrowContainer onClick={handleDropDown} active={settingsDD}>
-				<i className='fa-solid fa-caret-down'></i>
+				<div className='arrow'>
+					<i className='fa-solid fa-caret-down'></i>
+				</div>
 			</ArrowContainer>
-			<SettingsDropDownContainer active={settingsDD}>
-				<SettingDropDown />
-			</SettingsDropDownContainer>
+			{settingsDD && <SettingDropDown />}
 		</SettingsContainer>
 	);
 }
