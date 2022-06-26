@@ -1,5 +1,5 @@
 import { ModalHeader, ModalProfileDiv } from "../../../styles/Add post";
-import { hidePostModal } from "../../../features/Modal/modalSlice";
+import { handlePostModal } from "../../../features/Modal/modalSlice";
 import { useDispatch } from "react-redux";
 
 function ModalTopSection() {
@@ -9,7 +9,7 @@ function ModalTopSection() {
 		<div className='top-section'>
 			<ModalHeader className='b-b'>
 				<h2>Create Post</h2>
-				<span className='item' onClick={() => dispatch(hidePostModal())}>
+				<span className='item' onClick={() => dispatch(handlePostModal(false))}>
 					<i className='fa-solid fa-xmark'></i>
 				</span>
 			</ModalHeader>
