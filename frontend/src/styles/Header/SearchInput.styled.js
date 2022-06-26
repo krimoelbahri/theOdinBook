@@ -70,7 +70,7 @@ export const SearchContainer = styled.div`
 `;
 export const SearchDD = styled.div`
 	width: 100%;
-	display: ${({ active }) => (active ? "flex" : "none")};
+	display: flex;
 	flex-direction: column;
 	.recent {
 		height: 40px;
