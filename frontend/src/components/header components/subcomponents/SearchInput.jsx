@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { showSearchDD, hideSearchDD } from "../../../features/dropDown/dropDownSlice";
+import { handleSearchDD } from "../../../features/dropDown/dropDownSlice";
 import {
 	SearchContainer,
 	SearchDDContainer,
@@ -14,13 +14,26 @@ function SearchInput() {
 	const { searchDD } = useSelector((state) => state.dropDown);
 	const dispatch = useDispatch();
 	function hideDropDown() {
-		if (searchDD) dispatch(hideSearchDD());
+		if (searchDD) dispatch(handleSearchDD(false));
 	}
 	function showDropDown() {
-		if (!searchDD) dispatch(showSearchDD());
+		if (!searchDD) dispatch(handleSearchDD(true));
+	}
+	function handleBlur(e) {
+		const currentTarget = e.currentTarget;
+		setTimeout(() => {
+			if (!currentTarget.contains(document.activeElement)) {
+				hideDropDown();
+			}
+		}, 0);
 	}
 	return (
-		<SearchDDContainer active={searchDD}>
+		<SearchDDContainer
+			active={searchDD}
+			tabIndex={"1"}
+			onFocus={() => console.log("focused")}
+			onBlur={handleBlur}
+		>
 			<DDheader active={searchDD}>
 				<Arrow active={searchDD} onClick={hideDropDown}>
 					<i className='fa-solid fa-arrow-left'></i>
@@ -35,11 +48,13 @@ function SearchInput() {
 					/>
 				</SearchContainer>
 			</DDheader>
-			<SearchDD active={searchDD}>
-				<div className='recent'>
-					<h4>Recent Searches</h4>
-				</div>
-			</SearchDD>
+			{searchDD && (
+				<SearchDD>
+					<div className='recent'>
+						<h4>Recent Searches</h4>
+					</div>
+				</SearchDD>
+			)}
 		</SearchDDContainer>
 	);
 }
