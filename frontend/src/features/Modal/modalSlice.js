@@ -6,13 +6,10 @@ let modalSlice = createSlice({
 	name: "Modal",
 	initialState,
 	reducers: {
-		showPostModal: (state) => {
-			state.postModal = true;
-		},
-		hidePostModal: (state) => {
-			state.postModal = false;
+		handlePostModal: (state, actions) => {
+			state.postModal = actions.payload;
 		},
 	},
 });
-export const { showPostModal, hidePostModal } = modalSlice.actions;
+export const { handlePostModal } = modalSlice.actions;
 export default modalSlice.reducer;
