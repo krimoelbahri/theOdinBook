@@ -10,21 +10,27 @@ export const SettingsContainer = styled.div`
 	align-items: flex-end;
 `;
 export const ArrowContainer = styled.div`
-	width: 40px;
-	height: 40px;
 	margin: 10px 0;
-	border-radius: 50%;
-	background-color: ${({ theme }) => theme.searchBGC};
+	width: 100%;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	:hover {
-		cursor: pointer;
-		background-color: ${({ theme, active }) => (active ? null : theme.hoverBGC)};
-	}
-	i {
-		font-size: 20px;
-		color: ${({ theme, active }) => (active ? theme.headerBGC : "black")};
+	flex-direction: row;
+	justify-content: flex-end;
+	.arrow {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background-color: ${({ theme }) => theme.searchBGC};
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		:hover {
+			cursor: pointer;
+			background-color: ${({ theme, active }) => (active ? null : theme.hoverBGC)};
+		}
+		i {
+			font-size: 20px;
+			color: ${({ theme, active }) => (active ? theme.headerBGC : "black")};
+		}
 	}
 `;
 export const SettingsDropDownContainer = styled.div`
@@ -33,7 +39,7 @@ export const SettingsDropDownContainer = styled.div`
 	margin-top: -5px;
 	border-radius: 10px;
 	background-color: ${({ theme }) => theme.cardsBGC};
-	display: ${(props) => (props.active ? "flex" : "none")};
+	display: flex;
 	flex-direction: column;
 	hr {
 		background: #dadde1;
