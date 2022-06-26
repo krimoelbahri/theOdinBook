@@ -9,7 +9,7 @@ function PostModal() {
 	return (
 		<ModalContainer>
 			<ModalTopSection />
-			<ModalMediaSection media={media} />
+			<ModalMediaSection media={media} setMedia={setMedia} />
 			<ModalbottomSection setMedia={setMedia} />
 		</ModalContainer>
 	);
