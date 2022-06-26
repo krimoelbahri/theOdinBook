@@ -7,19 +7,13 @@ let dropDownSlice = createSlice({
 	name: "dropDown",
 	initialState,
 	reducers: {
-		showSettingDD: (state) => {
-			state.settingsDD = true;
+		handleSettingDD: (state, actions) => {
+			state.settingsDD = actions.payload;
 		},
-		showSearchDD: (state) => {
-			state.searchDD = true;
-		},
-		hideSettingDD: (state) => {
-			state.settingsDD = false;
-		},
-		hideSearchDD: (state) => {
-			state.searchDD = false;
+		handleSearchDD: (state, actions) => {
+			state.searchDD = actions.payload;
 		},
 	},
 });
-export const { showSettingDD, hideSettingDD, showSearchDD, hideSearchDD } = dropDownSlice.actions;
+export const { handleSettingDD, handleSearchDD } = dropDownSlice.actions;
 export default dropDownSlice.reducer;
