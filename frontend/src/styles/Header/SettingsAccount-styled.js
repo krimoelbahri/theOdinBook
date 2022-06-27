@@ -34,13 +34,14 @@ export const ArrowContainer = styled.div`
 	}
 `;
 export const SettingsDropDownContainer = styled.div`
-	min-height: 100px;
+	height: ${({ height }) => height};
 	padding: 10px;
 	margin-top: -5px;
 	border-radius: 10px;
 	background-color: ${({ theme }) => theme.cardsBGC};
 	display: flex;
 	flex-direction: column;
+	transition: height 200ms;
 	hr {
 		background: #dadde1;
 		border-width: 0;
@@ -67,12 +68,11 @@ export const ProfileDiv = styled.div`
 		border-radius: 50%;
 		border: 1px solid;
 	}
-
-	.name {
+	h1 {
 		font-weight: bold;
 		font-size: 1rem;
 	}
-	.date {
+	p {
 		color: grey;
 		width: fit-content;
 		font-size: 0.9rem;
@@ -113,5 +113,55 @@ export const IconContainer = styled.div`
 	align-items: center;
 	i {
 		font-size: 20px;
+	}
+`;
+
+//display Drop Down
+export const DisplayDDHeader = styled.div`
+	width: 100%;
+	padding-right: 35px;
+	margin-bottom: 25px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	h1 {
+		font-size: 1.5rem;
+		font-weight: bold;
+	}
+`;
+export const DisplayDiv = styled.div`
+	width: 100%;
+	min-height: 150px;
+	padding-left: 10px;
+	display: flex;
+	flex-direction: row;
+	.content {
+		max-width: 280px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex-grow: 1;
+		h6 {
+			font-size: 1rem;
+			font-weight: bold;
+			line-height: 1.1rem;
+		}
+		p {
+			max-width: 100%;
+			font-size: 0.8rem;
+			color: #65676b;
+		}
+	}
+	.toggle {
+		width: 100%;
+		height: 40px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		input {
+			width: 18px;
+			height: 18px;
+		}
 	}
 `;
