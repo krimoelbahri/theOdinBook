@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { handleSettingDD } from "../../../features/dropDown/dropDownSlice";
+import { handleSettingDD, handleSettingDDContent } from "../../../features/dropDown/dropDownSlice";
+import handleBlur from "../../../helpers/handleBlur";
 import { SettingsContainer, ArrowContainer } from "../../../styles/Header/SettingsAccount-styled";
 import SettingDropDown from "./SettingDropDown";
 
@@ -7,25 +8,16 @@ function Setting() {
 	const { settingsDD } = useSelector((state) => state.dropDown);
 	const dispatch = useDispatch();
 	function handleDropDown() {
-		if (settingsDD) dispatch(handleSettingDD(false));
+		if (settingsDD) {
+			dispatch(handleSettingDD(false));
+			dispatch(handleSettingDDContent("main"));
+		}
 		if (!settingsDD) {
 			dispatch(handleSettingDD(true));
 		}
 	}
-	function handleBlur(e) {
-		const currentTarget = e.currentTarget;
-		setTimeout(() => {
-			if (!currentTarget.contains(document.activeElement)) {
-				dispatch(handleSettingDD(false));
-			}
-		}, 0);
-	}
 	return (
-		<SettingsContainer
-			tabIndex={"1"}
-			onFocus={() => console.log("focused")}
-			onBlur={handleBlur}
-		>
+		<SettingsContainer tabIndex={"1"} onBlur={(e) => handleBlur(e, handleDropDown)}>
 			<ArrowContainer onClick={handleDropDown} active={settingsDD}>
 				<div className='arrow'>
 					<i className='fa-solid fa-caret-down'></i>
