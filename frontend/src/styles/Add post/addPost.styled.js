@@ -121,7 +121,6 @@ export const TextareaPlaceHolder = styled.div`
 `;
 export const ModalMediaarea = styled.div`
 	width: 100%;
-	min-height: 200px;
 	position: relative;
 	display: ${({ active }) => (active ? "flex" : "none")};
 	border: 1px solid gray;
@@ -148,7 +147,8 @@ export const ModalMediaarea = styled.div`
 `;
 export const AddPhotoContainer = styled.div`
 	width: 100%;
-	min-height: 100%;
+	min-height: 180px;
+	max-height: 700px;
 	position: relative;
 	background-color: ${({ theme }) => theme.iconBGC};
 	border-radius: 10px;
@@ -158,6 +158,12 @@ export const AddPhotoContainer = styled.div`
 	cursor: pointer;
 	:hover {
 		background-color: ${({ theme }) => theme.hoverBGC};
+	}
+	img {
+		width: 100%;
+		height: 100%;
+		border-radius: 10px;
+		cursor: auto;
 	}
 `;
 export const AddPhotoInput = styled.div`
