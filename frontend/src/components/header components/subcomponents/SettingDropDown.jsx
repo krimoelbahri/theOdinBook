@@ -1,68 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { logout } from "../../../features/auth/userSlice";
-import { handleSettingDD } from "../../../features/dropDown/dropDownSlice";
-import {
-	ProfileDiv,
-	SettingsDiv,
-	IconContainer,
-	SettingsDropDownContainer,
-} from "../../../styles/Header/SettingsAccount-styled";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { SettingsDropDownContainer } from "../../../styles/Header/SettingsAccount-styled";
+import DisplayDD from "./DisplayDD";
+import MainDD from "./MainDD";
+import SettingDD from "./SettingDD";
 
 function SettingDropDown() {
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const { user } = useSelector((state) => state.user);
+	const { settingsDDContent } = useSelector((state) => state.dropDown);
+	const [height, setHeight] = useState("250px");
+	useEffect(() => {
+		if (settingsDDContent === "main") setHeight("250px");
+		if (settingsDDContent === "display") setHeight("300px");
+		if (settingsDDContent === "setting") setHeight("350px");
+	}, [settingsDDContent]);
 
 	return (
-		<SettingsDropDownContainer>
-			<ProfileDiv
-				onClick={() => {
-					dispatch(handleSettingDD(false));
-					navigate(`/${user._id}`);
-				}}
-			>
-				<img className='c-p' src={user.profilePic} alt='profile' />
-				<div>
-					<p className='name '>Profile name</p>
-					<p className='date '>see your profile</p>
-				</div>
-			</ProfileDiv>
-			<hr />
-			<SettingsDiv>
-				<div className='hv fr-sb'>
-					<div className='fr-sb'>
-						<IconContainer>
-							<i className='fa-solid fa-gear'></i>
-						</IconContainer>
-						<p>Settings</p>
-					</div>
-					<i className='fa-solid fa-chevron-right'></i>
-				</div>
-				<div className='hv fr-sb'>
-					<div className='fr-sb'>
-						<IconContainer>
-							<i className='fa-solid fa-moon'></i>
-						</IconContainer>
-						<p>Display</p>
-					</div>
-					<i className='fa-solid fa-chevron-right'></i>
-				</div>
-				<div
-					className='hv fr-sb'
-					onClick={() => {
-						dispatch(handleSettingDD(false));
-						dispatch(logout());
-					}}
-				>
-					<div className='fr-sb'>
-						<IconContainer>
-							<i className='fa-solid fa-arrow-right-from-bracket'></i>
-						</IconContainer>
-						<p>Log Out</p>
-					</div>
-				</div>
-			</SettingsDiv>
+		<SettingsDropDownContainer height={height}>
+			{settingsDDContent === "main" && <MainDD />}
+			{settingsDDContent === "display" && <DisplayDD />}
+			{settingsDDContent === "setting" && <SettingDD />}
 		</SettingsDropDownContainer>
 	);
 }
