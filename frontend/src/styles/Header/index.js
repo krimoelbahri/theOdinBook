@@ -13,6 +13,8 @@ import {
 	SettingsDropDownContainer,
 	SettingsDiv,
 	IconContainer,
+	DisplayDDHeader,
+	DisplayDiv,
 } from "./SettingsAccount-styled";
 import { ShortcutsContainer, ShortcutDiv } from "./shortcuts.styled";
 
@@ -31,4 +33,6 @@ export {
 	SettingsDropDownContainer,
 	SettingsDiv,
 	IconContainer,
+	DisplayDDHeader,
+	DisplayDiv,
 };
