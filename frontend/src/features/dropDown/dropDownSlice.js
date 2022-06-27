@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 let initialState = {
 	settingsDD: false,
 	searchDD: false,
+	settingsDDContent: "main",
 };
 let dropDownSlice = createSlice({
 	name: "dropDown",
@@ -13,7 +14,10 @@ let dropDownSlice = createSlice({
 		handleSearchDD: (state, actions) => {
 			state.searchDD = actions.payload;
 		},
+		handleSettingDDContent: (state, actions) => {
+			state.settingsDDContent = actions.payload;
+		},
 	},
 });
-export const { handleSettingDD, handleSearchDD } = dropDownSlice.actions;
+export const { handleSettingDD, handleSearchDD, handleSettingDDContent } = dropDownSlice.actions;
 export default dropDownSlice.reducer;
