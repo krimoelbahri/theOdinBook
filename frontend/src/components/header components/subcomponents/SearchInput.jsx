@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { handleSearchDD } from "../../../features/dropDown/dropDownSlice";
+import handleBlur from "../../../helpers/handleBlur";
 import {
 	SearchContainer,
 	SearchDDContainer,
@@ -19,20 +20,12 @@ function SearchInput() {
 	function showDropDown() {
 		if (!searchDD) dispatch(handleSearchDD(true));
 	}
-	function handleBlur(e) {
-		const currentTarget = e.currentTarget;
-		setTimeout(() => {
-			if (!currentTarget.contains(document.activeElement)) {
-				hideDropDown();
-			}
-		}, 0);
-	}
+
 	return (
 		<SearchDDContainer
 			active={searchDD}
 			tabIndex={"1"}
-			onFocus={() => console.log("focused")}
-			onBlur={handleBlur}
+			onBlur={(e) => handleBlur(e, hideDropDown)}
 		>
 			<DDheader active={searchDD}>
 				<Arrow active={searchDD} onClick={hideDropDown}>
