@@ -2,7 +2,9 @@ import axios from "axios";
 let URL = "/api/posts/";
 let user = JSON.parse(localStorage.getItem("user"));
 const config = {
-	headers: { Authorization: `Bearer ${user.token}` },
+	headers: {
+		Authorization: `Bearer ${user.token}`,
+	},
 };
 
 const getPosts = async function () {
@@ -16,7 +18,8 @@ const addPost = async function (userData) {
 const uploadImage = async function (userData) {
 	let response = await axios.post(URL + "uploadImg", userData, {
 		headers: {
-			"Content-Type": "multipart/form-data",
+			Authorization: `Bearer ${user.token}`,
+			"Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
 		},
 	});
 	return response.data;
