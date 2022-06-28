@@ -23,22 +23,26 @@ exports.getPost = asyncHandler(async function (req, res) {
 
 	res.status(200).json(post);
 });
+// Upload Images
+exports.uploadImage = asyncHandler(async function (req, res) {
+	res.status(201).json(req.file.publicUrl);
+});
 
 // CREATE a new post
 // route POST /api/posts
 exports.addPost = asyncHandler(async function (req, res) {
-	let { title, text, author, status } = req.body;
-	if (!title || !text || !author || !status) {
+	console.log("hi");
+	let { description, postImage, author } = req.body;
+	if (!description || !postImage || !author) {
 		res.status(400);
 		throw new Error("all fields are required");
 	}
-
 	const post = await Post.create({
-		title,
-		text,
+		description,
+		postImage,
 		author,
-		status,
 		comments: [],
+		likes: [],
 	});
 	res.status(200).json(post);
 });
