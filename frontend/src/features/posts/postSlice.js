@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import postServices from "./postServices";
 let state = {
 	post: { posts: null, isError: false, isDone: false, isLoading: false, message: "" },
-	addPost: { response: null, isError: false, isDone: false, isLoading: false, message: "" },
+	addPost: { post: null, isError: false, isDone: false, isLoading: false, message: "" },
 };
 
 export const getPosts = createAsyncThunk("get/allPosts", async (_, thunkAPI) => {
@@ -13,9 +13,13 @@ export const getPosts = createAsyncThunk("get/allPosts", async (_, thunkAPI) => 
 		return thunkAPI.rejectWithValue(error.response.data.message);
 	}
 });
-export const addPost = createAsyncThunk("add/Post", async (data, thunkAPI) => {
+export const addingPost = createAsyncThunk("add/Post", async (data, thunkAPI) => {
+	const { description, author, imgFile } = data;
+	let formData = new FormData();
+	formData.append("imgFile", imgFile);
 	try {
-		let response = await postServices.addPost(data);
+		let url = await postServices.uploadImage(formData);
+		let response = await postServices.addPost({ description, author, postImage: url });
 		return response;
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.response.data.message);
@@ -56,15 +60,15 @@ let postSlice = createSlice({
 				post.isLoading = false;
 				post.isError = true;
 			})
-			.addCase(addPost.pending, ({ addPost }) => {
+			.addCase(addingPost.pending, ({ addPost }) => {
 				addPost.isLoading = true;
 			})
-			.addCase(addPost.fulfilled, ({ addPost, action }) => {
-				addPost.response = action.payload;
+			.addCase(addingPost.fulfilled, ({ addPost }, action) => {
+				addPost.post = action.payload;
 				addPost.isDone = true;
 				addPost.isLoading = false;
 			})
-			.addCase(addPost.rejected, ({ addPost }, action) => {
+			.addCase(addingPost.rejected, ({ addPost }, action) => {
 				addPost.message = action.payload;
 				addPost.isDone = false;
 				addPost.isLoading = false;
