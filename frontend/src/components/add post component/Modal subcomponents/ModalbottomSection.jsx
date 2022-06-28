@@ -4,14 +4,17 @@ import {
 	ModalSubmitButton,
 } from "../../../styles/Add post";
 
-function ModalbottomSection({ setMedia }) {
+function ModalbottomSection({ setMedia, setUrl }) {
 	return (
 		<ModalBottomSectionContainer>
 			<AddMediaToPost>
 				<h3>Add to your post</h3>
 				<i
 					className='fa-solid fa-photo-film'
-					onClick={() => setMedia((state) => !state)}
+					onClick={() => {
+						setUrl(null);
+						setMedia((state) => !state);
+					}}
 				></i>
 			</AddMediaToPost>
 			<ModalSubmitButton type='submit'>
