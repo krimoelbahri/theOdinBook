@@ -1,11 +1,34 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 const asyncHandler = require("express-async-handler");
+const { where } = require("../models/post");
 
 // GET all posts -- Acces Public
 // route GET /api/posts
 exports.getPosts = asyncHandler(async function (req, res) {
-	let posts = await Post.find();
+	let posts = await Post.find()
+		.populate("comments")
+		.populate("author")
+		.populate("likes")
+		.catch((err) => {
+			res.status(400);
+			throw new Error(err);
+		});
+	res.status(200).json(posts);
+});
+
+// GET all posts -- Acces Public
+// route GET /api/posts
+exports.getUserPosts = asyncHandler(async function (req, res) {
+	let id = req.params.id;
+	let posts = await Post.find({ author: id })
+		.populate("comments")
+		.populate("likes")
+		.populate("author")
+		.catch((err) => {
+			res.status(400);
+			throw new Error("something went wrong");
+		});
 	res.status(200).json(posts);
 });
 
@@ -15,6 +38,7 @@ exports.getPost = asyncHandler(async function (req, res) {
 	let id = req.params.id;
 	let post = await Post.findById(id)
 		.populate("comments")
+		.populate("likes")
 		.populate("author")
 		.catch((err) => {
 			res.status(400);
@@ -31,7 +55,6 @@ exports.uploadImage = asyncHandler(async function (req, res) {
 // CREATE a new post
 // route POST /api/posts
 exports.addPost = asyncHandler(async function (req, res) {
-	console.log("hi");
 	let { description, postImage, author } = req.body;
 	if (!description || !postImage || !author) {
 		res.status(400);
