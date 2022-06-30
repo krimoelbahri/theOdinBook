@@ -3,12 +3,21 @@ import userServices from "./userServices";
 let user = JSON.parse(localStorage.getItem("user"));
 let state = {
 	user: user ? user : null,
+	profileUser: null,
 	isError: false,
 	isDone: false,
 	isLoading: false,
 	message: "",
 };
 
+export const getUser = createAsyncThunk("get/user", async (data, thunkAPI) => {
+	try {
+		let response = await userServices.getUser(data);
+		return response;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error.response.data.message);
+	}
+});
 export const signup = createAsyncThunk("register/user", async (data, thunkAPI) => {
 	try {
 		let response = await userServices.signup(data);
@@ -47,6 +56,7 @@ let userSlice = createSlice({
 	initialState: state,
 	reducers: {
 		reset: (state) => {
+			state.profileUser = null;
 			state.isError = false;
 			state.isDone = false;
 			state.isLoading = false;
@@ -66,6 +76,20 @@ let userSlice = createSlice({
 			.addCase(signup.rejected, (state, action) => {
 				state.message = action.payload;
 				state.user = null;
+				state.isLoading = false;
+				state.isError = true;
+			})
+			.addCase(getUser.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getUser.fulfilled, (state, action) => {
+				state.profileUser = action.payload;
+				state.isDone = true;
+				state.isLoading = false;
+			})
+			.addCase(getUser.rejected, (state, action) => {
+				state.message = action.payload;
+				state.profileUser = null;
 				state.isLoading = false;
 				state.isError = true;
 			})
