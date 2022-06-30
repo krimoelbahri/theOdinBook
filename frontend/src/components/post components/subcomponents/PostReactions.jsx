@@ -4,16 +4,16 @@ import {
 	ReactionsStatsDiv,
 } from "../../../styles/Post.styled";
 
-function PostReactions() {
+function PostReactions({ comments, likes }) {
 	return (
 		<PostReactionContainer>
 			<ReactionsStatsDiv className='b-b'>
 				<div>
 					<div>emojies</div>
-					<p>Likes Number</p>
+					<p>{likes?.length}</p>
 				</div>
 				<div>
-					<p>Comments Number</p>
+					<p>{comments?.length} Comments</p>
 				</div>
 			</ReactionsStatsDiv>
 			<ReactionButtonsDiv>
