@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addingPost } from "../../features/posts/postSlice";
+import { addingPost, getPost } from "../../features/posts/postSlice";
 import { ModalContainer } from "../../styles/Add post";
 import { handlePostModal } from "../../features/Modal/modalSlice";
 import ModalbottomSection from "./Modal subcomponents/ModalbottomSection";
@@ -20,8 +20,11 @@ function PostModal() {
 		dispatch(addingPost(data));
 	}
 	useEffect(() => {
-		if (addPost.isDone) dispatch(handlePostModal(false));
-	}, [addPost.isDone, dispatch]);
+		if (addPost.isDone) {
+			dispatch(getPost(addPost.post._id));
+			dispatch(handlePostModal(false));
+		}
+	}, [addPost, dispatch]);
 	return (
 		<ModalContainer onSubmit={handleSubmit}>
 			<ModalTopSection setData={setData} />
