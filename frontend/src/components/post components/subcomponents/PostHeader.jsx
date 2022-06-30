@@ -1,13 +1,18 @@
+import { Link } from "react-router-dom";
 import { PostHeaderContainer, ProfileDiv } from "../../../styles/Post.styled";
 
-function PostHeader() {
+function PostHeader({ user, date }) {
 	return (
 		<PostHeaderContainer>
 			<ProfileDiv>
-				<img className='c-p' src='' alt='' />
+				<Link to={`/${user._id}`}>
+					<img className='c-p' src={user?.profilePic} alt='' />
+				</Link>
 				<div>
-					<p className='name c-p'>Profile name</p>
-					<p className='date c-p'>date</p>
+					<Link to={`/${user._id}`}>
+						<p className='name c-p'>{user?.name}</p>
+					</Link>
+					<p className='date c-p'>{date}</p>
 				</div>
 			</ProfileDiv>
 			<div>
