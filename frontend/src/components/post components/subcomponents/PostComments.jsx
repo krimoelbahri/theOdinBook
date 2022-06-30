@@ -5,7 +5,7 @@ import {
 	CommentsDiv,
 } from "../../../styles/Post.styled";
 
-function PostComments() {
+function PostComments({ comments }) {
 	function handleSubmit(e) {
 		e.preventDefault();
 	}
@@ -25,18 +25,20 @@ function PostComments() {
 					</form>
 				</div>
 			</AddCommentsDiv>
-			<CommentsDiv>
-				<div>
-					<img src='' alt='' />
+			{comments?.map((comment) => (
+				<CommentsDiv key={comment._id}>
 					<div>
+						<img src={comment.author.profilePic} alt='' />
 						<div>
-							<p className='c-p'>profile name</p>
-							<span>this is a sample comment</span>
+							<div>
+								<p className='c-p'>{comment.author.name}</p>
+								<span>{comment.text}</span>
+							</div>
 						</div>
+						<i className='fa-solid fa-ellipsis c-p'></i>
 					</div>
-					<i className='fa-solid fa-ellipsis c-p'></i>
-				</div>
-			</CommentsDiv>
+				</CommentsDiv>
+			))}
 		</PostCommentsContainer>
 	);
 }
