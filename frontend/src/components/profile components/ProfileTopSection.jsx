@@ -7,14 +7,14 @@ import {
 import CoverPic from "./subcomponents/CoverPic";
 import ProfileInfo from "./subcomponents/ProfileInfo";
 
-function ProfileTopSection({ element }) {
+function ProfileTopSection({ element, user }) {
 	return (
 		<TopSectionContainer ref={element}>
 			<CoverPicWrapper>
-				<CoverPic />
+				<CoverPic user={user} />
 			</CoverPicWrapper>
 			<ProfileInfoWrapper>
-				<ProfileInfo />
+				<ProfileInfo user={user} />
 			</ProfileInfoWrapper>
 			<LineWrapper>
 				<div></div>
