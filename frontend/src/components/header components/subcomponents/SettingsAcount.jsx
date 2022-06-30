@@ -17,7 +17,15 @@ function Setting() {
 		}
 	}
 	return (
-		<SettingsContainer tabIndex={"1"} onBlur={(e) => handleBlur(e, handleDropDown)}>
+		<SettingsContainer
+			tabIndex={"1"}
+			onBlur={(e) =>
+				handleBlur(e, () => {
+					dispatch(handleSettingDD(false));
+					dispatch(handleSettingDDContent("main"));
+				})
+			}
+		>
 			<ArrowContainer onClick={handleDropDown} active={settingsDD}>
 				<div className='arrow'>
 					<i className='fa-solid fa-caret-down'></i>
