@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 export const NavSectionContainer = styled.div`
 	width: 100%;
 	height: 60px;
+	z-index: 1;
 	position: sticky;
 	top: 60px;
 	background-color: ${({ theme }) => theme.cardsBGC};
