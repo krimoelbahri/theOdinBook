@@ -1,7 +1,7 @@
 import { NavSectionContainer, NavWraper, ProfileNavLink } from "../../styles/profile";
 import { ProfileDiv } from "../../styles/Post.styled";
 
-function ProfileNavSection({ visible, location }) {
+function ProfileNavSection({ visible, location, user }) {
 	return (
 		<NavSectionContainer>
 			<NavWraper visible={visible} transform={"up"}>
@@ -47,9 +47,9 @@ function ProfileNavSection({ visible, location }) {
 			</NavWraper>
 			<NavWraper visible={!visible} transform={"down"}>
 				<ProfileDiv>
-					<img className='c-p' src='' alt='' />
+					<img className='c-p' src={user.profilePic} alt='' />
 					<div>
-						<p className='name c-p'>Profile name</p>
+						<p className='name c-p'>{user.name}</p>
 					</div>
 				</ProfileDiv>
 			</NavWraper>
