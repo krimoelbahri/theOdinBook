@@ -9,7 +9,9 @@ const { protect } = require("../middleware/authMiddleware");
 //GET all posts
 // URL /api/posts/
 router.get("/", postsController.getPosts);
-
+//GET user posts
+// URL /api/posts/user/:id
+router.get("/user/:id", postsController.getUserPosts);
 //GET a posts
 router.get("/:id", postsController.getPost);
 
