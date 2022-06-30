@@ -10,6 +10,21 @@ const generateToken = (id) => {
 		expiresIn: "30d",
 	});
 };
+exports.getUser = asyncHandler(async function (req, res) {
+	let id = req.params.id;
+	const user = await User.findById(id);
+	if (!user) {
+		res.status(400);
+		throw new Error("No user found");
+	}
+	res.status(200).json({
+		_id: user.id,
+		name: user.name,
+		email: user.email,
+		profilePic: user.profilePic,
+		coverPic: user.coverPic,
+	});
+});
 
 exports.signupUser = asyncHandler(async function (req, res) {
 	const { name, email, password, confirmPassword } = req.body;
