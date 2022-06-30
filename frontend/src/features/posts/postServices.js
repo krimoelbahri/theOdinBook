@@ -7,8 +7,14 @@ const config = {
 	},
 };
 
-const getPosts = async function () {
-	let response = await axios.get(URL);
+const getPosts = async function (id) {
+	let response;
+	if (id) response = await axios.get(URL + `user/${id}`);
+	if (!id) response = await axios.get(URL);
+	return response.data;
+};
+const getPost = async function (id) {
+	let response = await axios.get(URL + id);
 	return response.data;
 };
 const addPost = async function (userData) {
@@ -25,5 +31,5 @@ const uploadImage = async function (userData) {
 	return response.data;
 };
 
-let postServices = { getPosts, addPost, uploadImage };
+let postServices = { getPosts, getPost, addPost, uploadImage };
 export default postServices;
