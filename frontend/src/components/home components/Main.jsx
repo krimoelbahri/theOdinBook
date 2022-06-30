@@ -1,13 +1,13 @@
 import { MainContainer } from "../../styles/home.styled";
 import { Post, CreatePost } from "../post components";
 
-function Main() {
+function Main({ post }) {
 	return (
 		<MainContainer>
 			<CreatePost />
-			<Post />
-			<Post />
-			<Post />
+			{post.posts?.map((post) => (
+				<Post key={post._id} post={post} />
+			))}
 		</MainContainer>
 	);
 }
