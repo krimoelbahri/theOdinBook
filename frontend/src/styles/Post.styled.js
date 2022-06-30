@@ -29,13 +29,18 @@ export const ProfileDiv = styled.div`
 		height: 35px;
 		margin-right: 20px;
 		border-radius: 50%;
-		border: 1px solid;
+		:hover {
+			opacity: 0.9;
+		}
 	}
 	p {
 		font-size: 14px;
 	}
 	.name {
 		font-weight: bold;
+		:hover {
+			text-decoration: underline;
+		}
 	}
 	.date {
 		color: grey;
