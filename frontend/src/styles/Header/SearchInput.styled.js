@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SearchDDContainer = styled.div`
 	width: 320px;
-	z-index: 12;
+	z-index: ${({ active }) => (active ? 12 : null)};
 	border-radius: 0 10px 10px 10px;
 	background-color: ${({ theme, active }) => (active ? theme.cardsBGC : "transparent")};
 	box-shadow: ${({ theme, active }) => (active ? theme.mainBSb : null)};
