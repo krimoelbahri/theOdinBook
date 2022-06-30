@@ -1,6 +1,11 @@
 import axios from "axios";
 let URL = "/api/user/";
 
+const getUser = async function (id) {
+	let response = await axios.get(URL + id);
+	return response.data;
+};
+
 const signup = async function (userData) {
 	let response = await axios.post(URL + "signup", userData);
 	if (response.data) {
@@ -31,5 +36,5 @@ const logout = async () => {
 	return response.data;
 };
 
-let userServices = { signup, signin, facebookSignin, logout };
+let userServices = { signup, signin, facebookSignin, logout, getUser };
 export default userServices;
