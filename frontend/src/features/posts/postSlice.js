@@ -1,13 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import postServices from "./postServices";
 let state = {
-	post: { posts: null, isError: false, isDone: false, isLoading: false, message: "" },
+	post: {
+		posts: [],
+		isError: false,
+		isDone: false,
+		isLoading: false,
+		message: "",
+	},
 	addPost: { post: null, isError: false, isDone: false, isLoading: false, message: "" },
 };
 
-export const getPosts = createAsyncThunk("get/allPosts", async (_, thunkAPI) => {
+export const getPosts = createAsyncThunk("get/allPosts", async (id, thunkAPI) => {
 	try {
-		let response = await postServices.getPosts();
+		let response;
+		if (id) response = await postServices.getPosts(id);
+		if (!id) response = await postServices.getPosts();
+		return response;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error.response?.data?.message);
+	}
+});
+export const getPost = createAsyncThunk("get/onePost", async (data, thunkAPI) => {
+	try {
+		let response = await postServices.getPost(data);
 		return response;
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.response.data.message);
@@ -34,10 +50,12 @@ let postSlice = createSlice({
 			post.isError = false;
 			post.isDone = false;
 			post.isLoading = false;
+			post.posts = [];
 			post.message = "";
 		},
 		resetAddPost: ({ addPost }) => {
 			addPost.isError = false;
+			addPost.post = null;
 			addPost.isDone = false;
 			addPost.isLoading = false;
 			addPost.message = "";
@@ -55,15 +73,20 @@ let postSlice = createSlice({
 			})
 			.addCase(getPosts.rejected, ({ post }, action) => {
 				post.message = action.payload;
-				post.posts = null;
+				post.posts = [];
 				post.isDone = false;
 				post.isLoading = false;
 				post.isError = true;
 			})
+			.addCase(getPost.pending, () => {}) //TODO
+			.addCase(getPost.fulfilled, ({ post }, action) => {
+				post.posts.unshift(action.payload);
+			})
+			.addCase(getPost.rejected, (_, action) => {}) //TODO
 			.addCase(addingPost.pending, ({ addPost }) => {
 				addPost.isLoading = true;
 			})
-			.addCase(addingPost.fulfilled, ({ addPost }, action) => {
+			.addCase(addingPost.fulfilled, ({ addPost, post }, action) => {
 				addPost.post = action.payload;
 				addPost.isDone = true;
 				addPost.isLoading = false;
@@ -76,5 +99,5 @@ let postSlice = createSlice({
 			});
 	},
 });
-export const { reset } = postSlice.actions;
+export const { resetPost, resetAddPost } = postSlice.actions;
 export default postSlice.reducer;
