@@ -4,11 +4,9 @@ import { useSelector } from "react-redux";
 
 function Addpost() {
 	const { postModal } = useSelector((state) => state.modal);
-	return (
-		<Container active={postModal}>
-			<PostModal />
-		</Container>
-	);
+	const { user } = useSelector((state) => state.user);
+
+	return <Container active={postModal}>{user && <PostModal />}</Container>;
 }
 
 export default Addpost;
