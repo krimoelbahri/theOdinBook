@@ -7,7 +7,7 @@ import {
 } from "../../styles/profile";
 import { Post, CreatePost } from "../post components";
 
-function ProfileBottomSection() {
+function ProfileBottomSection({ currentUser, post }) {
 	return (
 		<BottomSectionContainer>
 			<div className='wrapper'>
@@ -41,8 +41,10 @@ function ProfileBottomSection() {
 					</FriendsContainer>
 				</ProfileLeftBar>
 				<ProfilePostsWrapper>
-					<CreatePost />
-					<Post />
+					{currentUser && <CreatePost />}
+					{post?.posts?.map((post) => (
+						<Post key={post._id} post={post} />
+					))}
 				</ProfilePostsWrapper>
 			</div>
 		</BottomSectionContainer>
