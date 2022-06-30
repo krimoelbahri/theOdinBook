@@ -1,9 +1,9 @@
 import { PostImgContainer } from "../../../styles/Post.styled";
 
-function PostImg() {
+function PostImg({ url }) {
 	return (
 		<PostImgContainer>
-			<img src='' alt='Post' />
+			<img src={url} alt='Post' />
 		</PostImgContainer>
 	);
 }
