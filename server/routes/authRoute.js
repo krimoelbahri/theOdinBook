@@ -7,6 +7,9 @@ var authController = require("../controllers/authController");
 //Signup
 //Link: /api/user/signup
 router.post("/signup", authController.signupUser);
+//Get User
+//Link: /api/user/:id
+router.get("/:id", authController.getUser);
 
 //local Signin
 //Link: /api/user/auth/local
