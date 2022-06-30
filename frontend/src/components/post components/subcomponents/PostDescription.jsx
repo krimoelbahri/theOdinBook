@@ -1,9 +1,9 @@
 import { PostDescriptionContainer } from "../../../styles/Post.styled";
 
-function PostDescription() {
+function PostDescription({ description }) {
 	return (
 		<PostDescriptionContainer>
-			<p>Description</p>
+			<p> {description}</p>
 		</PostDescriptionContainer>
 	);
 }
