@@ -18,22 +18,23 @@ function Profile() {
 	const dispatch = useDispatch();
 	const { id } = useParams();
 	const location = useLocation();
+
 	useEffect(() => {
 		if (id !== user._id) {
 			dispatch(getUser(id));
 		}
 		return () => dispatch(reset());
 	}, [id, user, dispatch]);
+
 	useEffect(() => {
 		dispatch(getPosts(id));
-
 		return () => dispatch(resetPost());
 	}, [id, user, dispatch]);
 	return (
 		<>
 			<ProfileTopSection element={ref} user={profileUser || user} />
 			<ProfileNavSection visible={isVisible} location={location} user={profileUser || user} />
-			<ProfileBottomSection currentUser={profileUser || user} post={post} />
+			<ProfileBottomSection currentUser={id === user._id} post={post} />
 		</>
 	);
 }
