@@ -7,6 +7,7 @@ const { where } = require("../models/post");
 // route GET /api/posts
 exports.getPosts = asyncHandler(async function (req, res) {
 	let posts = await Post.find()
+		.sort({ createdAt: -1 })
 		.populate("comments")
 		.populate("author")
 		.populate("likes")
@@ -22,6 +23,7 @@ exports.getPosts = asyncHandler(async function (req, res) {
 exports.getUserPosts = asyncHandler(async function (req, res) {
 	let id = req.params.id;
 	let posts = await Post.find({ author: id })
+		.sort({ createdAt: -1 })
 		.populate("comments")
 		.populate("likes")
 		.populate("author")
