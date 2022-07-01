@@ -3,15 +3,18 @@ import { AddPhotoContainer, AddPhotoInput } from "../../../styles/Add post";
 
 function AddPhoto({ url, setUrl, setData }) {
 	const fileInput = useRef();
+
 	function handleFileInput() {
 		fileInput.current.click();
 	}
+
 	function handleImage() {
 		let selectedImage = fileInput.current.files[0];
 		let url = URL.createObjectURL(selectedImage);
 		setUrl(url);
 		setData((state) => ({ ...state, imgFile: selectedImage }));
 	}
+
 	return (
 		<AddPhotoContainer>
 			{!url && (
