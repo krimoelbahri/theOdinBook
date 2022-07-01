@@ -16,7 +16,7 @@ function ModalTopSection() {
 			<ModalProfileDiv>
 				<img className='c-p' src={user.profilePic} alt='' />
 				<div>
-					<p className='name c-p'>Profile name</p>
+					<p className='name c-p'>{user.name}</p>
 				</div>
 			</ModalProfileDiv>
 		</div>
