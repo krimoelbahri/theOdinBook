@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import {
 	PostCommentsContainer,
 	ShowCommentsDiv,
@@ -6,16 +7,19 @@ import {
 } from "../../../styles/Post.styled";
 
 function PostComments({ comments }) {
+	const { user } = useSelector((state) => state.user);
+
 	function handleSubmit(e) {
 		e.preventDefault();
 	}
+
 	return (
 		<PostCommentsContainer>
 			<ShowCommentsDiv>
 				<p>show all</p>
 			</ShowCommentsDiv>
 			<AddCommentsDiv>
-				<img src='' alt='' />
+				<img src={user.profilePic} alt='' />
 				<div>
 					<form onSubmit={handleSubmit}>
 						<input type='text' placeholder='Write a comment...' />
