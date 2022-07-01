@@ -13,6 +13,7 @@ router.get("/", postsController.getPosts);
 // URL /api/posts/user/:id
 router.get("/user/:id", postsController.getUserPosts);
 //GET a posts
+// URL /api/posts/:id
 router.get("/:id", postsController.getPost);
 
 // Adding new Post
