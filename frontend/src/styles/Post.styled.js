@@ -134,7 +134,7 @@ export const AddCommentsDiv = styled.div`
 	margin-top: 10px;
 	display: flex;
 	flex-direction: row;
-	align-items: center;
+	align-items: flex-start;
 	img {
 		height: 30px;
 		width: 30px;
@@ -144,17 +144,17 @@ export const AddCommentsDiv = styled.div`
 	}
 	div {
 		width: 100%;
-		height: 30px;
 		border-radius: 20px;
 		background-color: ${({ theme }) => theme.commentsBGC};
 		form {
 			display: flex;
 			width: 100%;
-			height: 100%;
 			padding: 5px 10px;
-			input {
+			textarea {
 				flex: auto;
-				height: 100%;
+				height: 20px;
+				max-height: 150px;
+				resize: none;
 				outline: none;
 				border: none;
 				background-color: transparent;
