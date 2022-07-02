@@ -30,6 +30,14 @@ const uploadImage = async function (userData) {
 	});
 	return response.data;
 };
+const addComment = async function (userData, postId) {
+	let response = await axios.post(URL + postId + "/comment", userData, config);
+	return response.data;
+};
+const deleteComment = async function (commentId, postId) {
+	let response = await axios.delete(URL + postId + "/comment/" + commentId, config);
+	return response.data;
+};
 
-let postServices = { getPosts, getPost, addPost, uploadImage };
+let postServices = { getPosts, getPost, addPost, uploadImage, addComment, deleteComment };
 export default postServices;
