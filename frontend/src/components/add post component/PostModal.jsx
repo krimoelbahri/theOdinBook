@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addingPost, getPost } from "../../features/posts/postSlice";
+import { addingPost, getPost, resetAddPost } from "../../features/posts/postSlice";
 import { ModalContainer } from "../../styles/Add post";
 import { handlePostModal } from "../../features/Modal/modalSlice";
 import ModalbottomSection from "./Modal subcomponents/ModalbottomSection";
@@ -26,6 +26,7 @@ function PostModal() {
 		if (addPost.isDone) {
 			dispatch(getPost(addPost.post._id));
 			dispatch(handlePostModal(false));
+			dispatch(resetAddPost());
 		}
 	}, [addPost, dispatch]);
 
