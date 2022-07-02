@@ -9,9 +9,11 @@ const { protect } = require("../middleware/authMiddleware");
 //GET all posts
 // URL /api/posts/
 router.get("/", postsController.getPosts);
+
 //GET user posts
 // URL /api/posts/user/:id
 router.get("/user/:id", postsController.getUserPosts);
+
 //GET a posts
 // URL /api/posts/:id
 router.get("/:id", postsController.getPost);
@@ -19,11 +21,22 @@ router.get("/:id", postsController.getPost);
 // Adding new Post
 //URL /api/posts/
 router.post("/", protect, postsController.addPost);
+
 //Upload images
+//URL /api/posts/uploadImg
 router.post("/uploadImg", protect, multer.single("imgFile"), postsController.uploadImage);
 
 // Adding new comment
-router.post("/:id/comment", postsController.addComment);
+//URL /api/posts/:id/comment
+router.post("/:id/comment", protect, postsController.addComment);
+
+// Delete comment
+//URL /api/posts/:postId/comment/:commentId
+router.delete("/:postId/comment/:commentId", protect, postsController.deleteComment);
+
+// Adding new Like
+//URL /api/posts/:id/Like
+router.post("/:id/Like", protect, postsController.addLike);
 
 // update a Post
 router.put("/:id", protect, postsController.updatePost);
