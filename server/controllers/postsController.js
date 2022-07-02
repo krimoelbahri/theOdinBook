@@ -1,16 +1,36 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 const asyncHandler = require("express-async-handler");
-const { where } = require("../models/post");
 
 // GET all posts -- Acces Public
 // route GET /api/posts
 exports.getPosts = asyncHandler(async function (req, res) {
 	let posts = await Post.find()
 		.sort({ createdAt: -1 })
-		.populate("comments")
-		.populate("author")
-		.populate("likes")
+		.populate([
+			{
+				path: "author",
+				select: "name profilePic",
+				model: "User",
+			},
+			{
+				path: "comments",
+				model: "Comment",
+				populate: {
+					path: "author",
+					select: "name profilePic ",
+					model: "User",
+				},
+			},
+			{
+				path: "likes",
+				populate: {
+					path: "author",
+					select: "name profilePic ",
+					model: "User",
+				},
+			},
+		])
 		.catch((err) => {
 			res.status(400);
 			throw new Error(err);
@@ -18,15 +38,36 @@ exports.getPosts = asyncHandler(async function (req, res) {
 	res.status(200).json(posts);
 });
 
-// GET all posts -- Acces Public
+// GET all user's posts -- Acces Public
 // route GET /api/posts
 exports.getUserPosts = asyncHandler(async function (req, res) {
 	let id = req.params.id;
 	let posts = await Post.find({ author: id })
 		.sort({ createdAt: -1 })
-		.populate("comments")
-		.populate("likes")
-		.populate("author")
+		.populate([
+			{
+				path: "author",
+				select: "name profilePic",
+				model: "User",
+			},
+			{
+				path: "comments",
+				model: "Comment",
+				populate: {
+					path: "author",
+					select: "name profilePic ",
+					model: "User",
+				},
+			},
+			{
+				path: "likes",
+				populate: {
+					path: "author",
+					select: "name profilePic ",
+					model: "User",
+				},
+			},
+		])
 		.catch((err) => {
 			res.status(400);
 			throw new Error("something went wrong");
@@ -34,14 +75,35 @@ exports.getUserPosts = asyncHandler(async function (req, res) {
 	res.status(200).json(posts);
 });
 
-// GET a unique -- Acces Public
+// GET a unique post -- Acces Public
 // route GET /api/posts/:id
 exports.getPost = asyncHandler(async function (req, res) {
 	let id = req.params.id;
 	let post = await Post.findById(id)
-		.populate("comments")
-		.populate("likes")
-		.populate("author")
+		.populate([
+			{
+				path: "author",
+				select: "name profilePic",
+				model: "User",
+			},
+			{
+				path: "comments",
+				model: "Comment",
+				populate: {
+					path: "author",
+					select: "name profilePic ",
+					model: "User",
+				},
+			},
+			{
+				path: "likes",
+				populate: {
+					path: "author",
+					select: "name profilePic ",
+					model: "User",
+				},
+			},
+		])
 		.catch((err) => {
 			res.status(400);
 			throw new Error("Post not found");
@@ -49,12 +111,13 @@ exports.getPost = asyncHandler(async function (req, res) {
 
 	res.status(200).json(post);
 });
-// Upload Images
+
+// Get URL of Uploaded Images --Private Acces
 exports.uploadImage = asyncHandler(async function (req, res) {
 	res.status(201).json(req.file.publicUrl);
 });
 
-// CREATE a new post
+// CREATE a new post -- Private acces
 // route POST /api/posts
 exports.addPost = asyncHandler(async function (req, res) {
 	let { description, postImage, author } = req.body;
@@ -76,23 +139,63 @@ exports.addPost = asyncHandler(async function (req, res) {
 // route POST /api/posts/:id/comment
 exports.addComment = asyncHandler(async function (req, res) {
 	let { text, author } = req.body;
-	let id = req.params.id;
+	let postId = req.params.id;
 	if (!text || !author) {
 		res.status(400);
 		throw new Error("all fields are required");
 	}
-	const post = await Post.findById(id);
-	const comment = await Comment.create({ text, author });
-	if (post && comment) {
-		let comments = post.comments.push(comment.id);
-		const updatedPost = await Post.findByIdAndUpdate(id, { ...post, comments }, { new: true })
-			.populate("comments")
-			.populate("author");
-
-		res.status(200).json(updatedPost);
-	} else {
+	try {
+		let post = await Post.findById(postId);
+		let comment = await Comment.create({ text, author });
+		post.comments.push(comment.id);
+		await post.save();
+		res.status(200).json(await comment.populate({ path: "author", select: "name profilePic" }));
+	} catch (error) {
 		res.status(400);
-		throw new Error("something went wrong");
+		throw new Error(error);
+	}
+});
+
+// Delete a Comment
+// route DELETE /api/posts/:postId/comment/:commentId
+exports.deleteComment = asyncHandler(async function (req, res) {
+	let postId = req.params.postId;
+	let commentId = req.params.commentId;
+	try {
+		await Comment.findByIdAndDelete(commentId);
+		let post = await Post.findById(postId);
+		if (post.comments.includes(commentId)) {
+			post.comments.splice(post.comments.indexOf(commentId), 1);
+		}
+		let savedPost = await post.save();
+		res.status(200).json(savedPost);
+	} catch (error) {
+		res.status(400);
+		throw new Error(error);
+	}
+});
+
+// Add Remove Like
+// route POST /api/posts/:id/Like
+exports.addLike = asyncHandler(async function (req, res) {
+	let { author } = req.body;
+	let postId = req.params.id;
+	if (!author) {
+		res.status(400);
+		throw new Error("no user");
+	}
+	try {
+		let post = await Post.findById(postId);
+		if (post.likes.includes(author)) {
+			post.likes.splice(post.likes.indexOf(author), 1);
+		} else {
+			post.likes.push(author);
+		}
+		let savedPost = await post.save();
+		res.status(200).json(savedPost);
+	} catch (error) {
+		res.status(400);
+		throw new Error(error);
 	}
 });
 
