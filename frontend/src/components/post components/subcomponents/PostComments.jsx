@@ -9,11 +9,10 @@ import {
 	CommentsDiv,
 } from "../../../styles/Post.styled";
 
-function PostComments({ comments, postId }) {
+function PostComments({ postComments, setComments, postId }) {
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.user);
 
-	const [postComments, setComments] = useState(comments);
 	const [data, setData] = useState({ text: "", author: user._id, postId });
 	const [addedComment, setAddedComment] = useState({
 		_id: uuid(),
@@ -85,25 +84,53 @@ function PostComments({ comments, postId }) {
 				</div>
 			</AddCommentsDiv>
 			{postComments?.map((comment) => (
-				<CommentsDiv key={comment?._id}>
-					<div>
-						<img src={comment?.author?.profilePic} alt='' />
-						<div>
-							<div>
-								<p className='c-p'>{comment?.author?.name}</p>
-								<span>{comment?.text}</span>
-							</div>
-						</div>
-						<i
-							className='fa-solid fa-ellipsis c-p'
-							id={comment?._id}
-							onClick={(e) => handleDeleteComment(e, comment)}
-						></i>
-					</div>
-				</CommentsDiv>
+				<Comments key={comment?._id} comment={comment} deletComment={handleDeleteComment} />
 			))}
 		</PostCommentsContainer>
 	);
 }
 
+function Comments({ comment, deletComment }) {
+	const [deleteLoading, setDeleteLoading] = useState(false);
+	const [deleteIcon, setDeleteIcon] = useState(false);
+
+	return (
+		<CommentsDiv>
+			<div>
+				<img src={comment?.author?.profilePic} alt='' />
+				<div>
+					<div>
+						<p className='c-p'>{comment?.author?.name}</p>
+						<span>{comment?.text}</span>
+					</div>
+				</div>
+				{!deleteLoading ? (
+					<>
+						{!deleteIcon ? (
+							<i
+								className='fa-solid fa-ellipsis'
+								onMouseOver={() => setDeleteIcon(true)}
+							></i>
+						) : (
+							<i
+								className='fa-solid fa-trash-can fa-flip c-p'
+								id={comment?._id}
+								onMouseOut={() => setDeleteIcon(false)}
+								onClick={(e) => {
+									setDeleteLoading(true);
+									deletComment(e, comment).then(() => {
+										setDeleteLoading(false);
+									});
+								}}
+								style={{ "--fa-animation-iteration-count": 1, color: "red" }}
+							></i>
+						)}
+					</>
+				) : (
+					<i className='fa-solid fa-spinner fa-spin-pulse'></i>
+				)}
+			</div>
+		</CommentsDiv>
+	);
+}
 export default PostComments;
