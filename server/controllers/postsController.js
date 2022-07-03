@@ -8,11 +8,7 @@ exports.getPosts = asyncHandler(async function (req, res) {
 	let posts = await Post.find()
 		.sort({ createdAt: -1 })
 		.populate([
-			{
-				path: "author",
-				select: "name profilePic",
-				model: "User",
-			},
+			{ path: "author", select: "name profilePic", model: "User" },
 			{
 				path: "comments",
 				model: "Comment",
@@ -22,14 +18,7 @@ exports.getPosts = asyncHandler(async function (req, res) {
 					model: "User",
 				},
 			},
-			{
-				path: "likes",
-				populate: {
-					path: "author",
-					select: "name profilePic ",
-					model: "User",
-				},
-			},
+			{ path: "likes", select: "name profilePic ", model: "User" },
 		])
 		.catch((err) => {
 			res.status(400);
@@ -45,11 +34,7 @@ exports.getUserPosts = asyncHandler(async function (req, res) {
 	let posts = await Post.find({ author: id })
 		.sort({ createdAt: -1 })
 		.populate([
-			{
-				path: "author",
-				select: "name profilePic",
-				model: "User",
-			},
+			{ path: "author", select: "name profilePic", model: "User" },
 			{
 				path: "comments",
 				model: "Comment",
@@ -59,14 +44,7 @@ exports.getUserPosts = asyncHandler(async function (req, res) {
 					model: "User",
 				},
 			},
-			{
-				path: "likes",
-				populate: {
-					path: "author",
-					select: "name profilePic ",
-					model: "User",
-				},
-			},
+			{ path: "likes", select: "name profilePic ", model: "User" },
 		])
 		.catch((err) => {
 			res.status(400);
@@ -191,8 +169,9 @@ exports.addLike = asyncHandler(async function (req, res) {
 		} else {
 			post.likes.push(author);
 		}
-		let savedPost = await post.save();
-		res.status(200).json(savedPost);
+		await post.save();
+		await post.populate({ path: "likes", select: "name" });
+		res.status(200).json(post.likes);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
