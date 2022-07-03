@@ -110,6 +110,13 @@ export const ReactionButtonsDiv = styled.div`
 		background-color: ${({ theme }) => theme.hoverBGC};
 		cursor: pointer;
 	}
+	i.like-icon {
+		color: ${({ isLiked, theme }) => (isLiked ? theme.headerBGC : "rgb(1 1 1 / 50%)")};
+	}
+	p.like-icon {
+		color: ${({ isLiked, theme }) => (isLiked ? theme.headerBGC : "rgb(1 1 1 / 50%)")};
+		font-weight: bolder;
+	}
 	i {
 		color: rgb(1 1 1 / 50%);
 	}
