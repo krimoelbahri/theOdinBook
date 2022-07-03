@@ -1,14 +1,23 @@
-import React from "react";
+import { useState } from "react";
 import { PostContainer } from "../../styles/Post.styled";
 import { PostHeader, PostComments, PostDescription, PostImg, PostReactions } from "./subcomponents";
 function Post({ post }) {
+	const { author, createdAt, description, postImage, comments, likes, _id } = post;
+	const [postComments, setComments] = useState(comments);
+	const [postLikes, setPostLikes] = useState(likes);
+
 	return (
 		<PostContainer>
-			<PostHeader user={post.author} date={post.createdAt} />
-			<PostDescription description={post.description} />
-			<PostImg url={post.postImage} />
-			<PostReactions comments={post.comments} likes={post.likes} />
-			<PostComments comments={post.comments} postId={post._id} />
+			<PostHeader user={author} date={createdAt} />
+			<PostDescription description={description} />
+			<PostImg url={postImage} />
+			<PostReactions
+				postComments={postComments}
+				postLikes={postLikes}
+				setPostLikes={setPostLikes}
+				postId={_id}
+			/>
+			<PostComments postComments={postComments} setComments={setComments} postId={_id} />
 		</PostContainer>
 	);
 }
