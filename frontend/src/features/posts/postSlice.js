@@ -9,7 +9,6 @@ let state = {
 		message: "",
 	},
 	addPost: { post: null, isError: false, isDone: false, isLoading: false, message: "" },
-	addComments: { comment: "" },
 };
 
 export const getPosts = createAsyncThunk("get/allPosts", async (id, thunkAPI) => {
@@ -60,6 +59,15 @@ export const deletingComment = createAsyncThunk("delete/comment", async (data, t
 		return thunkAPI.rejectWithValue(error.response.data.message);
 	}
 });
+export const addingLike = createAsyncThunk("add/comment", async (data, thunkAPI) => {
+	const { userId, postId } = data;
+	try {
+		let response = await postServices.addLike(userId, postId);
+		return response;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error.response.data.message);
+	}
+});
 
 let postSlice = createSlice({
 	name: "post",
@@ -78,9 +86,6 @@ let postSlice = createSlice({
 			addPost.isDone = false;
 			addPost.isLoading = false;
 			addPost.message = "";
-		},
-		resetAddComment: ({ addComents }) => {
-			addComents.comment = state.addComents.comment;
 		},
 	},
 	extraReducers(builder) {
