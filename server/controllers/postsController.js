@@ -18,7 +18,7 @@ exports.getPosts = asyncHandler(async function (req, res) {
 					model: "User",
 				},
 			},
-			{ path: "likes", select: "name profilePic ", model: "User" },
+			{ path: "likes", select: "name", model: "User" },
 		])
 		.catch((err) => {
 			res.status(400);
@@ -44,7 +44,7 @@ exports.getUserPosts = asyncHandler(async function (req, res) {
 					model: "User",
 				},
 			},
-			{ path: "likes", select: "name profilePic ", model: "User" },
+			{ path: "likes", select: "name", model: "User" },
 		])
 		.catch((err) => {
 			res.status(400);
@@ -75,11 +75,8 @@ exports.getPost = asyncHandler(async function (req, res) {
 			},
 			{
 				path: "likes",
-				populate: {
-					path: "author",
-					select: "name profilePic ",
-					model: "User",
-				},
+				select: "name ",
+				model: "User",
 			},
 		])
 		.catch((err) => {
@@ -110,6 +107,19 @@ exports.addPost = asyncHandler(async function (req, res) {
 		comments: [],
 		likes: [],
 	});
+	await post.populate([
+		{ path: "author", select: "name profilePic", model: "User" },
+		{
+			path: "comments",
+			model: "Comment",
+			populate: {
+				path: "author",
+				select: "name profilePic ",
+				model: "User",
+			},
+		},
+		{ path: "likes", select: "name", model: "User" },
+	]);
 	res.status(200).json(post);
 });
 
@@ -209,10 +219,8 @@ exports.updatePost = asyncHandler(async function (req, res) {
 exports.deletePost = asyncHandler(async function (req, res) {
 	let id = req.params.id;
 	const deletedPost = await Post.findByIdAndDelete(id).populate("comments");
-	const deletedComments = [];
 	for (const element of deletedPost.comments) {
-		const deletedComment = await Comment.findByIdAndDelete(element.id);
-		deletedComments.push(deletedComment);
+		await Comment.findByIdAndDelete(element.id);
 	}
-	res.status(201).json({ deletedPost, deletedComments });
+	res.status(201).json({ id: deletedPost.id });
 });
