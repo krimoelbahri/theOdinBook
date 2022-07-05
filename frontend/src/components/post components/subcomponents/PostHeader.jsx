@@ -1,7 +1,32 @@
+import { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { PostHeaderContainer, ProfileDiv } from "../../../styles/Post.styled";
+import { deletePost, removePost } from "../../../features/posts/postSlice";
+import { PostHeaderContainer, PostHeaderDD, ProfileDiv } from "../../../styles/Post.styled";
 
-function PostHeader({ user, date }) {
+function PostHeader({ user, date, postId, postIndex }) {
+	const DD = useRef();
+	const dispatch = useDispatch();
+
+	const [isActive, setIsActive] = useState(false);
+	const [isDeleting, setIsDeleting] = useState(false);
+
+	function handleOnBlur() {
+		setIsActive(false);
+	}
+	async function handleDeletePost() {
+		setIsDeleting(true);
+		try {
+			await dispatch(deletePost(postId)).unwrap();
+			dispatch(removePost(postIndex));
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	useEffect(() => {
+		if (isActive) DD.current.focus();
+	}, [isActive]);
+
 	return (
 		<PostHeaderContainer>
 			<ProfileDiv>
@@ -15,8 +40,33 @@ function PostHeader({ user, date }) {
 					<p className='date c-p'>{date}</p>
 				</div>
 			</ProfileDiv>
-			<div>
-				<i className='fa-solid fa-ellipsis'></i>
+			<div style={{ position: "relative" }}>
+				{!isDeleting && (
+					<>
+						<div
+							className='icon c-p'
+							onClick={() => (!isActive ? setIsActive(true) : setIsActive(false))}
+						>
+							<i className='fa-solid fa-ellipsis'></i>
+						</div>
+						<PostHeaderDD
+							active={isActive}
+							tabIndex={"1"}
+							onBlur={handleOnBlur}
+							ref={DD}
+						>
+							<div className='c-p' onClick={handleDeletePost}>
+								<i className='fa-solid fa-trash-can '></i>
+								<p>Delete</p>
+							</div>
+						</PostHeaderDD>
+					</>
+				)}
+				{isDeleting && (
+					<div className='icon'>
+						<i className='fa-solid fa-spinner fa-spin-pulse'></i>
+					</div>
+				)}
 			</div>
 		</PostHeaderContainer>
 	);
