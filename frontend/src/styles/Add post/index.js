@@ -1,6 +1,7 @@
-import {
+export {
 	Container,
 	ModalContainer,
+	Loader,
 	ModalHeader,
 	ModalProfileDiv,
 	ModalMediaSectionContainer,
@@ -14,20 +15,3 @@ import {
 	AddMediaToPost,
 	ModalSubmitButton,
 } from "./addPost.styled";
-
-export {
-	Container,
-	ModalContainer,
-	ModalHeader,
-	ModalProfileDiv,
-	ModalMediaSectionContainer,
-	ModalTextarea,
-	Textarea,
-	TextareaPlaceHolder,
-	ModalMediaarea,
-	AddPhotoContainer,
-	AddPhotoInput,
-	ModalBottomSectionContainer,
-	AddMediaToPost,
-	ModalSubmitButton,
-};
