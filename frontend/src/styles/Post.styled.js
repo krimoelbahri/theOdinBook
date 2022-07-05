@@ -18,6 +18,45 @@ export const PostHeaderContainer = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	div.icon {
+		width: 30px;
+		height: 30px;
+		padding: 7px;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		:hover {
+			background-color: ${({ theme }) => theme.hoverBGC};
+		}
+	}
+`;
+export const PostHeaderDD = styled.div`
+	width: 200px;
+	min-height: 30px;
+	padding: 7px;
+	border-radius: 5px;
+	box-shadow: ${({ theme }) => theme.mainBS};
+	background-color: ${({ theme }) => theme.cardsBGC};
+	position: absolute;
+	right: 0;
+	top: 35px;
+	display: ${({ active }) => (active ? "flex" : "none")};
+	flex-direction: column;
+	div {
+		width: 100%;
+		padding: 5px;
+		border-radius: 5px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		:hover {
+			background-color: ${({ theme }) => theme.hoverBGC};
+		}
+		i {
+			margin-right: 10px;
+		}
+	}
 `;
 export const ProfileDiv = styled.div`
 	width: 70%;
