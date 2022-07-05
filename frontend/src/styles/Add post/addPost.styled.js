@@ -7,7 +7,7 @@ export const Container = styled.div`
 	top: 0;
 	z-index: 100;
 	background-color: ${({ theme }) => theme.modalContainerBGC};
-	display: ${({ active }) => (active ? "flex" : "none")};
+	display: flex;
 	justify-content: center;
 	align-items: center;
 `;
@@ -15,6 +15,7 @@ export const ModalContainer = styled.form`
 	width: 500px;
 	min-height: 400px;
 	max-height: 500px;
+	position: relative;
 	border-radius: 10px;
 	background-color: ${({ theme }) => theme.cardsBGC};
 	display: flex;
@@ -24,6 +25,18 @@ export const ModalContainer = styled.form`
 		flex-direction: column;
 	}
 `;
+export const Loader = styled.div`
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	opacity: 0.8;
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
 export const ModalHeader = styled.div`
 	width: 100%;
 	height: 60px;
