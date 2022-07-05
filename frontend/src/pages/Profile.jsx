@@ -34,7 +34,11 @@ function Profile() {
 		<>
 			<ProfileTopSection element={ref} user={profileUser || user} />
 			<ProfileNavSection visible={isVisible} location={location} user={profileUser || user} />
-			<ProfileBottomSection currentUser={id === user._id} post={post} />
+			<ProfileBottomSection
+				currentUser={id === user._id}
+				post={post}
+				user={profileUser || user}
+			/>
 		</>
 	);
 }
