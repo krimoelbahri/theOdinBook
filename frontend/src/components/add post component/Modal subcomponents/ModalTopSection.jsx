@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 function ModalTopSection() {
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.user);
+
 	return (
 		<div className='top-section'>
 			<ModalHeader className='b-b'>
