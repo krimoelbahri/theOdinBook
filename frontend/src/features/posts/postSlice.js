@@ -8,7 +8,7 @@ let state = {
 		isLoading: false,
 		message: "",
 	},
-	addPost: { post: null, isError: false, isDone: false, isLoading: false, message: "" },
+	addPost: { isError: false, isDone: false, isLoading: false, message: "" },
 };
 
 export const getPosts = createAsyncThunk("get/allPosts", async (id, thunkAPI) => {
@@ -68,6 +68,14 @@ export const addingLike = createAsyncThunk("add/comment", async (data, thunkAPI)
 		return thunkAPI.rejectWithValue(error.response.data.message);
 	}
 });
+export const deletePost = createAsyncThunk("add/comment", async (postId, thunkAPI) => {
+	try {
+		let response = await postServices.deletePost(postId);
+		return response;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error.response.data.message);
+	}
+});
 
 let postSlice = createSlice({
 	name: "post",
@@ -82,10 +90,15 @@ let postSlice = createSlice({
 		},
 		resetAddPost: ({ addPost }) => {
 			addPost.isError = false;
-			addPost.post = null;
 			addPost.isDone = false;
 			addPost.isLoading = false;
 			addPost.message = "";
+		},
+		addPosts: ({ post }, action) => {
+			post.posts.unshift(action.payload);
+		},
+		removePost: ({ post }, action) => {
+			post.posts.splice(action.payload, 1);
 		},
 	},
 	extraReducers(builder) {
@@ -106,17 +119,10 @@ let postSlice = createSlice({
 				post.isError = true;
 			})
 
-			.addCase(getPost.pending, () => {}) //TODO
-			.addCase(getPost.fulfilled, ({ post }, action) => {
-				post.posts.unshift(action.payload);
-			})
-			.addCase(getPost.rejected, (_, action) => {}) //TODO
-
 			.addCase(addingPost.pending, ({ addPost }) => {
 				addPost.isLoading = true;
 			})
 			.addCase(addingPost.fulfilled, ({ addPost }, action) => {
-				addPost.post = action.payload;
 				addPost.isDone = true;
 				addPost.isLoading = false;
 			})
@@ -128,5 +134,5 @@ let postSlice = createSlice({
 			});
 	},
 });
-export const { resetPost, resetAddPost } = postSlice.actions;
+export const { resetPost, resetAddPost, removePost, addPosts } = postSlice.actions;
 export default postSlice.reducer;
