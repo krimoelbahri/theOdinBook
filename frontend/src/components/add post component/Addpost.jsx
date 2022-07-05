@@ -6,7 +6,7 @@ function Addpost() {
 	const { postModal } = useSelector((state) => state.modal);
 	const { user } = useSelector((state) => state.user);
 
-	return <Container active={postModal}>{user && <PostModal />}</Container>;
+	return <>{postModal && <Container>{user && <PostModal />}</Container>}</>;
 }
 
 export default Addpost;
