@@ -7,23 +7,17 @@ import {
 } from "../../styles/profile";
 import { Post, CreatePost } from "../post components";
 
-function ProfileBottomSection({ currentUser, post }) {
+function ProfileBottomSection({ currentUser, post, user }) {
 	return (
 		<BottomSectionContainer>
 			<div className='wrapper'>
 				<ProfileLeftBar>
 					<FriendsContainer>
 						<div className='header'>
-							<Link
-								to={`/62af5a0d2b41db9d923ba62d?sf=friends`}
-								state={{ data: "friends" }}
-							>
+							<Link to={`/${user._id}?sf=friends`} state={{ data: "friends" }}>
 								<h3>Friends</h3>
 							</Link>
-							<Link
-								to={`/62af5a0d2b41db9d923ba62d?sf=friends`}
-								state={{ data: "friends" }}
-							>
+							<Link to={`/${user._id}?sf=friends`} state={{ data: "friends" }}>
 								<h4>See all friends</h4>
 							</Link>
 						</div>
