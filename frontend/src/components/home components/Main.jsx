@@ -5,8 +5,8 @@ function Main({ post }) {
 	return (
 		<MainContainer>
 			<CreatePost />
-			{post.posts?.map((post) => (
-				<Post key={post._id} post={post} />
+			{post.posts?.map((post, i) => (
+				<Post key={post._id} post={post} postIndex={i} />
 			))}
 		</MainContainer>
 	);
