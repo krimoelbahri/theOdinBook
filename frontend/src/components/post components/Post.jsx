@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { PostContainer } from "../../styles/Post.styled";
 import { PostHeader, PostComments, PostDescription, PostImg, PostReactions } from "./subcomponents";
-function Post({ post }) {
+function Post({ post, postIndex }) {
 	const { author, createdAt, description, postImage, comments, likes, _id } = post;
 	const [postComments, setComments] = useState(comments);
 	const [postLikes, setPostLikes] = useState(likes);
 
 	return (
 		<PostContainer>
-			<PostHeader user={author} date={createdAt} />
+			<PostHeader user={author} date={createdAt} postId={_id} postIndex={postIndex} />
 			<PostDescription description={description} />
 			<PostImg url={postImage} />
 			<PostReactions
