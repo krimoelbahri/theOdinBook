@@ -46,6 +46,18 @@ const addLike = async function (userId, postId) {
 	let response = await axios.post(URL + postId + "/like", { author: userId }, getConfig());
 	return response.data;
 };
-
-let postServices = { getPosts, getPost, addPost, uploadImage, addComment, deleteComment, addLike };
+const deletePost = async function (postId) {
+	let response = await axios.delete(URL + postId, getConfig());
+	return response.data;
+};
+let postServices = {
+	getPosts,
+	getPost,
+	addPost,
+	uploadImage,
+	addComment,
+	deleteComment,
+	addLike,
+	deletePost,
+};
 export default postServices;
