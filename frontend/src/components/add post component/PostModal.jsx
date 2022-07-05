@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addingPost, getPost, resetAddPost } from "../../features/posts/postSlice";
-import { ModalContainer } from "../../styles/Add post";
+import { addingPost, addPosts, resetAddPost } from "../../features/posts/postSlice";
+import { ModalContainer, Loader } from "../../styles/Add post";
 import { handlePostModal } from "../../features/Modal/modalSlice";
 import ModalbottomSection from "./Modal subcomponents/ModalbottomSection";
 import ModalMediaSection from "./Modal subcomponents/ModalMediaSection";
@@ -17,18 +17,17 @@ function PostModal() {
 	const [url, setUrl] = useState(null);
 	const [data, setData] = useState({ description: null, author: user._id, imgFile: null });
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
-		dispatch(addingPost(data));
-	}
-
-	useEffect(() => {
-		if (addPost.isDone) {
-			dispatch(getPost(addPost.post._id));
-			dispatch(handlePostModal(false));
+		try {
+			let post = await dispatch(addingPost(data)).unwrap();
+			dispatch(addPosts(post));
+			dispatch(handlePostModal());
 			dispatch(resetAddPost());
+		} catch (error) {
+			console.log(error);
 		}
-	}, [addPost, dispatch]);
+	}
 
 	return (
 		<ModalContainer onSubmit={handleSubmit}>
@@ -41,6 +40,11 @@ function PostModal() {
 				setData={setData}
 			/>
 			<ModalbottomSection setMedia={setMedia} setUrl={setUrl} />
+			{addPost.isLoading && (
+				<Loader>
+					<i className='fa-solid fa-spinner fa-spin-pulse'></i>
+				</Loader>
+			)}
 		</ModalContainer>
 	);
 }
