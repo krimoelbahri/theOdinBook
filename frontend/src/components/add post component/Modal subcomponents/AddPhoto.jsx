@@ -5,7 +5,7 @@ function AddPhoto({ url, setUrl, setData }) {
 	const fileInput = useRef();
 
 	function handleFileInput() {
-		fileInput.current.click();
+		if (!url) fileInput.current.click();
 	}
 
 	function handleImage() {
@@ -16,9 +16,9 @@ function AddPhoto({ url, setUrl, setData }) {
 	}
 
 	return (
-		<AddPhotoContainer>
+		<AddPhotoContainer onClick={handleFileInput}>
 			{!url && (
-				<AddPhotoInput onClick={handleFileInput}>
+				<AddPhotoInput>
 					<i className='fa-solid fa-file-medical'></i>
 					<h1>Add Photos</h1>
 				</AddPhotoInput>
