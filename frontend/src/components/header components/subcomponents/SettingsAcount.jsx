@@ -1,11 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useClickOutside } from "@mantine/hooks";
 import { handleSettingDD, handleSettingDDContent } from "../../../features/dropDown/dropDownSlice";
-import handleBlur from "../../../helpers/handleBlur";
 import { SettingsContainer, ArrowContainer } from "../../../styles/Header/SettingsAccount-styled";
 import SettingDropDown from "./SettingDropDown";
 
 function Setting() {
 	const { settingsDD } = useSelector((state) => state.dropDown);
+	const DD = useClickOutside(() => {
+		dispatch(handleSettingDD(false));
+		dispatch(handleSettingDDContent("main"));
+	});
+
 	const dispatch = useDispatch();
 	function handleDropDown() {
 		if (settingsDD) {
@@ -17,15 +22,7 @@ function Setting() {
 		}
 	}
 	return (
-		<SettingsContainer
-			tabIndex={"1"}
-			onBlur={(e) =>
-				handleBlur(e, () => {
-					dispatch(handleSettingDD(false));
-					dispatch(handleSettingDDContent("main"));
-				})
-			}
-		>
+		<SettingsContainer ref={DD}>
 			<ArrowContainer onClick={handleDropDown} active={settingsDD}>
 				<div className='arrow'>
 					<i className='fa-solid fa-caret-down'></i>
