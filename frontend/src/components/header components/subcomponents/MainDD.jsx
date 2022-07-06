@@ -23,7 +23,7 @@ function MainDD() {
 			>
 				<img className='c-p' src={user.profilePic} alt='profile' />
 				<div>
-					<h1>Profile name</h1>
+					<h1>{user.name}</h1>
 					<p>see your profile</p>
 				</div>
 			</ProfileDiv>
