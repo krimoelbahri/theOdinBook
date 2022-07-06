@@ -18,6 +18,14 @@ export const getUser = createAsyncThunk("get/user", async (data, thunkAPI) => {
 		return thunkAPI.rejectWithValue(error.response.data.message);
 	}
 });
+export const getUsers = createAsyncThunk("get/users", async (_, thunkAPI) => {
+	try {
+		let response = await userServices.getUsers();
+		return response;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error.response.data.message);
+	}
+});
 export const signup = createAsyncThunk("register/user", async (data, thunkAPI) => {
 	try {
 		let response = await userServices.signup(data);
