@@ -15,7 +15,7 @@ function ModalTopSection() {
 				</span>
 			</ModalHeader>
 			<ModalProfileDiv>
-				<img className='c-p' src={user.profilePic} alt='' />
+				<img className='c-p' src={user.profilePic} alt='Profile' />
 				<div>
 					<p className='name c-p'>{user.name}</p>
 				</div>
