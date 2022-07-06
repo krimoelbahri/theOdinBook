@@ -9,5 +9,8 @@ const theme = {
 	modalContainerBGC: "rgba(244, 244, 244, 0.8);",
 	//Box Shadows
 	mainBS: "0px 0px 4px 1px rgb(194, 194, 194)",
+
+	//placeHolder color
+	placeHolderColor: "#65676B",
 };
 export default theme;
