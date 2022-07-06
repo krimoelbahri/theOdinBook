@@ -185,7 +185,6 @@ export const AddCommentsDiv = styled.div`
 		height: 30px;
 		width: 30px;
 		border-radius: 50%;
-		border: 1px solid;
 		margin-right: 10px;
 	}
 	div {
@@ -225,7 +224,6 @@ export const CommentsDiv = styled.div`
 			height: 30px;
 			width: 30px;
 			border-radius: 50%;
-			border: 1px solid;
 			margin-right: 10px;
 		}
 		div {
