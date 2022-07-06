@@ -5,6 +5,7 @@ import { PostDescriptionContainer } from "../../../styles/Post.styled";
 function PostDescription({ description }) {
 	const [rtl, setRtl] = useState("");
 	const paragraph = useRef();
+
 	useEffect(() => {
 		if (isRTL(description)) setRtl("rtl");
 		paragraph.current.innerText = description;
