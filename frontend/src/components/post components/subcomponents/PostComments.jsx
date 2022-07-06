@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
 import { addingComment, deletingComment } from "../../../features/posts/postSlice";
@@ -93,6 +93,11 @@ function PostComments({ postComments, setComments, postId }) {
 function Comments({ comment, deletComment }) {
 	const [deleteLoading, setDeleteLoading] = useState(false);
 	const [deleteIcon, setDeleteIcon] = useState(false);
+	const text = useRef();
+
+	useEffect(() => {
+		text.current.innerText = comment?.text;
+	}, [comment]);
 
 	return (
 		<CommentsDiv>
@@ -101,21 +106,21 @@ function Comments({ comment, deletComment }) {
 				<div>
 					<div>
 						<p className='c-p'>{comment?.author?.name}</p>
-						<span>{comment?.text}</span>
+						<span ref={text}></span>
 					</div>
 				</div>
 				{!deleteLoading ? (
-					<>
+					<div
+						className='icon'
+						onMouseOver={() => setDeleteIcon(true)}
+						onMouseOut={() => setDeleteIcon(false)}
+					>
 						{!deleteIcon ? (
-							<i
-								className='fa-solid fa-ellipsis'
-								onMouseOver={() => setDeleteIcon(true)}
-							></i>
+							<i className='fa-solid fa-ellipsis'></i>
 						) : (
 							<i
 								className='fa-solid fa-trash-can fa-flip c-p'
 								id={comment?._id}
-								onMouseOut={() => setDeleteIcon(false)}
 								onClick={(e) => {
 									setDeleteLoading(true);
 									deletComment(e, comment).then(() => {
@@ -125,9 +130,11 @@ function Comments({ comment, deletComment }) {
 								style={{ "--fa-animation-iteration-count": 1, color: "red" }}
 							></i>
 						)}
-					</>
+					</div>
 				) : (
-					<i className='fa-solid fa-spinner fa-spin-pulse'></i>
+					<div className='icon'>
+						<i className='fa-solid fa-spinner fa-spin-pulse'></i>
+					</div>
 				)}
 			</div>
 		</CommentsDiv>
