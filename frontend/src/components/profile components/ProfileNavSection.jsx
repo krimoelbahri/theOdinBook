@@ -6,7 +6,7 @@ function ProfileNavSection({ visible, location, user }) {
 		<NavSectionContainer>
 			<NavWraper visible={visible} transform={"up"}>
 				<ProfileNavLink
-					to={`/${user._id}?sf=posts`}
+					to={`/${user?._id}?sf=posts`}
 					state={{ data: "posts" }}
 					isactive={
 						location.state?.data === "posts" || location.state === null
@@ -17,28 +17,28 @@ function ProfileNavSection({ visible, location, user }) {
 					<div className='wrapper'>Posts</div>
 				</ProfileNavLink>
 				<ProfileNavLink
-					to={`/${user._id}?sf=about`}
+					to={`/${user?._id}?sf=about`}
 					state={{ data: "about" }}
 					isactive={location.state?.data === "about" ? "true" : undefined}
 				>
 					<div className='wrapper'>About</div>
 				</ProfileNavLink>
 				<ProfileNavLink
-					to={`/${user._id}?sf=friends`}
+					to={`/${user?._id}?sf=friends`}
 					state={{ data: "friends" }}
 					isactive={location.state?.data === "friends" ? "true" : undefined}
 				>
 					<div className='wrapper'>Friends</div>
 				</ProfileNavLink>
 				<ProfileNavLink
-					to={`/${user._id}?sf=photos`}
+					to={`/${user?._id}?sf=photos`}
 					state={{ data: "photos" }}
 					isactive={location.state?.data === "photos" ? "true" : undefined}
 				>
 					<div className='wrapper'>Photos</div>
 				</ProfileNavLink>
 				<ProfileNavLink
-					to={`/${user._id}?sf=videos`}
+					to={`/${user?._id}?sf=videos`}
 					state={{ data: "videos" }}
 					isactive={location.state?.data === "videos" ? "true" : undefined}
 				>
@@ -47,9 +47,9 @@ function ProfileNavSection({ visible, location, user }) {
 			</NavWraper>
 			<NavWraper visible={!visible} transform={"down"}>
 				<ProfileDiv>
-					<img className='c-p' src={user.profilePic} alt='' />
+					<img className='c-p' src={user?.profilePic} alt='' />
 					<div>
-						<p className='name c-p'>{user.name}</p>
+						<p className='name c-p'>{user?.name}</p>
 					</div>
 				</ProfileDiv>
 			</NavWraper>
