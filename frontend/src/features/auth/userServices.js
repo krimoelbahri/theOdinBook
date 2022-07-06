@@ -5,6 +5,10 @@ const getUser = async function (id) {
 	let response = await axios.get(URL + id);
 	return response.data;
 };
+const getUsers = async function () {
+	let response = await axios.get(URL + "getUsers");
+	return response.data;
+};
 
 const signup = async function (userData) {
 	let response = await axios.post(URL + "signup", userData);
@@ -36,5 +40,5 @@ const logout = async () => {
 	return response.data;
 };
 
-let userServices = { signup, signin, facebookSignin, logout, getUser };
+let userServices = { signup, signin, facebookSignin, logout, getUser, getUsers };
 export default userServices;
