@@ -110,12 +110,14 @@ export const CreatePostContainer = styled(PostContainer)`
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		.bold {
+			font-weight: 500;
+		}
 		img {
 			height: 40px;
 			width: 40px;
 			margin-right: 20px;
 			border-radius: 50%;
-			border: 1px solid;
 		}
 		i {
 			margin-right: 10px;
@@ -124,6 +126,7 @@ export const CreatePostContainer = styled(PostContainer)`
 		}
 		p {
 			font-size: 14px;
+			color: ${({ theme }) => theme.placeHolderColor};
 		}
 	}
 	.up {
