@@ -26,9 +26,9 @@ export const CardContainer = styled.div`
 	width: 200px;
 	height: 350px;
 	margin-bottom: 20px;
-	border: 1px solid;
 	border-radius: 10px;
 	background-color: ${({ theme }) => theme.cardsBGC};
+	box-shadow: ${({ theme }) => theme.mainBS};
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
