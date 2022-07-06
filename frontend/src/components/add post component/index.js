@@ -1,3 +1,3 @@
-import Addpost from "./Addpost";
+import PostModal from "./PostModal";
 
-export default Addpost;
+export default PostModal;
