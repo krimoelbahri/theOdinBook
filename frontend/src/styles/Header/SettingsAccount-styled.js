@@ -66,7 +66,6 @@ export const ProfileDiv = styled.div`
 		height: 60px;
 		margin-right: 20px;
 		border-radius: 50%;
-		border: 1px solid;
 	}
 	h1 {
 		font-weight: bold;
