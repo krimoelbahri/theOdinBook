@@ -35,6 +35,9 @@ export const Loader = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	i {
+		font-size: xx-large;
+	}
 `;
 
 export const ModalHeader = styled.div`
@@ -78,9 +81,8 @@ export const ModalProfileDiv = styled.div`
 	img {
 		width: 35px;
 		height: 35px;
-		margin-right: 20px;
+		margin-right: 10px;
 		border-radius: 50%;
-		border: 1px solid;
 	}
 	p {
 		font-size: 14px;
@@ -127,10 +129,8 @@ export const TextareaPlaceHolder = styled.div`
 	width: 100%;
 	position: absolute;
 	top: 3px;
-	h3 {
-		color: #eee;
-		font-size: 20px;
-	}
+	color: ${({ theme }) => theme.placeHolderColor};
+	font-size: 1.5rem;
 `;
 export const ModalMediaarea = styled.div`
 	width: 100%;
@@ -204,7 +204,6 @@ export const AddMediaToPost = styled.div`
 	align-items: center;
 	justify-content: flex-start;
 	padding: 0 15px;
-	border: 1px solid grey;
 	border-radius: 10px;
 	box-shadow: ${({ theme }) => theme.mainBS};
 	h3 {
