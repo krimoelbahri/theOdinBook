@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { multer } = require("../middleware/firebase");
+const { postMulter } = require("../middleware/firebase");
 
 // Require controller modules.
 var postsController = require("../controllers/postsController");
@@ -24,7 +24,7 @@ router.post("/", protect, postsController.addPost);
 
 //Upload images
 //URL /api/posts/uploadImg
-router.post("/uploadImg", protect, multer.single("imgFile"), postsController.uploadImage);
+router.post("/uploadImg", protect, postMulter.single("imgFile"), postsController.uploadImage);
 
 // Adding new comment
 //URL /api/posts/:id/comment
