@@ -216,6 +216,19 @@ export const CommentsDiv = styled.div`
 	margin-top: 10px;
 	display: flex;
 	flex-direction: column;
+	div.icon {
+		width: 30px;
+		height: 30px;
+		padding: 7px;
+		border-radius: 50%;
+		align-self: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		:hover {
+			background-color: ${({ theme }) => theme.commentsBGC};
+		}
+	}
 	div {
 		display: flex;
 		flex-direction: row;
@@ -248,15 +261,8 @@ export const CommentsDiv = styled.div`
 				span {
 					//comment body
 					font-size: 14px;
+					line-height: 18px;
 				}
-			}
-		}
-		i {
-			align-self: center;
-			padding: 7px;
-			border-radius: 50%;
-			:hover {
-				background-color: ${({ theme }) => theme.commentsBGC};
 			}
 		}
 	}
