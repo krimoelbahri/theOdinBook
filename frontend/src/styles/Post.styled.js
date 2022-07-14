@@ -4,7 +4,7 @@ export const PostContainer = styled.div`
 	width: 100%;
 	border-radius: 10px;
 	background-color: ${({ theme }) => theme.cardsBGC};
-	padding: 10px 20px;
+	padding: 10px 20px 0;
 	margin-bottom: 20px;
 	box-shadow: ${({ theme }) => theme.mainBS};
 	-webkit-box-shadow: ${({ theme }) => theme.mainBS};
@@ -106,7 +106,6 @@ export const PostImgContainer = styled.div`
 /* Post Reactions */
 export const PostReactionContainer = styled.div`
 	width: 100%;
-	margin: 5px 0;
 	display: flex;
 	flex-direction: column;
 	p {
@@ -166,18 +165,14 @@ export const ReactionButtonsDiv = styled.div`
 /* Post comments */
 export const PostCommentsContainer = styled.div`
 	width: 100%;
+	padding-bottom: 10px;
 	border-top: 1px solid #c9c4c4;
 	display: flex;
 	flex-direction: column;
 `;
-export const ShowCommentsDiv = styled.div`
-	margin-top: 10px;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-`;
+
 export const AddCommentsDiv = styled.div`
-	margin-top: 10px;
+	margin: 10px 0;
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
@@ -251,7 +246,8 @@ export const CommentsDiv = styled.div`
 				align-items: flex-start;
 				p {
 					//profile name
-					font-size: 14px;
+					font-size: 0.75rem;
+					font-weight: 600;
 					line-height: 16px;
 					margin-bottom: 10px;
 					:hover {
