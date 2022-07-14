@@ -2,12 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
 import { addingComment, deletingComment } from "../../../features/posts/postSlice";
-import {
-	PostCommentsContainer,
-	ShowCommentsDiv,
-	AddCommentsDiv,
-	CommentsDiv,
-} from "../../../styles/Post.styled";
+import { PostCommentsContainer, AddCommentsDiv, CommentsDiv } from "../../../styles/Post.styled";
 
 function PostComments({ postComments, setComments, postId }) {
 	const dispatch = useDispatch();
@@ -42,16 +37,17 @@ function PostComments({ postComments, setComments, postId }) {
 		}
 	}
 
-	function handleChange(e) {
-		e.target.style.height = 0;
-		e.target.style.height = `${e.target.scrollHeight}px`;
-		setData((state) => ({ ...state, text: e.target.value }));
-		setAddedComment((state) => ({ ...state, text: e.target.value }));
+	function handleChange(target) {
+		target.style.height = 0;
+		target.style.height = `${target.scrollHeight}px`;
+		setData((state) => ({ ...state, text: target.value }));
+		setAddedComment((state) => ({ ...state, text: target.value }));
 	}
 
 	async function handleSubmit(e) {
 		e.preventDefault();
 		textArea.current.value = "";
+		handleChange(textArea.current);
 		resetState();
 		if (addedComment.text) setComments((state) => [addedComment, ...state]);
 		try {
@@ -64,9 +60,6 @@ function PostComments({ postComments, setComments, postId }) {
 
 	return (
 		<PostCommentsContainer>
-			<ShowCommentsDiv>
-				<p>show all</p>
-			</ShowCommentsDiv>
 			<AddCommentsDiv>
 				<img src={user.profilePic} alt='' />
 				<div>
@@ -74,7 +67,7 @@ function PostComments({ postComments, setComments, postId }) {
 						<textarea
 							type='textArea'
 							placeholder='Write a comment...'
-							onInput={handleChange}
+							onInput={(e) => handleChange(e.target)}
 							ref={textArea}
 						/>
 						<button type='submit' className='c-p'>
@@ -93,6 +86,7 @@ function PostComments({ postComments, setComments, postId }) {
 function Comments({ comment, deletComment }) {
 	const [deleteLoading, setDeleteLoading] = useState(false);
 	const [deleteIcon, setDeleteIcon] = useState(false);
+
 	const text = useRef();
 
 	useEffect(() => {
