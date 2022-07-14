@@ -7,7 +7,7 @@ import {
 	ReactionsStatsDiv,
 } from "../../../styles/Post.styled";
 
-function PostReactions({ postComments, postLikes, postId, setPostLikes }) {
+function PostReactions({ postComments, postLikes, postId, setPostLikes, setShowComments }) {
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.user);
 
@@ -58,7 +58,7 @@ function PostReactions({ postComments, postLikes, postId, setPostLikes }) {
 						</>
 					)}
 				</div>
-				<div>
+				<div onClick={() => setShowComments((state) => !state)}>
 					<p>{postComments.length} Comments</p>
 				</div>
 			</ReactionsStatsDiv>
@@ -73,7 +73,7 @@ function PostReactions({ postComments, postLikes, postId, setPostLikes }) {
 					></i>
 					<p className='like-icon'>Like</p>
 				</div>
-				<div>
+				<div onClick={() => setShowComments(true)}>
 					<i className='fa-solid fa-message'></i>
 					<p>Comment</p>
 				</div>
