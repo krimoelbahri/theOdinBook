@@ -106,9 +106,9 @@ exports.localSigninUser = function (req, res, next) {
 				return next(Error(loginErr));
 			}
 			res.json({
-				_id: req.user.id,
-				name: req.user.name,
-				email: req.user.email,
+				_id: user.id,
+				name: user.name,
+				email: user.email,
 				profilePic: user.profilePic,
 				coverPic: user.coverPic,
 				friends: user.friends,
