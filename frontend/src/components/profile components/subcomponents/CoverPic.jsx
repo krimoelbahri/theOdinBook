@@ -1,10 +1,15 @@
+import { Skeleton } from "@mantine/core";
+import { useState } from "react";
+
 function CoverPic({ user }) {
+	const [loaded, setloaded] = useState(false);
+
 	return (
-		<div className='wrapper'>
-			<img src={user?.coverPic} alt='Cover' />
+		<Skeleton visible={!loaded} className='wrapper'>
+			<img onLoad={() => setloaded(true)} src={user?.coverPic} alt='Cover' />
 			<button>Edit Cover Photo</button>
 			<div></div> {/*TODO: Edit DD */}
-		</div>
+		</Skeleton>
 	);
 }
 
