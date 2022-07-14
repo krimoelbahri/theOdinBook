@@ -22,6 +22,7 @@ export const CoverPicWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 0;
 	.wrapper {
 		max-width: 950px;
 		width: 100%;
@@ -46,6 +47,7 @@ export const ProfileInfoWrapper = styled.div`
 	background-color: ${({ theme }) => theme.cardsBGC};
 	display: flex;
 	justify-content: center;
+	z-index: 1;
 	.wrapper {
 		max-width: 900px;
 		width: 100%;
@@ -60,12 +62,14 @@ export const ProfileInfoWrapper = styled.div`
 export const ProfilePicWrapper = styled.div`
 	width: 200px;
 	height: 200px;
+	position: relative;
 	margin-right: 20px;
 	border-radius: 50%;
 	border: 2px solid white;
 	background-color: ${({ theme }) => theme.cardsBGC};
 	z-index: 1;
 	img {
+		opacity: ${({ visible }) => (visible ? "1" : "0")};
 		width: 100%;
 		height: 100%;
 	}
