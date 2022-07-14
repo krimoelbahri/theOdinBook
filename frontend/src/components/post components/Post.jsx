@@ -5,6 +5,7 @@ function Post({ post, postIndex }) {
 	const { author, createdAt, description, postImage, comments, likes, _id } = post;
 	const [postComments, setComments] = useState(comments);
 	const [postLikes, setPostLikes] = useState(likes);
+	const [showComments, setShowComments] = useState(false);
 
 	return (
 		<PostContainer>
@@ -16,8 +17,11 @@ function Post({ post, postIndex }) {
 				postLikes={postLikes}
 				setPostLikes={setPostLikes}
 				postId={_id}
+				setShowComments={setShowComments}
 			/>
-			<PostComments postComments={postComments} setComments={setComments} postId={_id} />
+			{showComments && (
+				<PostComments postComments={postComments} setComments={setComments} postId={_id} />
+			)}
 		</PostContainer>
 	);
 }
