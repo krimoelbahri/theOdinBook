@@ -34,10 +34,19 @@ export const CoverPicWrapper = styled.div`
 		}
 		button {
 			width: 150px;
-			height: 30px;
+			height: 35px;
+			padding: 0px 10px;
 			position: absolute;
 			bottom: 5%;
 			right: 5%;
+			border-radius: 5px;
+			border: none;
+			cursor: pointer;
+			font-size: 0.85rem;
+			font-weight: 600;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 		}
 	}
 `;
@@ -73,6 +82,21 @@ export const ProfilePicWrapper = styled.div`
 		width: 100%;
 		height: 100%;
 	}
+	.edit-icon {
+		position: absolute;
+		opacity: ${({ visible }) => (visible ? "1" : "0")};
+		bottom: 20px;
+		right: 10px;
+		padding: 10px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: ${({ theme }) => theme.iconBGC};
+		border-radius: 50%;
+		:hover {
+			opacity: 0.9;
+		}
+	}
 `;
 export const ProfileName = styled.div`
 	height: 100%;
@@ -96,6 +120,15 @@ export const ProfilButtons = styled.div`
 		position: absolute;
 		bottom: 30%;
 		right: 5%;
+		padding: 0px 10px;
+		border-radius: 5px;
+		border: none;
+		cursor: pointer;
+		font-size: 0.85rem;
+		font-weight: 600;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 `;
 export const LineWrapper = styled.div`
