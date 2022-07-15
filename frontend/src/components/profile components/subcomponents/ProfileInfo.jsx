@@ -14,12 +14,17 @@ function ProfileInfo({ user }) {
 					mb='xl'
 				/>
 				<img onLoad={() => setloaded(true)} src={user?.profilePic} alt='' />
+				<div className='edit-icon c-p'>
+					<i className='fa-solid fa-camera'></i>
+				</div>
 			</ProfilePicWrapper>
 			<ProfileName>
 				<h1>{user?.name}</h1>
 			</ProfileName>
 			<ProfilButtons>
-				<button>Edit Profile</button>
+				<button>
+					<i className='fa-solid fa-pen'></i>Edit Profile
+				</button>
 			</ProfilButtons>
 		</div>
 	);
