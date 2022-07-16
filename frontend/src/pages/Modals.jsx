@@ -1,4 +1,4 @@
-import { Container } from "../styles/Add post";
+import { Container } from "../styles/Modals";
 import PostModal from "../components/add post component";
 import { useSelector } from "react-redux";
 import { CoverPicModal, ProfilePicModal } from "../components/profile components";
