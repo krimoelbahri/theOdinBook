@@ -26,7 +26,7 @@ function PostHeader({ user, date, postId, postIndex }) {
 		<PostHeaderContainer>
 			<ProfileDiv>
 				<Link to={`/${user._id}`}>
-					<img className='c-p' src={user?.profilePic} alt='' />
+					<img className='c-p' src={user?.profilePic.url} alt='' />
 				</Link>
 				<div>
 					<Link to={`/${user._id}`}>
