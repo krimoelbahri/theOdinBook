@@ -7,7 +7,7 @@ import {
 	Textarea,
 	TextareaPlaceHolder,
 	ModalMediaarea,
-} from "../../../styles/Add post";
+} from "../../../styles/Modals";
 import AddPhoto from "./AddPhoto";
 
 function ModalMediaSection({ media, setMedia, url, setUrl, setData }) {
