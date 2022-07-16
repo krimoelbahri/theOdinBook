@@ -11,7 +11,7 @@ function Post({ post, postIndex }) {
 		<PostContainer>
 			<PostHeader user={author} date={createdAt} postId={_id} postIndex={postIndex} />
 			<PostDescription description={description} />
-			<PostImg url={postImage} />
+			<PostImg url={postImage.url} />
 			<PostReactions
 				postComments={postComments}
 				postLikes={postLikes}
