@@ -6,7 +6,7 @@ function CoverPic({ user }) {
 
 	return (
 		<Skeleton visible={!loaded} className='wrapper'>
-			<img onLoad={() => setloaded(true)} src={user?.coverPic} alt='Cover' />
+			<img onLoad={() => setloaded(true)} src={user?.coverPic.url} alt='Cover' />
 			<button>
 				<i className='fa-solid fa-camera'></i>
 				Edit Cover Photo
