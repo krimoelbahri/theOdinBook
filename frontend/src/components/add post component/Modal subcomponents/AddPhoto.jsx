@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { AddPhotoContainer, AddPhotoInput } from "../../../styles/Add post";
+import { AddPhotoContainer, AddPhotoInput } from "../../../styles/Modals";
 
 function AddPhoto({ url, setUrl, setData }) {
 	const fileInput = useRef();
