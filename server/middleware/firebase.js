@@ -1,7 +1,7 @@
 const Multer = require("multer");
 const FirebaseStorage = require("multer-firebase-storage");
 
-const postMulter = Multer({
+const uploadImage = Multer({
 	storage: FirebaseStorage({
 		bucketName: process.env.STORAGEBUCKET,
 		credentials: {
@@ -9,9 +9,10 @@ const postMulter = Multer({
 			privateKey: process.env.PRIVATEKEY.replace(/\\n/g, "\n"),
 			projectId: process.env.PROJECTID,
 		},
-		directoryPath: "post",
+		directoryPath: "images",
+		unique: true,
 		public: true,
 	}),
 });
 
-module.exports = { postMulter };
+module.exports = { uploadImage };
