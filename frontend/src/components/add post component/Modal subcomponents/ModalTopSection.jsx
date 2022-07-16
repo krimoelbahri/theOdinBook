@@ -1,4 +1,4 @@
-import { ModalHeader, ModalProfileDiv } from "../../../styles/Add post";
+import { ModalHeader, ModalProfileDiv } from "../../../styles/Modals";
 import { handlePostModal } from "../../../features/Modal/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,7 +15,7 @@ function ModalTopSection() {
 				</span>
 			</ModalHeader>
 			<ModalProfileDiv>
-				<img className='c-p' src={user.profilePic} alt='Profile' />
+				<img className='c-p' src={user.profilePic.url} alt='Profile' />
 				<div>
 					<p className='name c-p'>{user.name}</p>
 				</div>
