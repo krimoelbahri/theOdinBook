@@ -8,7 +8,7 @@ export default function Card({ user, setFriends, setUsers }) {
 
 	return (
 		<CardContainer>
-			<img src={user?.profilePic} alt='Ball' className='m-b-10' />
+			<img src={user?.profilePic.url} alt='Ball' className='m-b-10' />
 			<h2 className='m-b-10'>{user?.name}</h2>
 			<CardButton
 				onClick={handleAddfriends}
