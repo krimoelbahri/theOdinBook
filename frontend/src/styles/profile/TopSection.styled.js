@@ -69,24 +69,25 @@ export const ProfileInfoWrapper = styled.div`
 	}
 `;
 export const ProfilePicWrapper = styled.div`
-	width: 200px;
-	height: 200px;
+	width: 180px;
+	height: 180px;
 	position: relative;
 	margin-right: 20px;
 	border-radius: 50%;
-	border: 2px solid white;
+	border: 5px solid white;
 	background-color: ${({ theme }) => theme.cardsBGC};
 	z-index: 1;
 	img {
 		opacity: ${({ visible }) => (visible ? "1" : "0")};
+		border-radius: 50%;
 		width: 100%;
 		height: 100%;
 	}
 	.edit-icon {
 		position: absolute;
 		opacity: ${({ visible }) => (visible ? "1" : "0")};
-		bottom: 20px;
-		right: 10px;
+		bottom: 15px;
+		right: 5px;
 		padding: 10px;
 		display: flex;
 		justify-content: center;
