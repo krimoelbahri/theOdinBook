@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userServices from "./userServices";
+import postServices from "../posts/postServices";
 let user = JSON.parse(localStorage.getItem("user"));
 let state = {
 	user: user ? user : null,
@@ -58,6 +59,18 @@ export const logout = createAsyncThunk("logout/user", async (_, thunkAPI) => {
 		return thunkAPI.rejectWithValue(error.response.data.message);
 	}
 });
+export const updateImage = createAsyncThunk("add/Post", async (data, thunkAPI) => {
+	const { action, author, imgFile } = data;
+	let formData = new FormData();
+	formData.append("imgFile", imgFile);
+	try {
+		let data = await postServices.uploadImage(formData);
+		let response = await userServices.updateUser({ action, author, data });
+		return response;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error.response.data.message);
+	}
+});
 
 let userSlice = createSlice({
 	name: "user",
@@ -69,6 +82,9 @@ let userSlice = createSlice({
 			state.isDone = false;
 			state.isLoading = false;
 			state.message = "";
+		},
+		updateUser: (state, action) => {
+			state.user = action.payload;
 		},
 	},
 	extraReducers(builder) {
@@ -144,5 +160,5 @@ let userSlice = createSlice({
 			});
 	},
 });
-export const { reset } = userSlice.actions;
+export const { reset, updateUser } = userSlice.actions;
 export default userSlice.reducer;
