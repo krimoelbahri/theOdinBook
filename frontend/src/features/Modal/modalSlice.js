@@ -22,5 +22,5 @@ let modalSlice = createSlice({
 		},
 	},
 });
-export const { handlePostModal } = modalSlice.actions;
+export const { handlePostModal, handlePPModal, handleCPModal, resetModals } = modalSlice.actions;
 export default modalSlice.reducer;
