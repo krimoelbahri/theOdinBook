@@ -89,7 +89,7 @@ exports.getPost = asyncHandler(async function (req, res) {
 
 // Get URL of Uploaded Images --Private Acces
 exports.uploadImage = asyncHandler(async function (req, res) {
-	res.status(201).json(req.file.publicUrl);
+	res.status(201).json({ url: req.file.publicUrl, path: req.file.fileRef.name });
 });
 
 // CREATE a new post -- Private acces
