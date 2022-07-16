@@ -2,7 +2,7 @@ import {
 	ModalBottomSectionContainer,
 	AddMediaToPost,
 	ModalSubmitButton,
-} from "../../../styles/Add post";
+} from "../../../styles/Modals";
 
 function ModalbottomSection({ setMedia, setUrl }) {
 	return (
