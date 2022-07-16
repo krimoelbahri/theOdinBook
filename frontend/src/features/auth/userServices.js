@@ -1,5 +1,14 @@
 import axios from "axios";
 let URL = "/api/user/";
+function getConfig() {
+	let user = JSON.parse(localStorage.getItem("user"));
+	const config = {
+		headers: {
+			Authorization: `Bearer ${user?.token}`,
+		},
+	};
+	return config;
+}
 
 const getUser = async function (id) {
 	let response = await axios.get(URL + id);
@@ -7,6 +16,11 @@ const getUser = async function (id) {
 };
 const getUsers = async function () {
 	let response = await axios.get(URL + "getUsers");
+	return response.data;
+};
+const updateUser = async function (data) {
+	let id = data.author;
+	let response = await axios.put(URL + id, data, getConfig());
 	return response.data;
 };
 
@@ -40,5 +54,13 @@ const logout = async () => {
 	return response.data;
 };
 
-let userServices = { signup, signin, facebookSignin, logout, getUser, getUsers };
+let userServices = {
+	signup,
+	signin,
+	facebookSignin,
+	logout,
+	getUser,
+	updateUser,
+	getUsers,
+};
 export default userServices;
