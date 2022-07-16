@@ -34,8 +34,8 @@ export const addingPost = createAsyncThunk("add/Post", async (data, thunkAPI) =>
 	let formData = new FormData();
 	formData.append("imgFile", imgFile);
 	try {
-		let url = await postServices.uploadImage(formData);
-		let response = await postServices.addPost({ description, author, postImage: url });
+		let data = await postServices.uploadImage(formData);
+		let response = await postServices.addPost({ description, author, postImage: data });
 		return response;
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.response.data.message);
