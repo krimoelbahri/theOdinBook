@@ -3,6 +3,7 @@ const router = express.Router();
 
 // Require controller modules.
 var authController = require("../controllers/authController");
+const { protect } = require("../middleware/authMiddleware");
 
 //Signup
 //Link: /api/user/signup
@@ -30,5 +31,9 @@ router.get("/auth/facebook/callback", authController.facebookSigninUserCB);
 //Logout
 //Link: /api/user/auth;logout
 router.get("/auth/logout", authController.logout);
+
+//Update user
+//Link: /api/user/:id
+router.put("/:id", protect, authController.updateUser);
 
 module.exports = router;
