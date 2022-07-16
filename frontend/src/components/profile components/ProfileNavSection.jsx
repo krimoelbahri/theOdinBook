@@ -47,7 +47,7 @@ function ProfileNavSection({ visible, location, user }) {
 			</NavWraper>
 			<NavWraper visible={!visible} transform={"down"}>
 				<ProfileDiv>
-					<img className='c-p' src={user?.profilePic} alt='' />
+					<img className='c-p' src={user?.profilePic.url} alt='' />
 					<div>
 						<p className='name c-p'>{user?.name}</p>
 					</div>
