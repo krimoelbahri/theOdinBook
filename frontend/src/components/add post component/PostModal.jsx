@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addingPost, addPosts, resetAddPost } from "../../features/posts/postSlice";
-import { ModalContainer, Loader } from "../../styles/Add post";
+import { ModalContainer, Loader } from "../../styles/Modals";
 import { handlePostModal } from "../../features/Modal/modalSlice";
 import ModalbottomSection from "./Modal subcomponents/ModalbottomSection";
 import ModalMediaSection from "./Modal subcomponents/ModalMediaSection";
@@ -22,7 +22,7 @@ function PostModal() {
 		try {
 			let post = await dispatch(addingPost(data)).unwrap();
 			dispatch(addPosts(post));
-			dispatch(handlePostModal());
+			dispatch(handlePostModal(false));
 			dispatch(resetAddPost());
 		} catch (error) {
 			console.log(error);
