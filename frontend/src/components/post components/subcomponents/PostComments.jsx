@@ -61,7 +61,7 @@ function PostComments({ postComments, setComments, postId }) {
 	return (
 		<PostCommentsContainer>
 			<AddCommentsDiv>
-				<img src={user.profilePic} alt='' />
+				<img src={user.profilePic.url} alt='' />
 				<div>
 					<form onSubmit={handleSubmit}>
 						<textarea
@@ -96,7 +96,7 @@ function Comments({ comment, deletComment }) {
 	return (
 		<CommentsDiv>
 			<div>
-				<img src={comment?.author?.profilePic} alt='' />
+				<img src={comment?.author?.profilePic.url} alt='' />
 				<div>
 					<div>
 						<p className='c-p'>{comment?.author?.name}</p>
