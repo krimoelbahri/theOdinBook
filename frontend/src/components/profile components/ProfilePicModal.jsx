@@ -7,27 +7,30 @@ import {
 	ModalMediaarea,
 	ModalSubmitButton,
 	ModalHeader,
+	Loader,
 } from "../../styles/Modals";
 import { handlePPModal } from "../../features/Modal/modalSlice";
 import AddPhoto from "../add post component/Modal subcomponents/AddPhoto";
 import { updateImage, updateUser } from "../../features/auth/userSlice";
 
-function PostModal() {
+function ProfilePicModal() {
 	//using Redux
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.user);
 	//useState state handeling post data
 	const [url, setUrl] = useState(null);
 	const [data, setData] = useState({ action: "profile", author: user._id, imgFile: null });
-
+	const [loading, setLoading] = useState(false);
 	async function handleSubmit(e) {
 		e.preventDefault();
 		try {
+			setLoading(true);
 			let user = await dispatch(updateImage(data)).unwrap();
-			console.log(user);
 			dispatch(updateUser(user));
+			setLoading(false);
 			dispatch(handlePPModal(false));
 		} catch (error) {
+			setLoading(false);
 			console.log(error);
 		}
 	}
@@ -52,13 +55,13 @@ function PostModal() {
 					<h3>Update Picture</h3>
 				</ModalSubmitButton>
 			</ModalBottomSectionContainer>
-			{/*addPost.isLoading && (
+			{loading && (
 				<Loader>
 					<i className='fa-solid fa-spinner fa-spin-pulse'></i>
 				</Loader>
-			)*/}
+			)}
 		</ModalContainer>
 	);
 }
 
-export default PostModal;
+export default ProfilePicModal;
