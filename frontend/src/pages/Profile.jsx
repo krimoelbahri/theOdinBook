@@ -31,7 +31,7 @@ function Profile() {
 	}, [id, user, dispatch]);
 	return (
 		<>
-			<ProfileTopSection element={ref} user={profileUser} />
+			<ProfileTopSection currentUser={id === user._id} element={ref} user={profileUser} />
 			<ProfileNavSection visible={isVisible} location={location} user={profileUser} />
 			<ProfileBottomSection currentUser={id === user._id} post={post} user={profileUser} />
 		</>
