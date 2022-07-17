@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { uploadImage, setDirectory } = require("../middleware/firebase");
+const { uploadImage } = require("../middleware/firebase");
 
 // Require controller modules.
 var postsController = require("../controllers/postsController");
