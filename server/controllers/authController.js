@@ -3,7 +3,6 @@ const passport = require("passport");
 const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
-const user = require("../models/user");
 
 // Generate JWT
 const generateToken = (id) => {
@@ -146,22 +145,14 @@ exports.logout = function (req, res) {
 //Update User
 exports.updateUser = asyncHandler(async function (req, res) {
 	let { action, data } = req.body;
-	console.log(action);
+	let id = req.params.id;
+
 	try {
-		let id = req.params.id;
-		const user = await User.findById(id);
+		const user = await User.findById(id).select("-password");
 		if (action === "profile") user.profilePic = data;
 		if (action === "cover") user.coverPic = data;
 		await user.save();
-		console.log(user);
-		res.status(200).json({
-			_id: user.id,
-			name: user.name,
-			email: user.email,
-			profilePic: user.profilePic,
-			coverPic: user.coverPic,
-			friends: user.friends,
-		});
+		res.status(200).json(user);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
