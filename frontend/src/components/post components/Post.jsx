@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PostContainer } from "../../styles/Post.styled";
 import { PostHeader, PostComments, PostDescription, PostImg, PostReactions } from "./subcomponents";
+
 function Post({ post, postIndex }) {
 	const { author, createdAt, description, postImage, comments, likes, _id } = post;
 	const [postComments, setComments] = useState(comments);
@@ -9,7 +10,7 @@ function Post({ post, postIndex }) {
 
 	return (
 		<PostContainer>
-			<PostHeader user={author} date={createdAt} postId={_id} postIndex={postIndex} />
+			<PostHeader author={author} date={createdAt} postId={_id} postIndex={postIndex} />
 			<PostDescription description={description} />
 			<PostImg url={postImage.url} />
 			<PostReactions
@@ -20,7 +21,12 @@ function Post({ post, postIndex }) {
 				setShowComments={setShowComments}
 			/>
 			{showComments && (
-				<PostComments postComments={postComments} setComments={setComments} postId={_id} />
+				<PostComments
+					author={author}
+					postComments={postComments}
+					setComments={setComments}
+					postId={_id}
+				/>
 			)}
 		</PostContainer>
 	);
