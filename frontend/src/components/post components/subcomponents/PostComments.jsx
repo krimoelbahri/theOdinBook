@@ -4,7 +4,7 @@ import uuid from "react-uuid";
 import { addingComment, deletingComment } from "../../../features/posts/postSlice";
 import { PostCommentsContainer, AddCommentsDiv, CommentsDiv } from "../../../styles/Post.styled";
 
-function PostComments({ postComments, setComments, postId }) {
+function PostComments({ author, postComments, setComments, postId }) {
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.user);
 
@@ -77,21 +77,33 @@ function PostComments({ postComments, setComments, postId }) {
 				</div>
 			</AddCommentsDiv>
 			{postComments?.map((comment) => (
-				<Comments key={comment?._id} comment={comment} deletComment={handleDeleteComment} />
+				<Comments
+					key={comment?._id}
+					author={author}
+					user={user}
+					comment={comment}
+					deletComment={handleDeleteComment}
+				/>
 			))}
 		</PostCommentsContainer>
 	);
 }
 
-function Comments({ comment, deletComment }) {
+function Comments({ user, author, comment, deletComment }) {
 	const [deleteLoading, setDeleteLoading] = useState(false);
 	const [deleteIcon, setDeleteIcon] = useState(false);
-
+	const [deleting, setDeleting] = useState(false);
 	const text = useRef();
 
 	useEffect(() => {
 		text.current.innerText = comment?.text;
 	}, [comment]);
+
+	useEffect(() => {
+		if (user._id === author._id || user._id === comment?.author?._id) {
+			setDeleting(true);
+		}
+	}, [user, comment, author]);
 
 	return (
 		<CommentsDiv>
@@ -103,32 +115,39 @@ function Comments({ comment, deletComment }) {
 						<span ref={text}></span>
 					</div>
 				</div>
-				{!deleteLoading ? (
-					<div
-						className='icon'
-						onMouseOver={() => setDeleteIcon(true)}
-						onMouseOut={() => setDeleteIcon(false)}
-					>
-						{!deleteIcon ? (
-							<i className='fa-solid fa-ellipsis'></i>
+				{deleting && (
+					<>
+						{!deleteLoading ? (
+							<div
+								className='icon'
+								onMouseOver={() => setDeleteIcon(true)}
+								onMouseOut={() => setDeleteIcon(false)}
+							>
+								{!deleteIcon ? (
+									<i className='fa-solid fa-ellipsis'></i>
+								) : (
+									<i
+										className='fa-solid fa-trash-can fa-flip c-p'
+										id={comment?._id}
+										onClick={(e) => {
+											setDeleteLoading(true);
+											deletComment(e, comment).then(() => {
+												setDeleteLoading(false);
+											});
+										}}
+										style={{
+											"--fa-animation-iteration-count": 1,
+											color: "red",
+										}}
+									></i>
+								)}
+							</div>
 						) : (
-							<i
-								className='fa-solid fa-trash-can fa-flip c-p'
-								id={comment?._id}
-								onClick={(e) => {
-									setDeleteLoading(true);
-									deletComment(e, comment).then(() => {
-										setDeleteLoading(false);
-									});
-								}}
-								style={{ "--fa-animation-iteration-count": 1, color: "red" }}
-							></i>
+							<div className='icon'>
+								<i className='fa-solid fa-spinner fa-spin-pulse'></i>
+							</div>
 						)}
-					</div>
-				) : (
-					<div className='icon'>
-						<i className='fa-solid fa-spinner fa-spin-pulse'></i>
-					</div>
+					</>
 				)}
 			</div>
 		</CommentsDiv>
