@@ -15,11 +15,13 @@ const generateToken = (id) => {
 exports.getUser = asyncHandler(async function (req, res) {
 	try {
 		let id = req.params.id;
-		const user = await User.findById(id, "name profilePic coverPic friends").populate({
-			path: "friends",
-			model: "User",
-			select: "name profilePic",
-		});
+		const user = await User.findById(id, "name profilePic coverPic friends")
+			.select("-password")
+			.populate({
+				path: "friends",
+				model: "User",
+				select: "name profilePic",
+			});
 		res.status(200).json(user);
 	} catch (error) {
 		res.status(400);
@@ -30,7 +32,7 @@ exports.getUser = asyncHandler(async function (req, res) {
 //Get all users
 exports.getUsers = asyncHandler(async function (req, res) {
 	try {
-		const users = await User.find({}, "name profilePic friends").populate({
+		const users = await User.find({}, "name profilePic friends").select("-password").populate({
 			path: "friends",
 			model: "User",
 			select: "name profilePic",
@@ -73,7 +75,9 @@ exports.signupUser = asyncHandler(async function (req, res) {
 		profilePic: { path: "", url: process.env.USER_PIC },
 		coverPic: { path: "", url: process.env.COVER_PIC },
 	});
+
 	if (user) {
+		await user.populate({ path: "friends", model: "User", select: "name profilePic" });
 		res.status(201).json({
 			_id: user.id,
 			name: user.name,
@@ -152,6 +156,27 @@ exports.updateUser = asyncHandler(async function (req, res) {
 		if (action === "profile") user.profilePic = data;
 		if (action === "cover") user.coverPic = data;
 		await user.save();
+		await user.populate({ path: "friends", model: "User", select: "name profilePic" });
+		res.status(200).json(user);
+	} catch (error) {
+		res.status(400);
+		throw new Error(error);
+	}
+});
+//Add Friens
+exports.addFriend = asyncHandler(async function (req, res) {
+	let { friend } = req.body;
+	let id = req.params.id;
+
+	try {
+		const user = await User.findById(id).select("-password");
+		if (user.friends.includes(friend)) {
+			user.friends.splice(user.friends.indexOf(friend), 1);
+		} else {
+			user.friends.push(friend);
+		}
+		await user.save();
+		await user.populate({ path: "friends", model: "User", select: "name profilePic" });
 		res.status(200).json(user);
 	} catch (error) {
 		res.status(400);
