@@ -23,7 +23,11 @@ const updateUser = async function (data) {
 	let response = await axios.put(URL + id, data, getConfig());
 	return response.data;
 };
-
+const addFriend = async function ({ author, friend }) {
+	let id = author;
+	let response = await axios.put(URL + "addFriend/" + id, { friend: friend }, getConfig());
+	return response.data;
+};
 const signup = async function (userData) {
 	let response = await axios.post(URL + "signup", userData);
 	if (response.data) {
@@ -62,5 +66,6 @@ let userServices = {
 	getUser,
 	updateUser,
 	getUsers,
+	addFriend,
 };
 export default userServices;
