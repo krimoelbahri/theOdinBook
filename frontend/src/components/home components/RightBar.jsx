@@ -1,22 +1,22 @@
 import React from "react";
-import { RBContainer } from "../../styles/home.styled";
+import { RBContainer, ProfilesContainer, ProfileWrapper } from "../../styles/home.styled";
 
-function RightBar() {
+function RightBar({ friends }) {
 	return (
 		<RBContainer>
-			<div className='subDiv contacts'>
+			<div className='subDiv contacts b-b'>
 				<h5>Contacts</h5>
 				<i className='fa-solid fa-address-book'></i>
 			</div>
-			<div className='subDiv types b-b'>
-				<div>
-					<h6>Primary</h6>
-				</div>
-				<div>
-					<h6>Suggested</h6>
-				</div>
-			</div>
-			<div>{/* TODO: adding profiles components*/}</div>
+
+			<ProfilesContainer>
+				{friends.map((friend) => (
+					<ProfileWrapper key={`friend${friend._id}`}>
+						<img src={friend.profilePic.url} alt='friend' />
+						<p>{friend.name}</p>
+					</ProfileWrapper>
+				))}
+			</ProfilesContainer>
 		</RBContainer>
 	);
 }
