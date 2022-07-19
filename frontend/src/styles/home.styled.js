@@ -75,35 +75,41 @@ export const RBContainer = styled(SideBarContainer)`
 	}
 
 	.subDiv {
-		display: flex;
 		height: 30px;
 		margin-bottom: 5px;
+		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
 	}
-	.types {
-		div {
-			height: 100%;
-			padding: 5px;
-		}
-		div:hover {
-			background-color: ${({ theme }) => theme.hoverBGC};
-			border-bottom: 1px solid black;
-			border-radius: 5px 5px 0 0;
-			cursor: pointer;
-		}
-	}
-	li {
-		display: flex;
-		flex-direction: row;
-		justify-content: start;
-		align-items: center;
-	}
+
 	i {
 		margin-right: 10px;
 	}
 `;
+export const ProfilesContainer = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+`;
+export const ProfileWrapper = styled.div`
+	width: 100%;
+	padding: 10px 0px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	img {
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+		margin-right: 15px;
+	}
+	p {
+		font-size: 0.85rem;
+		font-weight: bold;
+	}
+`;
+
 /*Create Post*/
 export const CreatePostContainer = styled(PostContainer)`
 	.subdiv {
