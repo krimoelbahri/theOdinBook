@@ -13,6 +13,20 @@ const uploadImage = Multer({
 		unique: true,
 		public: true,
 	}),
+	limits: { fileSize: 0.5 * 1024 * 1024 /* 2MB */ },
+	fileFilter: (req, file, cb) => {
+		if (
+			file.mimetype == "image/png" ||
+			file.mimetype == "image/jpg" ||
+			file.mimetype == "image/webp" ||
+			file.mimetype == "image/jpeg"
+		) {
+			cb(null, true);
+		} else {
+			cb(null, false);
+			return cb(new Error("Only .png,.webp, .jpg and .jpeg format allowed!"));
+		}
+	},
 });
 
 module.exports = { uploadImage };
