@@ -59,13 +59,21 @@ export const logout = createAsyncThunk("logout/user", async (_, thunkAPI) => {
 		return thunkAPI.rejectWithValue(error.response.data.message);
 	}
 });
-export const updateImage = createAsyncThunk("add/Post", async (data, thunkAPI) => {
+export const updateImage = createAsyncThunk("updateImage/user", async (data, thunkAPI) => {
 	const { action, author, imgFile } = data;
 	let formData = new FormData();
 	formData.append("imgFile", imgFile);
 	try {
 		let data = await postServices.uploadImage(formData);
 		let response = await userServices.updateUser({ action, author, data });
+		return response;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error.response.data.message);
+	}
+});
+export const addFriend = createAsyncThunk("add-friend/user", async (data, thunkAPI) => {
+	try {
+		let response = await userServices.addFriend(data);
 		return response;
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.response.data.message);
