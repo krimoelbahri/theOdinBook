@@ -13,7 +13,6 @@ export const Container = styled.div`
 `;
 export const ModalContainer = styled.form`
 	width: 500px;
-	min-height: 400px;
 	max-height: 500px;
 	position: relative;
 	border-radius: 10px;
@@ -191,7 +190,6 @@ export const AddPhotoInput = styled.div`
 `;
 export const ModalBottomSectionContainer = styled.div`
 	width: 100%;
-	min-height: 120px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -218,6 +216,7 @@ export const AddMediaToPost = styled.div`
 export const ModalSubmitButton = styled.button`
 	width: 100%;
 	height: 40px;
+	margin: 5px 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
