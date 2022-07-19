@@ -47,7 +47,17 @@ function CoverPicModal() {
 			</div>
 			<ModalMediaSectionContainer>
 				<ModalMediaarea active={true}>
-					<AddPhoto url={url} setUrl={setUrl} setData={setData} />
+					{url && (
+						<span
+							className='item'
+							onClick={() => {
+								setUrl(null);
+							}}
+						>
+							<i className='fa-solid fa-xmark'></i>
+						</span>
+					)}
+					<AddPhoto action={"cover"} url={url} setUrl={setUrl} setData={setData} />
 				</ModalMediaarea>
 			</ModalMediaSectionContainer>
 			<ModalBottomSectionContainer>
