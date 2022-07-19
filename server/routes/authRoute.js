@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const { protect } = require("../middleware/authMiddleware");
 
 // Require controller modules.
 var authController = require("../controllers/authController");
-const { protect } = require("../middleware/authMiddleware");
 
 //Signup
 //Link: /api/user/signup
@@ -35,5 +35,9 @@ router.get("/auth/logout", authController.logout);
 //Update user
 //Link: /api/user/:id
 router.put("/:id", protect, authController.updateUser);
+
+//Add Friend
+//Link: /api/user/addFriend/:id
+router.put("/addFriend/:id", protect, authController.addFriend);
 
 module.exports = router;
