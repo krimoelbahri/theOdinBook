@@ -19,7 +19,7 @@ const Local = new LocalStrategy((username, password, done) => {
 				return done(null, false, { message: "Incorrect password" });
 			}
 		});
-	});
+	}).populate({ path: "friends", model: "User", select: "name profilePic" });
 });
 const Facebook = new FacebookStrategy(
 	{
