@@ -7,6 +7,8 @@ import { Container } from "../styles/home.styled";
 const Home = () => {
 	const dispatch = useDispatch();
 	const { post } = useSelector((state) => state.post);
+	const { user } = useSelector((state) => state.user);
+
 	useEffect(() => {
 		dispatch(getPosts());
 		return () => dispatch(resetPost());
@@ -16,7 +18,7 @@ const Home = () => {
 		<Container>
 			<LeftBar />
 			<Main post={post} />
-			<RightBar />
+			<RightBar friends={user?.friends} />
 		</Container>
 	);
 };
