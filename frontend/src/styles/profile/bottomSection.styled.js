@@ -65,9 +65,11 @@ export const FriendsContainer = styled.div`
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
+		justify-content: space-evenly;
 		.card {
 			margin-bottom: 20px;
 			width: 80px;
+			text-align: center;
 			img {
 				width: 80px;
 				height: 80px;
