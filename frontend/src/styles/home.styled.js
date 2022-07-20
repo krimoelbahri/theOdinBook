@@ -94,10 +94,14 @@ export const ProfilesContainer = styled.div`
 `;
 export const ProfileWrapper = styled.div`
 	width: 100%;
-	padding: 10px 0px;
+	padding: 10px 5px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	:hover {
+		background-color: ${({ theme }) => theme.hoverBGC};
+		border-radius: 10px;
+	}
 	img {
 		width: 25px;
 		height: 25px;
