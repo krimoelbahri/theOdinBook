@@ -92,7 +92,8 @@ let userSlice = createSlice({
 			state.message = "";
 		},
 		updateUser: (state, action) => {
-			state.user = action.payload;
+			state.user = { ...state.user, ...action.payload };
+			localStorage.setItem("user", JSON.stringify(state.user));
 		},
 	},
 	extraReducers(builder) {
