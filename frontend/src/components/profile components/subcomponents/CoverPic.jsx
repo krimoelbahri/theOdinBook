@@ -16,7 +16,6 @@ function CoverPic({ currentUser, user }) {
 					Edit Cover Photo
 				</button>
 			)}
-			<div></div> {/*TODO: Edit DD */}
 		</Skeleton>
 	);
 }
