@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { RBContainer, ProfilesContainer, ProfileWrapper } from "../../styles/home.styled";
 
 function RightBar({ friends }) {
@@ -11,10 +12,12 @@ function RightBar({ friends }) {
 
 			<ProfilesContainer>
 				{friends.map((friend) => (
-					<ProfileWrapper key={`friend${friend._id}`}>
-						<img src={friend.profilePic.url} alt='friend' />
-						<p>{friend.name}</p>
-					</ProfileWrapper>
+					<Link key={`friend${friend._id}`} to={`/${friend._id}`}>
+						<ProfileWrapper>
+							<img src={friend.profilePic.url} alt='friend' />
+							<p>{friend.name}</p>
+						</ProfileWrapper>
+					</Link>
 				))}
 			</ProfilesContainer>
 		</RBContainer>
