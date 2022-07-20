@@ -23,10 +23,14 @@ function ProfileBottomSection({ currentUser, post, user }) {
 						</div>
 						<div className='wrapper'>
 							{user?.friends?.map((friend, i) => (
-								<div key={`card${friend._id}`} className='card'>
+								<Link
+									to={`/${friend._id}`}
+									key={`card${friend._id}`}
+									className='card'
+								>
 									<img src={friend.profilePic.url} alt='card' />
 									<h3>{friend.name}</h3>
-								</div>
+								</Link>
 							))}
 						</div>
 					</FriendsContainer>
