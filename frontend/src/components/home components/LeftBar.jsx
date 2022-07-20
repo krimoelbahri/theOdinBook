@@ -19,14 +19,13 @@ function LeftBar() {
 					</Link>
 				</li>
 				<li>
-					<Link to={"/friends"}>
-						{/*TODO:change this to groups*/}
+					<Link to={"/"}>
 						<i className='fa-solid fa-users-line'></i>
 						<p>Groups</p>
 					</Link>
 				</li>
 				<li>
-					<Link to={"/watch"}>
+					<Link to={"/"}>
 						<i className='fa-solid fa-tv'></i>
 						<p>Watch</p>
 					</Link>
