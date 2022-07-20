@@ -17,7 +17,7 @@ function Shortcuts() {
 				</NavLink>
 			</ShortcutDiv>
 			<ShortcutDiv active={location.pathname === "/watch" ? true : false}>
-				<NavLink to={"/watch"} className='item-holder'>
+				<NavLink to={"/"} className='item-holder'>
 					<i className='fa-solid fa-tv'></i>
 				</NavLink>
 			</ShortcutDiv>
