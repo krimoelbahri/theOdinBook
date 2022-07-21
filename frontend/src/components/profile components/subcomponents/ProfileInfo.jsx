@@ -1,12 +1,18 @@
 import { ProfilePicWrapper, ProfileName, ProfilButtons } from "../../../styles/profile";
 import { Skeleton } from "@mantine/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { handlePPModal } from "../../../features/Modal/modalSlice";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 function ProfileInfo({ currentUser, user }) {
 	const dispatch = useDispatch();
 	const [loaded, setloaded] = useState(false);
+	const { id } = useParams();
+
+	useEffect(() => {
+		setloaded(false);
+	}, [id]);
 
 	return (
 		<div className='wrapper'>
@@ -18,7 +24,7 @@ function ProfileInfo({ currentUser, user }) {
 					circle
 					mb='xl'
 				/>
-				<img onLoad={() => setloaded(true)} src={user?.profilePic.url} alt='' />
+				<img onLoad={() => setloaded(true)} src={user?.profilePic.url} alt='user' />
 				{currentUser && (
 					<div className='edit-icon c-p' onClick={() => dispatch(handlePPModal(true))}>
 						<i className='fa-solid fa-camera'></i>
