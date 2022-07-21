@@ -11,8 +11,20 @@ export const Container = styled.div`
 export const FriendsHeader = styled.div`
 	width: 100%;
 	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	h1 {
 		font-size: x-large;
+	}
+	button {
+		height: 40px;
+		border-radius: 5px;
+		border: none;
+		background-color: ${({ theme }) => theme.cardsBGC};
+		box-shadow: ${({ theme }) => theme.mainBS};
+		color: #1877f2;
+		font-weight: bold;
 	}
 `;
 export const FriendsCardsContainer = styled.div`
