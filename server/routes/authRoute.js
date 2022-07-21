@@ -32,12 +32,16 @@ router.get("/auth/facebook/callback", authController.facebookSigninUserCB);
 //Link: /api/user/auth;logout
 router.get("/auth/logout", authController.logout);
 
-//Update user
-//Link: /api/user/:id
-router.put("/:id", protect, authController.updateUser);
-
 //Friend request
 //Link: /api/user/addFriend
 router.put("/friend-request", protect, authController.friendRequest);
+
+//Friend request reply
+//Link: /api/user/addFriend
+router.put("/friend-request-reply", protect, authController.friendRequestReply);
+
+//Update user
+//Link: /api/user/:id
+router.put("/:id", protect, authController.updateUser);
 
 module.exports = router;
