@@ -171,16 +171,19 @@ exports.updateUser = asyncHandler(async function (req, res) {
 		throw new Error(error);
 	}
 });
+
 //Friend request
 exports.friendRequest = asyncHandler(async function (req, res) {
-	let { friend, action } = req.body;
-	let id = req.params.id;
+	let { author, friend, action } = req.body;
 	try {
 		const requestedFriend = await User.findById(friend).select("-password");
 		if (action === "cancel") {
-			requestedFriend.friendRequests.splice(requestedFriend.friendRequests.indexOf(id), 1);
+			requestedFriend.friendRequests.splice(
+				requestedFriend.friendRequests.indexOf(author),
+				1,
+			);
 		} else {
-			requestedFriend.friendRequests.push(id);
+			requestedFriend.friendRequests.push(author);
 		}
 		await requestedFriend.save();
 		await requestedFriend.populate([
