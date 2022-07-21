@@ -24,10 +24,18 @@ const updateUser = async function (data) {
 	return response.data;
 };
 const friendRequest = async function ({ author, friend, action }) {
-	let id = author;
-	let response = await axios.put(URL + "addFriend/" + id, { friend, action }, getConfig());
+	let response = await axios.put(URL + "friend-request", { author, friend, action }, getConfig());
 	return response.data;
 };
+const friendRequestreply = async function ({ author, friend, action }) {
+	let response = await axios.put(
+		URL + "friend-request-reply",
+		{ author, friend, action },
+		getConfig(),
+	);
+	return response.data;
+};
+
 const signup = async function (userData) {
 	let response = await axios.post(URL + "signup", userData);
 	if (response.data) {
@@ -67,5 +75,6 @@ let userServices = {
 	updateUser,
 	getUsers,
 	friendRequest,
+	friendRequestreply,
 };
 export default userServices;
