@@ -10,6 +10,7 @@ const UserSchema = new Schema(
 		profilePic: { type: Object },
 		coverPic: { type: Object },
 		friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
+		friendRequests: [{ type: Schema.Types.ObjectId, ref: "User" }],
 	},
 	{ timestamps: true },
 );
