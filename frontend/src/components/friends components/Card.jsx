@@ -8,7 +8,7 @@ export default function Card({ user, currentuser, setUsers }) {
 
 	const [cardUser, setCardUser] = useState(user);
 	const [requested, setRequested] = useState(false);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	function handleRemoveCard() {
 		setUsers((state) => state.filter((cardUser) => cardUser._id !== user._id));
@@ -34,6 +34,7 @@ export default function Card({ user, currentuser, setUsers }) {
 		} else {
 			setRequested(true);
 		}
+		setLoading(false);
 	}, [currentuser, cardUser]);
 
 	return (
