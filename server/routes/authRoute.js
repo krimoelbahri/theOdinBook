@@ -38,6 +38,6 @@ router.put("/:id", protect, authController.updateUser);
 
 //Add Friend
 //Link: /api/user/addFriend/:id
-router.put("/addFriend/:id", protect, authController.addFriend);
+router.put("/addFriend/:id", protect, authController.friendRequest);
 
 module.exports = router;
