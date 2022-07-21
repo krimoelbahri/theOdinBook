@@ -71,9 +71,9 @@ export const updateImage = createAsyncThunk("updateImage/user", async (data, thu
 		return thunkAPI.rejectWithValue(error.response.data.message);
 	}
 });
-export const addFriend = createAsyncThunk("add-friend/user", async (data, thunkAPI) => {
+export const friendRequest = createAsyncThunk("add-friend/user", async (data, thunkAPI) => {
 	try {
-		let response = await userServices.addFriend(data);
+		let response = await userServices.friendRequest(data);
 		return response;
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.response.data.message);
