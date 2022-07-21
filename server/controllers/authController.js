@@ -196,3 +196,32 @@ exports.friendRequest = asyncHandler(async function (req, res) {
 		throw new Error(error);
 	}
 });
+
+//Friend request reply
+exports.friendRequestReply = asyncHandler(async function (req, res) {
+	let { author, friend, action } = req.body;
+	try {
+		const _friend = await User.findById(friend).select("-password");
+		const user = await User.findById(author).select("-password");
+
+		if (action === "accept") {
+			user.friends.push(friend);
+			_friend.friends.push(author);
+			user.friendRequests.splice(user.friendRequests.indexOf(friend), 1);
+		}
+
+		if (action === "deny") {
+			user.friendRequests.splice(user.friendRequests.indexOf(friend), 1);
+		}
+		await _friend.save();
+		await user.save();
+		await user.populate([
+			{ path: "friends", model: "User", select: "name profilePic" },
+			{ path: "friendRequests", model: "User", select: "name profilePic" },
+		]);
+		res.status(200).json(user);
+	} catch (error) {
+		res.status(400);
+		throw new Error(error);
+	}
+});
