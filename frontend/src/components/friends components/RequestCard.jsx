@@ -1,5 +1,5 @@
 import { CardContainer, CardButton } from "../../styles/friends";
-import { friendRequest } from "../../features/auth/userSlice";
+import { friendRequestreply, updateUser } from "../../features/auth/userSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
@@ -12,8 +12,9 @@ export default function RequestCard({ user, currentuser }) {
 		try {
 			setLoading(true);
 			let updatedUser = await dispatch(
-				friendRequest({ author: currentuser._id, friend: id, action }),
+				friendRequestreply({ author: currentuser._id, friend: id, action }),
 			).unwrap();
+			dispatch(updateUser(updatedUser));
 			setLoading(false);
 		} catch (error) {
 			console.log(error);
