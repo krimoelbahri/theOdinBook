@@ -36,8 +36,8 @@ router.get("/auth/logout", authController.logout);
 //Link: /api/user/:id
 router.put("/:id", protect, authController.updateUser);
 
-//Add Friend
-//Link: /api/user/addFriend/:id
-router.put("/addFriend/:id", protect, authController.friendRequest);
+//Friend request
+//Link: /api/user/addFriend
+router.put("/friend-request", protect, authController.friendRequest);
 
 module.exports = router;
