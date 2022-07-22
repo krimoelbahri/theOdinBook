@@ -1,28 +1,14 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import { Card, RequestCard } from "../components/friends components";
 import { Container, FriendsHeader, FriendsCardsContainer } from "../styles/friends";
-import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../features/auth/userSlice";
-
+import { useSelector } from "react-redux";
+import { useGetUsersQuery } from "../features/auth/user-api-query";
 function Friends() {
-	const [users, setUsers] = useState([]);
-	const [page, setPage] = useState("suggestions");
-
 	const { user } = useSelector((state) => state.user);
-	const dispatch = useDispatch();
+	const { data = [] } = useGetUsersQuery();
 
-	useEffect(() => {
-		async function fetchUsers() {
-			try {
-				let users = await dispatch(getUsers()).unwrap();
-				setUsers(users);
-			} catch (error) {
-				console.log(error);
-			}
-		}
-		fetchUsers();
-	}, [dispatch]);
+	const [page, setPage] = useState("suggestions");
+	const [users, setUsers] = useState(data);
 
 	return (
 		<Container>

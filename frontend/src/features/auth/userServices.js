@@ -10,14 +10,6 @@ function getConfig() {
 	return config;
 }
 
-const getUser = async function (id) {
-	let response = await axios.get(URL + id);
-	return response.data;
-};
-const getUsers = async function () {
-	let response = await axios.get(URL + "getUsers");
-	return response.data;
-};
 const updateUser = async function (data) {
 	let id = data.author;
 	let response = await axios.put(URL + id, data, getConfig());
@@ -71,9 +63,7 @@ let userServices = {
 	signin,
 	facebookSignin,
 	logout,
-	getUser,
 	updateUser,
-	getUsers,
 	friendRequest,
 	friendRequestreply,
 };

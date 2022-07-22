@@ -30,18 +30,18 @@ router.post("/uploadImg", protect, uploadImage.single("imgFile"), postsControlle
 //URL /api/posts/:id/comment
 router.post("/:id/comment", protect, postsController.addComment);
 
-// Delete comment
-//URL /api/posts/:postId/comment/:commentId
-router.delete("/:postId/comment/:commentId", protect, postsController.deleteComment);
-
 // Adding new Like
 //URL /api/posts/:id/Like
 router.post("/:id/Like", protect, postsController.addLike);
 
-// update a Post
-router.put("/:id", protect, postsController.updatePost);
+// Delete comment
+//URL /api/posts/:postId/comment/:commentId
+router.delete("/:postId/comment/:commentId", protect, postsController.deleteComment);
 
 // delete a Post
 router.delete("/:id", protect, postsController.deletePost);
+
+// update a Post
+router.put("/:id", protect, postsController.updatePost);
 
 module.exports = router;
