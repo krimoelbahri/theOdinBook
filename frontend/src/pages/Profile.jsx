@@ -7,16 +7,17 @@ import {
 	ProfileBottomSection,
 } from "../components/profile components";
 import { getUser, reset } from "../features/auth/userSlice";
-import { resetPost, getPosts } from "../features/posts/postSlice";
 import { useElementOnScreen } from "../hooks/intersectionObserver";
+import { useGetProfilePostsQuery } from "../features/posts/post-api-query";
 
 function Profile() {
 	const [ref, isVisible] = useElementOnScreen({ rootMargin: "-60px" });
-	const { user, profileUser } = useSelector((state) => state.user);
-	const { post } = useSelector((state) => state.post);
+	const { id } = useParams();
 
 	const dispatch = useDispatch();
-	const { id } = useParams();
+	const { user, profileUser } = useSelector((state) => state.user);
+	const { data } = useGetProfilePostsQuery(id);
+
 	const location = useLocation();
 
 	useEffect(() => {
@@ -25,15 +26,11 @@ function Profile() {
 		return () => dispatch(reset());
 	}, [id, user, dispatch]);
 
-	useEffect(() => {
-		dispatch(getPosts(id));
-		return () => dispatch(resetPost());
-	}, [id, user, dispatch]);
 	return (
 		<>
 			<ProfileTopSection currentUser={id === user._id} element={ref} user={profileUser} />
 			<ProfileNavSection visible={isVisible} location={location} user={profileUser} />
-			<ProfileBottomSection currentUser={id === user._id} post={post} user={profileUser} />
+			<ProfileBottomSection currentUser={id === user._id} post={data} user={profileUser} />
 		</>
 	);
 }
