@@ -2,7 +2,6 @@ import { MainContainer } from "../../styles/home.styled";
 import { Post, CreatePost } from "../post components";
 
 function Main({ post }) {
-	console.log(post);
 	return (
 		<MainContainer>
 			<CreatePost />
