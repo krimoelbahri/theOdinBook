@@ -4,7 +4,7 @@ import { Container } from "../styles/home.styled";
 import { useGetUserPostsQuery } from "../features/posts/post-api-query";
 const Home = () => {
 	const { user } = useSelector((state) => state.user);
-	const { data } = useGetUserPostsQuery();
+	const { data = [] } = useGetUserPostsQuery();
 
 	return (
 		<Container>
