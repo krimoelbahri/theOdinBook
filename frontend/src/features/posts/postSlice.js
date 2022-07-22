@@ -1,13 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import postServices from "./postServices";
 let state = {
-	post: {
-		posts: [],
-		isError: false,
-		isDone: false,
-		isLoading: false,
-		message: "",
-	},
+	post: { posts: [], isError: false, isDone: false, isLoading: false, message: "" },
 	addPost: { isError: false, isDone: false, isLoading: false, message: "" },
 };
 
