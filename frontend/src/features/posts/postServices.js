@@ -11,16 +11,6 @@ function getConfig() {
 	return config;
 }
 
-const getPosts = async function (id) {
-	let response;
-	if (id) response = await axios.get(URL + `user/${id}`);
-	if (!id) response = await axios.get(URL);
-	return response.data;
-};
-const getPost = async function (id) {
-	let response = await axios.get(URL + id);
-	return response.data;
-};
 const addPost = async function (userData) {
 	let response = await axios.post(URL, userData, getConfig());
 	return response.data;
@@ -51,8 +41,6 @@ const deletePost = async function (postId) {
 	return response.data;
 };
 let postServices = {
-	getPosts,
-	getPost,
 	addPost,
 	uploadImage,
 	addComment,
