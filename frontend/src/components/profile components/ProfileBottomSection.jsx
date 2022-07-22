@@ -37,7 +37,7 @@ function ProfileBottomSection({ currentUser, post, user }) {
 				</ProfileLeftBar>
 				<ProfilePostsWrapper>
 					{currentUser && <CreatePost />}
-					{post?.posts?.map((post, i) => (
+					{post?.map((post, i) => (
 						<Post key={post._id} post={post} postIndex={i} />
 					))}
 				</ProfilePostsWrapper>
