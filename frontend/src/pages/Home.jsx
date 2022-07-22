@@ -1,23 +1,15 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { LeftBar, RightBar, Main } from "../components/home components";
-import { getPosts, resetPost } from "../features/posts/postSlice";
 import { Container } from "../styles/home.styled";
-
+import { useGetUserPostsQuery } from "../features/posts/post-api-query";
 const Home = () => {
-	const dispatch = useDispatch();
-	const { post } = useSelector((state) => state.post);
 	const { user } = useSelector((state) => state.user);
-
-	useEffect(() => {
-		dispatch(getPosts());
-		return () => dispatch(resetPost());
-	}, [dispatch]);
+	const { data } = useGetUserPostsQuery();
 
 	return (
 		<Container>
 			<LeftBar />
-			<Main post={post} />
+			<Main post={data} />
 			<RightBar friends={user?.friends} />
 		</Container>
 	);
