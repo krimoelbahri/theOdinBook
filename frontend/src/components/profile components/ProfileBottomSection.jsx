@@ -6,8 +6,11 @@ import {
 	FriendsContainer,
 } from "../../styles/profile";
 import { Post, CreatePost } from "../post components";
+import { useGetProfilePostsQuery } from "../../features/posts/post-api-query";
 
-function ProfileBottomSection({ currentUser, post, user }) {
+function ProfileBottomSection({ currentUser, id, user }) {
+	const { data = [] } = useGetProfilePostsQuery(id);
+
 	return (
 		<BottomSectionContainer>
 			<div className='wrapper'>
@@ -28,7 +31,7 @@ function ProfileBottomSection({ currentUser, post, user }) {
 									key={`card${friend._id}`}
 									className='card'
 								>
-									<img src={friend.profilePic.url} alt='card' />
+									<img src={friend?.profilePic?.url} alt='card' />
 									<h3>{friend.name}</h3>
 								</Link>
 							))}
@@ -37,7 +40,7 @@ function ProfileBottomSection({ currentUser, post, user }) {
 				</ProfileLeftBar>
 				<ProfilePostsWrapper>
 					{currentUser && <CreatePost />}
-					{post?.map((post, i) => (
+					{data.map((post, i) => (
 						<Post key={post._id} post={post} postIndex={i} />
 					))}
 				</ProfilePostsWrapper>
