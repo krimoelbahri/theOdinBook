@@ -88,14 +88,15 @@ exports.getPost = asyncHandler(async function (req, res) {
 });
 
 // Get URL of Uploaded Images --Private Acces
-exports.uploadImage = asyncHandler(async function (req, res) {
-	res.status(201).json({ url: req.file.publicUrl, path: req.file.fileRef.name });
-});
-
-// CREATE a new post -- Private acces
-// route POST /api/posts
 exports.addPost = asyncHandler(async function (req, res) {
-	let { description, postImage, author } = req.body;
+	let { description, author } = req.body;
+	let postImage = { url: req.file.publicUrl, path: req.file.fileRef.name };
+
+	res.status(201).json({
+		description,
+		author,
+		postImage,
+	});
 	if (!description || !postImage || !author) {
 		res.status(400);
 		throw new Error("all fields are required");
@@ -217,6 +218,7 @@ exports.updatePost = asyncHandler(async function (req, res) {
 // DELETE a post
 // route DELETE /api/posts/:id
 exports.deletePost = asyncHandler(async function (req, res) {
+	console.log("hi");
 	let id = req.params.id;
 	const deletedPost = await Post.findByIdAndDelete(id).populate("comments");
 	for (const element of deletedPost.comments) {
