@@ -11,19 +11,6 @@ function getConfig() {
 	return config;
 }
 
-const addPost = async function (userData) {
-	let response = await axios.post(URL, userData, getConfig());
-	return response.data;
-};
-const uploadImage = async function (userData) {
-	let response = await axios.post(URL + "uploadImg", userData, {
-		headers: {
-			Authorization: getConfig().headers.Authorization,
-			"Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
-		},
-	});
-	return response.data;
-};
 const addComment = async function (userData, postId) {
 	let response = await axios.post(URL + postId + "/comment", userData, getConfig());
 	return response.data;
@@ -36,16 +23,10 @@ const addLike = async function (userId, postId) {
 	let response = await axios.post(URL + postId + "/like", { author: userId }, getConfig());
 	return response.data;
 };
-const deletePost = async function (postId) {
-	let response = await axios.delete(URL + postId, getConfig());
-	return response.data;
-};
+
 let postServices = {
-	addPost,
-	uploadImage,
 	addComment,
 	deleteComment,
 	addLike,
-	deletePost,
 };
 export default postServices;
