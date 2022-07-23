@@ -6,7 +6,7 @@ function Main({ post }) {
 		<MainContainer>
 			<CreatePost />
 			{post?.map((post, i) => (
-				<Post key={post._id} post={post} postIndex={i} />
+				<Post key={post._id} post={post} />
 			))}
 		</MainContainer>
 	);
