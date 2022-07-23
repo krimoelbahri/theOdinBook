@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { useClickOutside } from "@mantine/hooks";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { deletePost, removePost } from "../../../features/posts/postSlice";
 import { PostHeaderContainer, PostHeaderDD, ProfileDiv } from "../../../styles/Post.styled";
-
-function PostHeader({ author, date, postId, postIndex }) {
+import { useDeletePostMutation } from "../../../features/posts/post-api-query";
+function PostHeader({ author, date, postId }) {
 	const DD = useClickOutside(() => setIsActive(false));
-	const dispatch = useDispatch();
+
 	const { user } = useSelector((state) => state.user);
+	const [deletePost] = useDeletePostMutation();
+
 	const [isActive, setIsActive] = useState(false);
 	const [isDeleting, setIsDeleting] = useState(false);
 
 	async function handleDeletePost() {
 		setIsDeleting(true);
 		try {
-			await dispatch(deletePost(postId)).unwrap();
-			dispatch(removePost(postIndex));
+			await deletePost(postId);
 		} catch (error) {
 			console.log(error);
 		}
