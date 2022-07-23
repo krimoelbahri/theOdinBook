@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PostContainer } from "../../styles/Post.styled";
 import { PostHeader, PostComments, PostDescription, PostImg, PostReactions } from "./subcomponents";
 
-function Post({ post, postIndex }) {
+function Post({ post }) {
 	const { author, createdAt, description, postImage, comments, likes, _id } = post;
 	const [postComments, setComments] = useState(comments);
 	const [postLikes, setPostLikes] = useState(likes);
@@ -10,7 +10,7 @@ function Post({ post, postIndex }) {
 
 	return (
 		<PostContainer>
-			<PostHeader author={author} date={createdAt} postId={_id} postIndex={postIndex} />
+			<PostHeader author={author} date={createdAt} postId={_id} />
 			<PostDescription description={description} />
 			<PostImg url={postImage.url} />
 			<PostReactions
