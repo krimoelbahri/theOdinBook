@@ -19,12 +19,8 @@ router.get("/user/:id", postsController.getUserPosts);
 router.get("/:id", postsController.getPost);
 
 // Adding new Post
-//URL /api/posts/
-router.post("/", protect, postsController.addPost);
-
-//Upload images
-//URL /api/posts/uploadImg
-router.post("/uploadImg", protect, uploadImage.single("imgFile"), postsController.uploadImage);
+// URL /api/posts/
+router.post("/", protect, uploadImage.single("imgFile"), postsController.addPost);
 
 // Adding new comment
 //URL /api/posts/:id/comment
