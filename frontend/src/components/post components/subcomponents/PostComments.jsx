@@ -7,7 +7,7 @@ import {
 
 import { PostCommentsContainer, AddCommentsDiv, CommentsDiv } from "../../../styles/Post.styled";
 
-function PostComments({ author, postComments, setComments, postId }) {
+function PostComments({ author, postComments, postId }) {
 	const [addComent] = useAddCommentMutation();
 	const [deleteComment] = useDeleteCommentMutation();
 
@@ -20,13 +20,10 @@ function PostComments({ author, postComments, setComments, postId }) {
 		setData({ text: "", author: user._id, id: postId });
 	}
 
-	async function handleDeleteComment(e, comment) {
+	async function handleDeleteComment(e) {
 		let data = { commentId: e.target.id, id: postId };
 		try {
 			await deleteComment(data).unwrap();
-			let comments = [...postComments];
-			comments.splice(comments.indexOf(comment), 1);
-			setComments(comments);
 		} catch (error) {
 			console.log(error);
 		}
@@ -45,8 +42,7 @@ function PostComments({ author, postComments, setComments, postId }) {
 		resetState();
 
 		try {
-			let result = await addComent(data).unwrap();
-			setComments([result, ...postComments]);
+			await addComent(data).unwrap();
 		} catch (err) {
 			console.error(err);
 		}
@@ -125,9 +121,7 @@ function Comments({ user, author, comment, deletComment }) {
 										id={comment?._id}
 										onClick={(e) => {
 											setDeleteLoading(true);
-											deletComment(e, comment).then(() => {
-												setDeleteLoading(false);
-											});
+											deletComment(e);
 										}}
 										style={{
 											"--fa-animation-iteration-count": 1,
