@@ -1,34 +1,29 @@
 import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import uuid from "react-uuid";
-import { addingComment, deletingComment } from "../../../features/posts/postSlice";
+import { useSelector } from "react-redux";
+import {
+	useAddCommentMutation,
+	useDeleteCommentMutation,
+} from "../../../features/posts/post-api-query";
+
 import { PostCommentsContainer, AddCommentsDiv, CommentsDiv } from "../../../styles/Post.styled";
 
 function PostComments({ author, postComments, setComments, postId }) {
-	const dispatch = useDispatch();
-	const { user } = useSelector((state) => state.user);
+	const [addComent] = useAddCommentMutation();
+	const [deleteComment] = useDeleteCommentMutation();
 
-	const [data, setData] = useState({ text: "", author: user._id, postId });
-	const [addedComment, setAddedComment] = useState({
-		_id: uuid(),
-		text: null,
-		author: { _id: user._id, name: user.name, profilePic: user.profilePic },
-	});
+	const { user } = useSelector((state) => state.user);
+	const [data, setData] = useState({ text: "", author: user._id, id: postId });
+
 	const textArea = useRef();
 
 	function resetState() {
-		setData({ text: "", author: user._id, postId });
-		setAddedComment({
-			_id: uuid(),
-			text: null,
-			author: { _id: user._id, name: user.name, profilePic: user.profilePic },
-		});
+		setData({ text: "", author: user._id, id: postId });
 	}
 
 	async function handleDeleteComment(e, comment) {
-		let data = { commentId: e.target.id, postId };
+		let data = { commentId: e.target.id, id: postId };
 		try {
-			await dispatch(deletingComment(data)).unwrap();
+			await deleteComment(data).unwrap();
 			let comments = [...postComments];
 			comments.splice(comments.indexOf(comment), 1);
 			setComments(comments);
@@ -41,7 +36,6 @@ function PostComments({ author, postComments, setComments, postId }) {
 		target.style.height = 0;
 		target.style.height = `${target.scrollHeight}px`;
 		setData((state) => ({ ...state, text: target.value }));
-		setAddedComment((state) => ({ ...state, text: target.value }));
 	}
 
 	async function handleSubmit(e) {
@@ -49,12 +43,12 @@ function PostComments({ author, postComments, setComments, postId }) {
 		textArea.current.value = "";
 		handleChange(textArea.current);
 		resetState();
-		if (addedComment.text) setComments((state) => [addedComment, ...state]);
+
 		try {
-			const result = await dispatch(addingComment(data)).unwrap();
+			let result = await addComent(data).unwrap();
 			setComments([result, ...postComments]);
-		} catch (error) {
-			console.log(error);
+		} catch (err) {
+			console.error(err);
 		}
 	}
 
