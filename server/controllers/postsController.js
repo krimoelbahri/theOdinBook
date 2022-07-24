@@ -137,7 +137,29 @@ exports.addComment = asyncHandler(async function (req, res) {
 		let comment = await Comment.create({ text, author });
 		post.comments.push(comment.id);
 		await post.save();
-		res.status(200).json(await comment.populate({ path: "author", select: "name profilePic" }));
+		res.status(200).json(
+			await post.populate([
+				{
+					path: "author",
+					select: "name profilePic",
+					model: "User",
+				},
+				{
+					path: "comments",
+					model: "Comment",
+					populate: {
+						path: "author",
+						select: "name profilePic ",
+						model: "User",
+					},
+				},
+				{
+					path: "likes",
+					select: "name ",
+					model: "User",
+				},
+			]),
+		);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -180,8 +202,28 @@ exports.addLike = asyncHandler(async function (req, res) {
 			post.likes.push(author);
 		}
 		await post.save();
-		await post.populate({ path: "likes", select: "name" });
-		res.status(200).json(post.likes);
+		await post.populate([
+			{
+				path: "author",
+				select: "name profilePic",
+				model: "User",
+			},
+			{
+				path: "comments",
+				model: "Comment",
+				populate: {
+					path: "author",
+					select: "name profilePic ",
+					model: "User",
+				},
+			},
+			{
+				path: "likes",
+				select: "name ",
+				model: "User",
+			},
+		]);
+		res.status(200).json(post);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
