@@ -7,39 +7,27 @@ import {
 	ReactionsStatsDiv,
 } from "../../../styles/Post.styled";
 
-function PostReactions({ postComments, postLikes, postId, setPostLikes, setShowComments }) {
+function PostReactions({ postComments, postLikes, postId, setShowComments }) {
 	const [addLike] = useAddLikeMutation();
 	const { user } = useSelector((state) => state.user);
 
 	const [isLiked, setIsLiked] = useState(false);
-	const [index, setIndex] = useState(null);
 
 	async function handleLike() {
-		if (!isLiked) {
-			setPostLikes((state) => [{ _id: user._id }, ...state]);
-		} else {
-			let likes = [...postLikes];
-			likes.splice(index, 1);
-			setPostLikes(likes);
-			setIsLiked(false);
-			setIndex(null);
-		}
+		setIsLiked((state) => !state);
 		try {
-			let result = await addLike({ author: user._id, id: postId }).unwrap();
-			setPostLikes(result);
+			await addLike({ author: user._id, id: postId }).unwrap();
 		} catch (error) {
 			setIsLiked(false);
-			setIndex(null);
 		}
 	}
 
 	useEffect(() => {
-		postLikes.forEach((element, i) => {
-			if (element._id === user._id) {
-				setIsLiked(true);
-				setIndex(i);
-			}
-		});
+		if (postLikes.every((element) => element._id !== user._id)) {
+			setIsLiked(false);
+		} else {
+			setIsLiked(true);
+		}
 	}, [postLikes, user]);
 
 	return (
