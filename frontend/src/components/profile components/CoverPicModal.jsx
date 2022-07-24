@@ -11,26 +11,24 @@ import {
 } from "../../styles/Modals";
 import { handleCPModal } from "../../features/Modal/modalSlice";
 import AddPhoto from "../add post component/Modal subcomponents/AddPhoto";
-import { updateImage, updateUser } from "../../features/auth/userSlice";
+import { useUpdateUserMutation } from "../../features/auth/user-api-query";
 
 function CoverPicModal() {
 	//using Redux
+	const [updateUser, updateUserResult] = useUpdateUserMutation();
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.user);
+
 	//useState state handeling post data
 	const [url, setUrl] = useState(null);
-	const [data, setData] = useState({ action: "cover", author: user._id, imgFile: null });
-	const [loading, setLoading] = useState(false);
+	const [data, setData] = useState({ action: "cover", id: user._id, imgFile: null });
+
 	async function handleSubmit(e) {
 		e.preventDefault();
 		try {
-			setLoading(true);
-			let user = await dispatch(updateImage(data)).unwrap();
-			dispatch(updateUser(user));
-			setLoading(false);
+			await updateUser(data).unwrap();
 			dispatch(handleCPModal(false));
 		} catch (error) {
-			setLoading(false);
 			console.log(error);
 		}
 	}
@@ -65,7 +63,7 @@ function CoverPicModal() {
 					<h3>Update Picture</h3>
 				</ModalSubmitButton>
 			</ModalBottomSectionContainer>
-			{loading && (
+			{updateUserResult.isLoading && (
 				<Loader>
 					<i className='fa-solid fa-spinner fa-spin-pulse'></i>
 				</Loader>
