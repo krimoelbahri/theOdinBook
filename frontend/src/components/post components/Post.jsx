@@ -4,8 +4,6 @@ import { PostHeader, PostComments, PostDescription, PostImg, PostReactions } fro
 
 function Post({ post }) {
 	const { author, createdAt, description, postImage, comments, likes, _id } = post;
-	const [postComments, setComments] = useState(comments);
-	const [postLikes, setPostLikes] = useState(likes);
 	const [showComments, setShowComments] = useState(false);
 
 	return (
@@ -14,20 +12,12 @@ function Post({ post }) {
 			<PostDescription description={description} />
 			<PostImg url={postImage.url} />
 			<PostReactions
-				postComments={postComments}
-				postLikes={postLikes}
-				setPostLikes={setPostLikes}
+				postComments={comments}
+				postLikes={likes}
 				postId={_id}
 				setShowComments={setShowComments}
 			/>
-			{showComments && (
-				<PostComments
-					author={author}
-					postComments={postComments}
-					setComments={setComments}
-					postId={_id}
-				/>
-			)}
+			{showComments && <PostComments author={author} postComments={comments} postId={_id} />}
 		</PostContainer>
 	);
 }
