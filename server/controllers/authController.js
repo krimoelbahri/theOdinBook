@@ -151,9 +151,17 @@ exports.logout = function (req, res) {
 	req.logout();
 	res.json({ user: req.user });
 };
+
 //Update User
+//Link: /api/user/:id
 exports.updateUser = asyncHandler(async function (req, res) {
-	let { action, data } = req.body;
+	if (!req.file) {
+		res.status(400);
+		throw new Error("Please include an image");
+	}
+
+	let { action } = req.body;
+	let data = { url: req.file?.publicUrl, path: req.file?.fileRef.name };
 	let id = req.params.id;
 
 	try {
