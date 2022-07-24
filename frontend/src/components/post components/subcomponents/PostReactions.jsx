@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addingLike } from "../../../features/posts/postSlice";
+import { useSelector } from "react-redux";
+import { useAddLikeMutation } from "../../../features/posts/post-api-query";
 import {
 	PostReactionContainer,
 	ReactionButtonsDiv,
@@ -8,7 +8,7 @@ import {
 } from "../../../styles/Post.styled";
 
 function PostReactions({ postComments, postLikes, postId, setPostLikes, setShowComments }) {
-	const dispatch = useDispatch();
+	const [addLike] = useAddLikeMutation();
 	const { user } = useSelector((state) => state.user);
 
 	const [isLiked, setIsLiked] = useState(false);
@@ -25,7 +25,7 @@ function PostReactions({ postComments, postLikes, postId, setPostLikes, setShowC
 			setIndex(null);
 		}
 		try {
-			let result = await dispatch(addingLike({ userId: user._id, postId })).unwrap();
+			let result = await addLike({ author: user._id, id: postId }).unwrap();
 			setPostLikes(result);
 		} catch (error) {
 			setIsLiked(false);
