@@ -14,15 +14,35 @@ const baseQuery = fetchBaseQuery({
 export const postApi = createApi({
 	reducerPath: "postApi",
 	baseQuery,
-	tagTypes: ["Post"],
+	tagTypes: ["Posts"],
 	endpoints: (builder) => ({
 		getUserPosts: builder.query({
 			query: () => ({ url: `` }),
-			providesTags: ["Post"],
+			providesTags: (result) => {
+				console.log(result);
+				// is result available?
+				return result
+					? // successful query
+					  [
+							...result.map(({ _id }) => ({ type: "Posts", id: _id })),
+							{ type: "Posts", id: "LIST" },
+					  ]
+					: // an error occurred, but we still want to refetch this query when `{ type: 'Posts', id: 'LIST' }` is invalidated
+					  [{ type: "Posts", id: "LIST" }];
+			},
 		}),
 		getProfilePosts: builder.query({
 			query: (id) => ({ url: `user/${id}` }),
-			providesTags: ["Post"],
+			providesTags: (result) =>
+				// is result available?
+				result
+					? // successful query
+					  [
+							...result.map(({ _id }) => ({ type: "Posts", id: _id })),
+							{ type: "Posts", id: "LIST" },
+					  ]
+					: // an error occurred, but we still want to refetch this query when `{ type: 'Posts', id: 'LIST' }` is invalidated
+					  [{ type: "Posts", id: "LIST" }],
 		}),
 		getPost: builder.query({
 			query: (id) => ({ url: `${id}` }),
@@ -35,7 +55,7 @@ export const postApi = createApi({
 				body: data,
 				headers: getConfig(),
 			}),
-			invalidatesTags: ["Post"],
+			invalidatesTags: [{ type: "Posts", id: "LIST" }],
 		}),
 		deletePost: builder.mutation({
 			query: (id) => ({
@@ -43,7 +63,7 @@ export const postApi = createApi({
 				method: "DELETE",
 				headers: getConfig(),
 			}),
-			invalidatesTags: ["Post"],
+			invalidatesTags: [{ type: "Posts", id: "LIST" }],
 		}),
 		addComment: builder.mutation({
 			query: ({ id, ...data }) => ({
@@ -52,7 +72,7 @@ export const postApi = createApi({
 				body: data,
 				headers: getConfig(),
 			}),
-			invalidatesTags: ["Post"],
+			invalidatesTags: (result, error, { id }) => [{ type: "Posts", id }],
 		}),
 		deleteComment: builder.mutation({
 			query: ({ id, commentId }) => ({
@@ -60,7 +80,7 @@ export const postApi = createApi({
 				method: "DELETE",
 				headers: getConfig(),
 			}),
-			invalidatesTags: ["Post"],
+			invalidatesTags: (result, error, { id }) => [{ type: "Posts", id }],
 		}),
 		addLike: builder.mutation({
 			query: ({ id, ...data }) => ({
@@ -69,7 +89,7 @@ export const postApi = createApi({
 				body: data,
 				headers: getConfig(),
 			}),
-			invalidatesTags: ["Post"],
+			invalidatesTags: (result, error, { id }) => [{ type: "Posts", id }],
 		}),
 	}),
 });
