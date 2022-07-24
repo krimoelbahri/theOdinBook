@@ -87,17 +87,16 @@ exports.getPost = asyncHandler(async function (req, res) {
 	res.status(200).json(post);
 });
 
-// Get URL of Uploaded Images --Private Acces
+// POST adding post
 exports.addPost = asyncHandler(async function (req, res) {
 	let { description, author } = req.body;
-	let postImage = { url: req.file.publicUrl, path: req.file.fileRef.name };
+	let postImage = { url: req.file?.publicUrl, path: req.file?.fileRef.name };
 
-	res.status(201).json({
-		description,
-		author,
-		postImage,
-	});
-	if (!description || !postImage || !author) {
+	if (description && description !== "null" && !req.file) {
+		res.status(400);
+		throw new Error("Please include an image");
+	}
+	if (!description || description === "null") {
 		res.status(400);
 		throw new Error("all fields are required");
 	}
