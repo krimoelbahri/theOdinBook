@@ -45,6 +45,32 @@ export const postApi = createApi({
 			}),
 			invalidatesTags: ["Post"],
 		}),
+		addComment: builder.mutation({
+			query: ({ id, ...data }) => ({
+				url: `${id}/comment`,
+				method: "POST",
+				body: data,
+				headers: getConfig(),
+			}),
+			invalidatesTags: ["Post"],
+		}),
+		deleteComment: builder.mutation({
+			query: ({ id, commentId }) => ({
+				url: `${id}/comment/${commentId}`,
+				method: "DELETE",
+				headers: getConfig(),
+			}),
+			invalidatesTags: ["Post"],
+		}),
+		addLike: builder.mutation({
+			query: ({ id, ...data }) => ({
+				url: `${id}/like`,
+				method: "POST",
+				body: data,
+				headers: getConfig(),
+			}),
+			invalidatesTags: ["Post"],
+		}),
 	}),
 });
 
@@ -54,4 +80,7 @@ export const {
 	useGetPostQuery,
 	useAddPostMutation,
 	useDeletePostMutation,
+	useAddCommentMutation,
+	useDeleteCommentMutation,
+	useAddLikeMutation,
 } = postApi;
