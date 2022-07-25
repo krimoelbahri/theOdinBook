@@ -18,18 +18,16 @@ export const postApi = createApi({
 	endpoints: (builder) => ({
 		getUserPosts: builder.query({
 			query: () => ({ url: `` }),
-			providesTags: (result) => {
-				console.log(result);
+			providesTags: (result) =>
 				// is result available?
-				return result
+				result
 					? // successful query
 					  [
 							...result.map(({ _id }) => ({ type: "Posts", id: _id })),
 							{ type: "Posts", id: "LIST" },
 					  ]
 					: // an error occurred, but we still want to refetch this query when `{ type: 'Posts', id: 'LIST' }` is invalidated
-					  [{ type: "Posts", id: "LIST" }];
-			},
+					  [{ type: "Posts", id: "LIST" }],
 		}),
 		getProfilePosts: builder.query({
 			query: (id) => ({ url: `user/${id}` }),
