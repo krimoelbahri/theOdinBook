@@ -15,6 +15,7 @@ function ModalMediaSection({ media, setMedia, url, setUrl, setData }) {
 	const [placeHolder, setPlaceHolder] = useState(true);
 	const [rtl, setRtl] = useState("");
 	const { user } = useSelector((state) => state.user);
+
 	function handleChange(e) {
 		if (e.target.innerText === "") {
 			setRtl("");
@@ -27,6 +28,7 @@ function ModalMediaSection({ media, setMedia, url, setUrl, setData }) {
 			setData((state) => ({ ...state, description: e.target.innerText }));
 		}
 	}
+
 	return (
 		<ModalMediaSectionContainer>
 			<ModalTextarea onClick={() => textArea.current.focus()}>
