@@ -9,7 +9,7 @@ import ProfileInfo from "./subcomponents/ProfileInfo";
 import { useScrollIntoView } from "@mantine/hooks";
 import { useEffect } from "react";
 
-function ProfileTopSection({ currentUser, element, user }) {
+function ProfileTopSection({ currentUser, element, user, loading }) {
 	const { scrollIntoView, targetRef } = useScrollIntoView();
 	useEffect(() => {
 		scrollIntoView({ alignment: "center" });
@@ -18,10 +18,10 @@ function ProfileTopSection({ currentUser, element, user }) {
 	return (
 		<TopSectionContainer ref={element}>
 			<CoverPicWrapper>
-				<CoverPic currentUser={currentUser} user={user} />
+				<CoverPic currentUser={currentUser} user={user} loading={loading} />
 			</CoverPicWrapper>
 			<ProfileInfoWrapper ref={targetRef}>
-				<ProfileInfo currentUser={currentUser} user={user} />
+				<ProfileInfo currentUser={currentUser} user={user} loading={loading} />
 			</ProfileInfoWrapper>
 			<LineWrapper>
 				<div></div>
