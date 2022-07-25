@@ -11,14 +11,18 @@ import { useGetUserQuery } from "../features/auth/user-api-query";
 function Profile() {
 	const [ref, isVisible] = useElementOnScreen({ rootMargin: "-60px" });
 	const { id } = useParams();
-
 	const { user } = useSelector((state) => state.user);
-	const { data = [] } = useGetUserQuery(id);
+	const { data = [], isFetching } = useGetUserQuery(id);
 	const location = useLocation();
 
 	return (
 		<>
-			<ProfileTopSection currentUser={id === user._id} element={ref} user={data} />
+			<ProfileTopSection
+				currentUser={id === user._id}
+				element={ref}
+				user={data}
+				loading={isFetching}
+			/>
 			<ProfileNavSection visible={isVisible} location={location} user={data} />
 			<ProfileBottomSection currentUser={id === user._id} id={id} user={data} />
 		</>
