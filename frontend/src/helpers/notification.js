@@ -10,3 +10,13 @@ export function errorNotification(error, id) {
 		radius: "md",
 	});
 }
+export function successNotification(message, id) {
+	showNotification({
+		id,
+		disallowClose: false,
+		title: "Success",
+		message,
+		icon: <i className='fa-solid fa-check' />,
+		radius: "md",
+	});
+}
