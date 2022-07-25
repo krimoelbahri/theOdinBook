@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
 	BottomSectionContainer,
@@ -7,9 +8,14 @@ import {
 } from "../../styles/profile";
 import { Post, CreatePost } from "../post components";
 import { useGetProfilePostsQuery } from "../../features/posts/post-api-query";
+import { errorNotification } from "../../helpers/notification";
+import Spinner from "../Spinner";
 
 function ProfileBottomSection({ currentUser, id, user }) {
-	const { data = [] } = useGetProfilePostsQuery(id);
+	const { data = [], isError, error, isFetching } = useGetProfilePostsQuery(id);
+	useEffect(() => {
+		if (isError) errorNotification(error, "p-p-Error");
+	}, [isError, error]);
 
 	return (
 		<BottomSectionContainer>
@@ -40,9 +46,15 @@ function ProfileBottomSection({ currentUser, id, user }) {
 				</ProfileLeftBar>
 				<ProfilePostsWrapper>
 					{currentUser && <CreatePost />}
-					{data.map((post, i) => (
-						<Post key={post._id} post={post} />
-					))}
+					{isFetching ? (
+						<Spinner />
+					) : (
+						<>
+							{data?.map((post) => (
+								<Post key={post._id} post={post} />
+							))}
+						</>
+					)}
 				</ProfilePostsWrapper>
 			</div>
 		</BottomSectionContainer>
