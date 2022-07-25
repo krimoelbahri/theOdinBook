@@ -1,12 +1,16 @@
 import { useRef } from "react";
 import { validateImgWidth } from "../../../helpers/validateImg";
 import { AddPhotoContainer, AddPhotoInput } from "../../../styles/Modals";
+import { errorNotification } from "../../../helpers/notification";
 
 function AddPhoto({ action, url, setUrl, setData }) {
 	const fileInput = useRef();
 
 	function handleFileInput() {
-		if (!url) fileInput.current.click();
+		if (!url) {
+			fileInput.current.click();
+			fileInput.current.value = null;
+		}
 	}
 
 	async function handleImage() {
@@ -17,17 +21,23 @@ function AddPhoto({ action, url, setUrl, setData }) {
 			selectedImage.type.split("/")[1] !== "jpeg" &&
 			selectedImage.type.split("/")[1] !== "jpg"
 		) {
-			//TODO: handle error if non-Image file was selected
+			//handle error if non-Image file was selected
+			errorNotification("This file is not supported", "Non-img");
 			return;
 		}
 		if (selectedImage.size > 1000000) {
-			console.log("file too big");
+			//handle error if file is too big
+			errorNotification(`file is too big, Should be less then 1MB`, "file-big");
 			return;
 		}
 		if (action === "cover") {
 			let test = await validateImgWidth(selectedImage);
 			if (!test) {
-				//TODO: handle cover image width & height errors
+				//handle cover image width & height errors
+				errorNotification(
+					"The image WIDTH/HEIGHT ratio should be between 2-3",
+					"img-ratio",
+				);
 				return;
 			}
 		}
@@ -46,7 +56,7 @@ function AddPhoto({ action, url, setUrl, setData }) {
 			)}
 			{url && <img src={url} alt={"holder"} />}
 			<input
-				onChange={handleImage}
+				onInput={handleImage}
 				type={"file"}
 				style={{ display: "none" }}
 				ref={fileInput}
