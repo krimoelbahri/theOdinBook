@@ -85,8 +85,9 @@ export const FriendsContainer = styled.div`
 `;
 export const ProfilePostsWrapper = styled.div`
 	width: 500px;
-	display: flex;
-	flex-direction: column;
+	//display: flex;
+	position: relative;
+	//flex-direction: column;
 	@media (max-width: 600px) {
 		width: 100%;
 	}
