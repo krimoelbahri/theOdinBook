@@ -4,7 +4,7 @@ import { useState } from "react";
 import { handlePPModal } from "../../../features/Modal/modalSlice";
 import { useDispatch } from "react-redux";
 
-function ProfileInfo({ currentUser, user }) {
+function ProfileInfo({ currentUser, user, loading }) {
 	const dispatch = useDispatch();
 	const [loaded, setloaded] = useState(false);
 
@@ -12,7 +12,7 @@ function ProfileInfo({ currentUser, user }) {
 		<div className='wrapper'>
 			<ProfilePicWrapper visible={loaded}>
 				<Skeleton
-					visible={!loaded}
+					visible={loading && !loaded}
 					height={170}
 					style={{ position: "absolute" }}
 					circle
@@ -26,7 +26,7 @@ function ProfileInfo({ currentUser, user }) {
 				)}
 			</ProfilePicWrapper>
 			<ProfileName>
-				<h1>{user?.name}</h1>
+				{loading ? <Skeleton height={20} width={100} visible /> : <h1>{user?.name}</h1>}
 			</ProfileName>
 			<ProfilButtons>
 				{currentUser && (
