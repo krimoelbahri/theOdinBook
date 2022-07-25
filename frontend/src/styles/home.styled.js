@@ -33,6 +33,7 @@ export const Container = styled.div`
 export const MainContainer = styled.div`
 	width: 450px;
 	min-height: 100%;
+	position: relative;
 `;
 /* LeftBar styling */
 export const LBContainer = styled(SideBarContainer)`
