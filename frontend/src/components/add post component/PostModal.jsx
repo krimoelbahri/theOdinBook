@@ -6,7 +6,7 @@ import ModalbottomSection from "./Modal subcomponents/ModalbottomSection";
 import ModalMediaSection from "./Modal subcomponents/ModalMediaSection";
 import ModalTopSection from "./Modal subcomponents/ModalTopSection";
 import { useAddPostMutation } from "../../features/posts/post-api-query";
-import { showNotification } from "@mantine/notifications";
+import { errorNotification, successNotification } from "../../helpers/notification";
 
 function PostModal() {
 	//using Redux
@@ -30,25 +30,10 @@ function PostModal() {
 
 		try {
 			await addPost(formData).unwrap();
-			showNotification({
-				id: "adding-post",
-				disallowClose: false,
-				title: "Post added",
-				message: "Post was succesfully added ",
-				icon: <i className='fa-solid fa-check' />,
-				radius: "md",
-			});
+			successNotification("Post was succesfully added ", "adding-post");
 			dispatch(handlePostModal(false));
 		} catch (error) {
-			showNotification({
-				id: "error-post",
-				disallowClose: false,
-				title: "ERROR",
-				message: error.data.message,
-				color: "red",
-				icon: <i className='fa-solid fa-xmark' />,
-				radius: "md",
-			});
+			errorNotification(error.data.message, "error-post");
 		}
 		setIsLoading(false);
 	}
