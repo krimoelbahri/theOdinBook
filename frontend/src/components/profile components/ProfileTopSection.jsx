@@ -18,10 +18,10 @@ function ProfileTopSection({ currentUser, element, user, loading }) {
 	return (
 		<TopSectionContainer ref={element}>
 			<CoverPicWrapper>
-				<CoverPic currentUser={currentUser} user={user} loading={loading} />
+				<CoverPic loading={loading} currentUser={currentUser} user={user} />
 			</CoverPicWrapper>
 			<ProfileInfoWrapper ref={targetRef}>
-				<ProfileInfo currentUser={currentUser} user={user} loading={loading} />
+				<ProfileInfo loading={loading} currentUser={currentUser} user={user} />
 			</ProfileInfoWrapper>
 			<LineWrapper>
 				<div></div>
