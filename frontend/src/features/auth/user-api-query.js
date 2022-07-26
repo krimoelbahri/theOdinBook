@@ -17,16 +17,49 @@ const baseQuery = fetchBaseQuery({
 export const userApi = createApi({
 	reducerPath: "userApi",
 	baseQuery,
-	tagTypes: ["User"],
+	tagTypes: ["Users", "currentUser"],
 	endpoints: (builder) => ({
 		getUsers: builder.query({
 			query: () => ({ url: `getUsers` }),
-			providesTags: ["User"],
+			providesTags: ["Users"],
 		}),
 		getUser: builder.query({
 			query: (id) => ({ url: `${id}` }),
-			providesTags: ["User"],
+			providesTags: ["Users"],
 		}),
+		getCurrentUser: builder.query({
+			query: () => ({ url: `` }),
+			providesTags: ["currentUser"],
+		}),
+		login: builder.mutation({
+			query: (data) => {
+				return {
+					url: "auth/local",
+					method: "POST",
+					body: data,
+				};
+			},
+			invalidatesTags: ["currentUser"],
+		}),
+		signup: builder.mutation({
+			query: (data) => {
+				return {
+					url: "signup",
+					method: "POST",
+					body: data,
+				};
+			},
+			invalidatesTags: ["currentUser"],
+		}),
+		logout: builder.mutation({
+			query: () => {
+				return {
+					url: "auth/logout",
+				};
+			},
+			invalidatesTags: ["currentUser"],
+		}),
+
 		updateUser: builder.mutation({
 			query: ({ id, ...rest }) => {
 				let formData = new FormData();
@@ -39,9 +72,17 @@ export const userApi = createApi({
 					headers: getConfig(),
 				};
 			},
-			invalidatesTags: ["User"],
+			invalidatesTags: ["Users"],
 		}),
 	}),
 });
 
-export const { useGetUserQuery, useGetUsersQuery, useUpdateUserMutation } = userApi;
+export const {
+	useGetUserQuery,
+	useGetUsersQuery,
+	useGetCurrentUserQuery,
+	useLoginMutation,
+	useSignupMutation,
+	useLogoutMutation,
+	useUpdateUserMutation,
+} = userApi;
