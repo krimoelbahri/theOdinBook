@@ -16,7 +16,7 @@ function PostReactions({ postComments, postLikes, postId, setShowComments }) {
 	async function handleLike() {
 		setIsLiked((state) => !state);
 		try {
-			await addLike({ author: user._id, id: postId }).unwrap();
+			await addLike({ author: user._id, id: postId, token: user.token }).unwrap();
 		} catch (error) {
 			setIsLiked(false);
 		}
