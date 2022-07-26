@@ -28,7 +28,7 @@ function ProfilePicModal() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		try {
-			await updateUser(data).unwrap();
+			await updateUser({ ...data, token: user.token }).unwrap();
 			dispatch(handlePPModal(false));
 		} catch (error) {
 			errorNotification(error.data.message, "profilePic-update");
