@@ -4,10 +4,11 @@ import { useSelector } from "react-redux";
 import { CoverPicModal, ProfilePicModal } from "../components/profile components";
 import { useScrollLock } from "@mantine/hooks";
 import { useEffect } from "react";
+import { useAuth } from "../App";
 
 function Modals() {
 	const { postModal, coverPicModal, profilePicModal } = useSelector((state) => state.modal);
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 	// eslint-disable-next-line no-unused-vars
 	const [scrollLocked, setScrollLocked] = useScrollLock();
 
