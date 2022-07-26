@@ -1,10 +1,11 @@
 import { CreatePostContainer } from "../../styles/home.styled";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { handlePostModal } from "../../features/Modal/modalSlice";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../App";
 
 function CreatePost() {
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 	const dispatch = useDispatch();
 	return (
 		<CreatePostContainer>
