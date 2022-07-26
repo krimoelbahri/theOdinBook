@@ -1,9 +1,9 @@
-import { useSelector } from "react-redux";
+import { useAuth } from "../../App";
 import { Container } from "../../styles/Header";
 import { SearchInput, Logo, Shortcuts, Setting } from "./subcomponents";
 
 function Header() {
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 	return (
 		<Container>
 			<Logo />
