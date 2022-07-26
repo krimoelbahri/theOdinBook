@@ -1,14 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
 let URL = "/api/user/";
-
-function getConfig() {
-	let user = JSON.parse(localStorage.getItem("user"));
-	const config = {
-		Authorization: `Bearer ${user?.token}`,
-	};
-	return config;
-}
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: URL,
@@ -59,9 +50,8 @@ export const userApi = createApi({
 			},
 			invalidatesTags: ["currentUser"],
 		}),
-
 		updateUser: builder.mutation({
-			query: ({ id, ...rest }) => {
+			query: ({ id, token, ...rest }) => {
 				let formData = new FormData();
 				formData.append("imgFile", rest.imgFile);
 				formData.append("action", rest.action);
@@ -69,7 +59,9 @@ export const userApi = createApi({
 					url: `${id}`,
 					method: "PUT",
 					body: formData,
-					headers: getConfig(),
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
 				};
 			},
 			invalidatesTags: ["Users"],
