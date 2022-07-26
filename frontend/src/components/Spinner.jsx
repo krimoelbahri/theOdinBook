@@ -1,11 +1,11 @@
 import React from "react";
 
-function Spinner() {
+function Spinner({ pos }) {
 	return (
 		<i
 			style={{
-				position: "absolute",
-				left: "50%",
+				position: pos ? pos : "absolute",
+				left: pos ? 0 : "50%",
 				fontSize: "xx-large",
 				color: "cornflowerblue",
 			}}
