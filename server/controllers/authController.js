@@ -43,7 +43,12 @@ exports.getUsers = asyncHandler(async function (req, res) {
 		throw new Error(error);
 	}
 });
-
+//Get current user
+exports.getCurrentUser = asyncHandler(async function (req, res) {
+	let user = req.user;
+	if (user) res.status(200).json(user);
+	res.status(200).json(null);
+});
 //Signup
 exports.signupUser = asyncHandler(async function (req, res) {
 	const { name, email, password, confirmPassword } = req.body;
