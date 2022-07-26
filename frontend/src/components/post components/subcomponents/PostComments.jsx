@@ -23,7 +23,7 @@ function PostComments({ author, postComments, postId }) {
 	async function handleDeleteComment(e) {
 		let data = { commentId: e.target.id, id: postId };
 		try {
-			await deleteComment(data).unwrap();
+			await deleteComment({ ...data, token: user.token }).unwrap();
 		} catch (error) {
 			errorNotification(error.data.message, "delete-comment");
 		}
@@ -42,7 +42,7 @@ function PostComments({ author, postComments, postId }) {
 		resetState();
 
 		try {
-			await addComent(data).unwrap();
+			await addComent({ ...data, token: user.token }).unwrap();
 		} catch (error) {
 			errorNotification(error.data.message, "add-comment");
 		}
