@@ -1,12 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 let URL = "/api/posts/";
-function getConfig() {
-	let user = JSON.parse(localStorage.getItem("user"));
-	const config = {
-		Authorization: `Bearer ${user?.token}`,
-	};
-	return config;
-}
+
 const baseQuery = fetchBaseQuery({
 	baseUrl: URL,
 });
@@ -47,45 +41,61 @@ export const postApi = createApi({
 			providesTags: ["Post"],
 		}),
 		addPost: builder.mutation({
-			query: (data) => ({
-				url: "",
-				method: "POST",
-				body: data,
-				headers: getConfig(),
-			}),
+			query: (data) => {
+				let formData = new FormData();
+				formData.append("imgFile", data.imgFile);
+				formData.append("description", data.description);
+				formData.append("author", data.author);
+				return {
+					url: "",
+					method: "POST",
+					body: formData,
+					headers: {
+						Authorization: `Bearer ${data.token}`,
+					},
+				};
+			},
 			invalidatesTags: [{ type: "Posts", id: "LIST" }],
 		}),
 		deletePost: builder.mutation({
-			query: (id) => ({
+			query: ({ id, token }) => ({
 				url: `${id}`,
 				method: "DELETE",
-				headers: getConfig(),
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			}),
 			invalidatesTags: [{ type: "Posts", id: "LIST" }],
 		}),
 		addComment: builder.mutation({
-			query: ({ id, ...data }) => ({
+			query: ({ id, token, ...data }) => ({
 				url: `${id}/comment`,
 				method: "POST",
 				body: data,
-				headers: getConfig(),
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			}),
 			invalidatesTags: (result, error, { id }) => [{ type: "Posts", id }],
 		}),
 		deleteComment: builder.mutation({
-			query: ({ id, commentId }) => ({
+			query: ({ id, commentId, token }) => ({
 				url: `${id}/comment/${commentId}`,
 				method: "DELETE",
-				headers: getConfig(),
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			}),
 			invalidatesTags: (result, error, { id }) => [{ type: "Posts", id }],
 		}),
 		addLike: builder.mutation({
-			query: ({ id, ...data }) => ({
+			query: ({ id, token, ...data }) => ({
 				url: `${id}/like`,
 				method: "POST",
 				body: data,
-				headers: getConfig(),
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			}),
 			invalidatesTags: (result, error, { id }) => [{ type: "Posts", id }],
 		}),
