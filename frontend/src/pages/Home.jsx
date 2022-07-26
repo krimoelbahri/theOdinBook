@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux";
+import { useAuth } from "../App";
 import { LeftBar, RightBar, Main } from "../components/home components";
 import { Container } from "../styles/home.styled";
 const Home = () => {
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 
 	return (
 		<Container>
