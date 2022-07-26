@@ -9,14 +9,14 @@ import {
 
 function PostReactions({ postComments, postLikes, postId, setShowComments }) {
 	const [addLike] = useAddLikeMutation();
-	const { user } = useAuth();
+	const { user, token } = useAuth();
 
 	const [isLiked, setIsLiked] = useState(false);
 
 	async function handleLike() {
 		setIsLiked((state) => !state);
 		try {
-			await addLike({ author: user._id, id: postId, token: user.token }).unwrap();
+			await addLike({ author: user._id, id: postId, token }).unwrap();
 		} catch (error) {
 			setIsLiked(false);
 		}

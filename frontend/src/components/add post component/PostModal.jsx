@@ -12,7 +12,7 @@ import { useAuth } from "../../App";
 function PostModal() {
 	//using Redux
 	const dispatch = useDispatch();
-	const { user } = useAuth();
+	const { user, token } = useAuth();
 	const [addPost] = useAddPostMutation();
 
 	//useState state handeling post data
@@ -23,11 +23,9 @@ function PostModal() {
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-
 		setIsLoading(true);
-
 		try {
-			await addPost({ ..._formData, token: user.token }).unwrap();
+			await addPost({ ..._formData, token }).unwrap();
 			successNotification("Post was succesfully added ", "adding-post");
 			dispatch(handlePostModal(false));
 		} catch (error) {

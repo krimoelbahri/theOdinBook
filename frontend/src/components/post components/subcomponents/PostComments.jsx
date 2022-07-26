@@ -11,7 +11,7 @@ function PostComments({ author, postComments, postId }) {
 	const [addComent] = useAddCommentMutation();
 	const [deleteComment] = useDeleteCommentMutation();
 
-	const { user } = useAuth();
+	const { user, token } = useAuth();
 	const [data, setData] = useState({ text: "", author: user._id, id: postId });
 
 	const textArea = useRef();
@@ -23,7 +23,7 @@ function PostComments({ author, postComments, postId }) {
 	async function handleDeleteComment(e) {
 		let data = { commentId: e.target.id, id: postId };
 		try {
-			await deleteComment({ ...data, token: user.token }).unwrap();
+			await deleteComment({ ...data, token }).unwrap();
 		} catch (error) {
 			errorNotification(error.data.message, "delete-comment");
 		}
@@ -42,7 +42,7 @@ function PostComments({ author, postComments, postId }) {
 		resetState();
 
 		try {
-			await addComent({ ...data, token: user.token }).unwrap();
+			await addComent({ ...data, token }).unwrap();
 		} catch (error) {
 			errorNotification(error.data.message, "add-comment");
 		}

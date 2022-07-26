@@ -19,7 +19,7 @@ function ProfilePicModal() {
 	//using Redux
 	const [updateUser, updateUserResult] = useUpdateUserMutation();
 	const dispatch = useDispatch();
-	const { user } = useAuth();
+	const { user, token } = useAuth();
 
 	//useState state handeling post data
 	const [url, setUrl] = useState(null);
@@ -28,7 +28,7 @@ function ProfilePicModal() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		try {
-			await updateUser({ ...data, token: user.token }).unwrap();
+			await updateUser({ ...data, token }).unwrap();
 			dispatch(handlePPModal(false));
 		} catch (error) {
 			errorNotification(error.data.message, "profilePic-update");

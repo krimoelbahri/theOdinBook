@@ -9,7 +9,7 @@ import { errorNotification } from "../../../helpers/notification";
 function PostHeader({ author, date, postId }) {
 	const DD = useClickOutside(() => setIsActive(false));
 
-	const { user } = useAuth();
+	const { user, token } = useAuth();
 	const [deletePost] = useDeletePostMutation();
 
 	const [isActive, setIsActive] = useState(false);
@@ -18,7 +18,7 @@ function PostHeader({ author, date, postId }) {
 	async function handleDeletePost() {
 		setIsDeleting(true);
 		try {
-			await deletePost({ id: postId, token: user.token });
+			await deletePost({ id: postId, token });
 		} catch (error) {
 			errorNotification(error.data.message, "delete-post");
 		}
