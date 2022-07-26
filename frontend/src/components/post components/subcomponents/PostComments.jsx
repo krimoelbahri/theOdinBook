@@ -4,7 +4,7 @@ import {
 	useAddCommentMutation,
 	useDeleteCommentMutation,
 } from "../../../features/posts/post-api-query";
-
+import { errorNotification } from "../../../helpers/notification";
 import { PostCommentsContainer, AddCommentsDiv, CommentsDiv } from "../../../styles/Post.styled";
 
 function PostComments({ author, postComments, postId }) {
@@ -25,7 +25,7 @@ function PostComments({ author, postComments, postId }) {
 		try {
 			await deleteComment(data).unwrap();
 		} catch (error) {
-			console.log(error);
+			errorNotification(error.data.message, "delete-comment");
 		}
 	}
 
@@ -43,8 +43,8 @@ function PostComments({ author, postComments, postId }) {
 
 		try {
 			await addComent(data).unwrap();
-		} catch (err) {
-			console.error(err);
+		} catch (error) {
+			errorNotification(error.data.message, "add-comment");
 		}
 	}
 
