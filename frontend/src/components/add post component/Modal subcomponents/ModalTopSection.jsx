@@ -1,10 +1,11 @@
 import { ModalHeader, ModalProfileDiv } from "../../../styles/Modals";
 import { handlePostModal } from "../../../features/Modal/modalSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useAuth } from "../../../App";
 
 function ModalTopSection() {
 	const dispatch = useDispatch();
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 
 	return (
 		<div className='top-section'>
