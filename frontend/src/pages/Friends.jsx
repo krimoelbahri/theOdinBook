@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Card, RequestCard } from "../components/friends components";
 import { Container, FriendsHeader, FriendsCardsContainer } from "../styles/friends";
-import { useSelector } from "react-redux";
 import { useGetUsersQuery } from "../features/auth/user-api-query";
+import { useAuth } from "../App";
+
 function Friends() {
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 	const { data = [] } = useGetUsersQuery();
 
 	const [page, setPage] = useState("suggestions");
