@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { PostHeaderContainer, PostHeaderDD, ProfileDiv } from "../../../styles/Post.styled";
 import { useDeletePostMutation } from "../../../features/posts/post-api-query";
 import { useAuth } from "../../../App";
+import { errorNotification } from "../../../helpers/notification";
+
 function PostHeader({ author, date, postId }) {
 	const DD = useClickOutside(() => setIsActive(false));
 
@@ -18,7 +20,7 @@ function PostHeader({ author, date, postId }) {
 		try {
 			await deletePost(postId);
 		} catch (error) {
-			console.log(error);
+			errorNotification(error.data.message, "delete-post");
 		}
 	}
 
