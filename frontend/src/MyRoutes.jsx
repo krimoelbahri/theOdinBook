@@ -1,10 +1,9 @@
-import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from "./App";
 import { HeaderLayout, Home, Friends, Watch, Profile, Signin, Signup } from "./pages";
 
-function MyRoutes({ children }) {
-	const { user } = useSelector((state) => state.user);
-
+function MyRoutes() {
+	const { user } = useAuth();
 	return (
 		<Routes>
 			<Route path='/' element={<HeaderLayout />}>
