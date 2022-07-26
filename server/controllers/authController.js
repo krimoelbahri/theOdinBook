@@ -43,12 +43,26 @@ exports.getUsers = asyncHandler(async function (req, res) {
 		throw new Error(error);
 	}
 });
+
 //Get current user
 exports.getCurrentUser = asyncHandler(async function (req, res) {
-	let user = req.user;
-	if (user) res.status(200).json(user);
-	res.status(200).json(null);
+	let id = req.user?._id;
+	if (!id) res.status(200).json(null);
+	try {
+		const user = await User.findById(id, "name profilePic coverPic friends friendRequests")
+			.select("-password")
+			.populate([
+				{ path: "friends", model: "User", select: "name profilePic" },
+				{ path: "friendRequests", model: "User", select: "name profilePic" },
+			]);
+		let token = generateToken(user?._id);
+		res.status(200).json({ user, token });
+	} catch (error) {
+		res.status(400);
+		throw new Error(error);
+	}
 });
+
 //Signup
 exports.signupUser = asyncHandler(async function (req, res) {
 	const { name, email, password, confirmPassword } = req.body;
@@ -82,19 +96,12 @@ exports.signupUser = asyncHandler(async function (req, res) {
 	});
 
 	if (user) {
-		await user.populate([
-			{ path: "friends", model: "User", select: "name profilePic" },
-			{ path: "friendRequests", model: "User", select: "name profilePic" },
-		]);
-		res.status(201).json({
-			_id: user.id,
-			name: user.name,
-			email: user.email,
-			profilePic: user.profilePic,
-			coverPic: user.coverPic,
-			friends: user.friends,
-			friendRequests: user.friendRequests,
-			token: generateToken(user.id),
+		req.logIn(user, (err) => {
+			if (err) {
+				res.status(400);
+				throw new Error("login error");
+			}
+			res.status(201).json(user);
 		});
 	} else {
 		res.status(400);
@@ -102,7 +109,7 @@ exports.signupUser = asyncHandler(async function (req, res) {
 	}
 });
 
-exports.localSigninUser = function (req, res, next) {
+exports.localSigninUser = asyncHandler(async function (req, res, next) {
 	passport.authenticate("local", function (err, user, info) {
 		if (err) {
 			res.status(400);
@@ -117,19 +124,10 @@ exports.localSigninUser = function (req, res, next) {
 				res.status(400);
 				return next(Error(loginErr));
 			}
-			res.json({
-				_id: user.id,
-				name: user.name,
-				email: user.email,
-				profilePic: user.profilePic,
-				coverPic: user.coverPic,
-				friends: user.friends,
-				friendRequests: user.friendRequests,
-				token: generateToken(req.user.id),
-			});
+			res.json(user);
 		});
 	})(req, res, next);
-};
+});
 
 //facebook signin logic
 exports.facebookSigninUser = passport.authenticate("facebook");
