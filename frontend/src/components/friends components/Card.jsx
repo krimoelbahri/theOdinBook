@@ -2,6 +2,7 @@ import { CardContainer, CardButton } from "../../styles/friends";
 import { friendRequest } from "../../features/auth/userSlice";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import { errorNotification } from "../../helpers/notification";
 
 export default function Card({ user, currentuser, setUsers }) {
 	const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export default function Card({ user, currentuser, setUsers }) {
 			setCardUser(updatedUser);
 			setLoading(false);
 		} catch (error) {
-			console.log(error);
+			errorNotification(error.data.message, "card-error");
 			setLoading(false);
 		}
 	}
