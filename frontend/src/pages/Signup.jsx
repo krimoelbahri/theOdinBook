@@ -1,21 +1,24 @@
-import { signup, reset, facebookSignin } from "../features/auth/userSlice";
-import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Container, Form, FacebookButton } from "../styles/signin.signup.styled";
+import { useAuth } from "../App";
+import { useSignupMutation } from "../features/auth/user-api-query";
 
 const Signup = () => {
 	const [userData, setUserData] = useState({});
-	let { user, isLoading, isError, isDone, message } = useSelector((state) => state.user);
-	const dispatch = useDispatch();
+	const [signup, { isError, isLoading, isSuccess, error }] = useSignupMutation();
+	const { user } = useAuth();
 	const navigate = useNavigate();
-	const handleSubmit = (e) => {
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(signup(userData));
+		await signup(userData).unwrap();
 	};
+
 	const handleFacebooklogin = () => {
 		//dispatch(facebookSignin());
 	};
+
 	const handleData = (e) => {
 		setUserData({
 			...userData,
@@ -23,12 +26,10 @@ const Signup = () => {
 		});
 	};
 	useEffect(() => {
-		if (user || isDone) {
+		if (user || isSuccess) {
 			navigate("/");
 		}
-
-		dispatch(reset());
-	}, [user, isDone, dispatch, navigate]);
+	}, [user, isSuccess, navigate]);
 
 	return (
 		<Container>
@@ -54,7 +55,7 @@ const Signup = () => {
 				</p>
 			</Form>
 			<FacebookButton onClick={handleFacebooklogin}>Sign In with Facebook</FacebookButton>
-			<p>{isError && message}</p>
+			<p>{isError && error.data.message}</p>
 		</Container>
 	);
 };
