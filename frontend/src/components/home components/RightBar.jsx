@@ -11,10 +11,10 @@ function RightBar({ friends }) {
 			</div>
 
 			<ProfilesContainer>
-				{friends.map((friend) => (
-					<Link key={`friend${friend._id}`} to={`/${friend._id}`}>
+				{friends?.map((friend) => (
+					<Link key={`friend${friend?._id}`} to={`/${friend?._id}`}>
 						<ProfileWrapper>
-							<img src={friend.profilePic.url} alt='friend' />
+							<img src={friend?.profilePic?.url} alt='friend' />
 							<p>{friend.name}</p>
 						</ProfileWrapper>
 					</Link>
