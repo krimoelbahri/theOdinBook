@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useAuth } from "../../../App";
 import isRTL from "../../../helpers/isRTL";
 import {
 	ModalMediaSectionContainer,
@@ -14,7 +14,7 @@ function ModalMediaSection({ media, setMedia, url, setUrl, setData }) {
 	const textArea = useRef();
 	const [placeHolder, setPlaceHolder] = useState(true);
 	const [rtl, setRtl] = useState("");
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 
 	function handleChange(e) {
 		if (e.target.innerText === "") {
