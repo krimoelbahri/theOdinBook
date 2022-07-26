@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ModalContainer, Loader } from "../../styles/Modals";
 import { handlePostModal } from "../../features/Modal/modalSlice";
 import ModalbottomSection from "./Modal subcomponents/ModalbottomSection";
@@ -7,11 +7,12 @@ import ModalMediaSection from "./Modal subcomponents/ModalMediaSection";
 import ModalTopSection from "./Modal subcomponents/ModalTopSection";
 import { useAddPostMutation } from "../../features/posts/post-api-query";
 import { errorNotification, successNotification } from "../../helpers/notification";
+import { useAuth } from "../../App";
 
 function PostModal() {
 	//using Redux
 	const dispatch = useDispatch();
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 	const [addPost, addPostResult] = useAddPostMutation();
 
 	//useState state handeling post data
