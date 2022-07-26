@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ModalContainer, Loader } from "../../styles/Modals";
 import { handlePostModal } from "../../features/Modal/modalSlice";
@@ -13,7 +13,7 @@ function PostModal() {
 	//using Redux
 	const dispatch = useDispatch();
 	const { user } = useAuth();
-	const [addPost, addPostResult] = useAddPostMutation();
+	const [addPost] = useAddPostMutation();
 
 	//useState state handeling post data
 	const [media, setMedia] = useState(false);
@@ -38,10 +38,6 @@ function PostModal() {
 		}
 		setIsLoading(false);
 	}
-
-	useEffect(() => {
-		//console.log(addPostResult);
-	}, [addPostResult]);
 
 	return (
 		<ModalContainer onSubmit={handleSubmit}>
