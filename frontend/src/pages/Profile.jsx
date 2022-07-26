@@ -12,19 +12,24 @@ function Profile() {
 	const [ref, isVisible] = useElementOnScreen({ rootMargin: "-60px" });
 	const { id } = useParams();
 	const { user } = useSelector((state) => state.user);
-	const { data = [], isFetching } = useGetUserQuery(id);
+	const { currentData, isFetching } = useGetUserQuery(id);
 	const location = useLocation();
 
 	return (
 		<>
 			<ProfileTopSection
+				loading={isFetching}
 				currentUser={id === user._id}
 				element={ref}
-				user={data}
-				loading={isFetching}
+				user={currentData}
 			/>
-			<ProfileNavSection visible={isVisible} location={location} user={data} />
-			<ProfileBottomSection currentUser={id === user._id} id={id} user={data} />
+			<ProfileNavSection visible={isVisible} location={location} user={currentData} />
+			<ProfileBottomSection
+				loading={isFetching}
+				currentUser={id === user._id}
+				id={id}
+				user={currentData}
+			/>
 		</>
 	);
 }
