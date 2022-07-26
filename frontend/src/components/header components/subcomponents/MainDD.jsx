@@ -1,6 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../../features/auth/userSlice";
+import { useAuth } from "../../../App";
+import { useLogoutMutation } from "../../../features/auth/user-api-query";
 import { handleSettingDD, handleSettingDDContent } from "../../../features/dropDown/dropDownSlice";
 import {
 	ProfileDiv,
@@ -11,7 +12,8 @@ import {
 function MainDD() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { user } = useSelector((state) => state.user);
+	const [logout] = useLogoutMutation();
+	const { user } = useAuth();
 
 	return (
 		<>
@@ -55,9 +57,9 @@ function MainDD() {
 				</div>
 				<div
 					className='hv fr-sb'
-					onClick={() => {
+					onClick={async () => {
 						dispatch(handleSettingDD(false));
-						dispatch(logout());
+						await logout().unwrap();
 					}}
 				>
 					<div className='fr-sb'>
