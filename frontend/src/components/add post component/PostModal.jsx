@@ -23,14 +23,11 @@ function PostModal() {
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		let formData = new FormData();
-		formData.append("imgFile", _formData.imgFile);
-		formData.append("description", _formData.description);
-		formData.append("author", _formData.author);
+
 		setIsLoading(true);
 
 		try {
-			await addPost(formData).unwrap();
+			await addPost({ ..._formData, token: user.token }).unwrap();
 			successNotification("Post was succesfully added ", "adding-post");
 			dispatch(handlePostModal(false));
 		} catch (error) {
