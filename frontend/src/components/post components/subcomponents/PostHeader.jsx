@@ -18,7 +18,7 @@ function PostHeader({ author, date, postId }) {
 	async function handleDeletePost() {
 		setIsDeleting(true);
 		try {
-			await deletePost(postId);
+			await deletePost({ id: postId, token: user.token });
 		} catch (error) {
 			errorNotification(error.data.message, "delete-post");
 		}
