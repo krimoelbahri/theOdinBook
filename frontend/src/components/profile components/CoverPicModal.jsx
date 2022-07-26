@@ -28,7 +28,7 @@ function CoverPicModal() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		try {
-			await updateUser(data).unwrap();
+			await updateUser({ ...data, token: user.token }).unwrap();
 			dispatch(handleCPModal(false));
 		} catch (error) {
 			errorNotification(error.data.message, "coverPic-update");
