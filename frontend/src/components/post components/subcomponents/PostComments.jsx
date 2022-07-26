@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useAuth } from "../../../App";
 import {
 	useAddCommentMutation,
 	useDeleteCommentMutation,
@@ -11,7 +11,7 @@ function PostComments({ author, postComments, postId }) {
 	const [addComent] = useAddCommentMutation();
 	const [deleteComment] = useDeleteCommentMutation();
 
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 	const [data, setData] = useState({ text: "", author: user._id, id: postId });
 
 	const textArea = useRef();
