@@ -13,6 +13,7 @@ import { handleCPModal } from "../../features/Modal/modalSlice";
 import AddPhoto from "../add post component/Modal subcomponents/AddPhoto";
 import { useUpdateUserMutation } from "../../features/auth/user-api-query";
 import { useAuth } from "../../App";
+import { errorNotification } from "../../helpers/notification";
 
 function CoverPicModal() {
 	//using Redux
@@ -30,7 +31,7 @@ function CoverPicModal() {
 			await updateUser(data).unwrap();
 			dispatch(handleCPModal(false));
 		} catch (error) {
-			console.log(error);
+			errorNotification(error.data.message, "coverPic-update");
 		}
 	}
 
