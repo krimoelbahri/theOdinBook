@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useClickOutside } from "@mantine/hooks";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { PostHeaderContainer, PostHeaderDD, ProfileDiv } from "../../../styles/Post.styled";
 import { useDeletePostMutation } from "../../../features/posts/post-api-query";
+import { useAuth } from "../../../App";
 function PostHeader({ author, date, postId }) {
 	const DD = useClickOutside(() => setIsActive(false));
 
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 	const [deletePost] = useDeletePostMutation();
 
 	const [isActive, setIsActive] = useState(false);
