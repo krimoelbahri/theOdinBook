@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import {
 	ProfileTopSection,
@@ -7,11 +6,12 @@ import {
 } from "../components/profile components";
 import { useElementOnScreen } from "../hooks/intersectionObserver";
 import { useGetUserQuery } from "../features/auth/user-api-query";
+import { useAuth } from "../App";
 
 function Profile() {
 	const [ref, isVisible] = useElementOnScreen({ rootMargin: "-60px" });
 	const { id } = useParams();
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 	const { currentData, isFetching } = useGetUserQuery(id);
 	const location = useLocation();
 
