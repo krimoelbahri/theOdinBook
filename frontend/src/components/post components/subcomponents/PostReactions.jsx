@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useAuth } from "../../../App";
 import { useAddLikeMutation } from "../../../features/posts/post-api-query";
 import {
 	PostReactionContainer,
@@ -9,7 +9,7 @@ import {
 
 function PostReactions({ postComments, postLikes, postId, setShowComments }) {
 	const [addLike] = useAddLikeMutation();
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 
 	const [isLiked, setIsLiked] = useState(false);
 
