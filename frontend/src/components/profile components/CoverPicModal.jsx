@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
 	ModalContainer,
 	ModalBottomSectionContainer,
@@ -12,12 +12,13 @@ import {
 import { handleCPModal } from "../../features/Modal/modalSlice";
 import AddPhoto from "../add post component/Modal subcomponents/AddPhoto";
 import { useUpdateUserMutation } from "../../features/auth/user-api-query";
+import { useAuth } from "../../App";
 
 function CoverPicModal() {
 	//using Redux
 	const [updateUser, updateUserResult] = useUpdateUserMutation();
 	const dispatch = useDispatch();
-	const { user } = useSelector((state) => state.user);
+	const { user } = useAuth();
 
 	//useState state handeling post data
 	const [url, setUrl] = useState(null);
