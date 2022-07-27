@@ -7,14 +7,18 @@ import {
 import { useElementOnScreen } from "../hooks/intersectionObserver";
 import { useGetUserQuery } from "../features/auth/user-api-query";
 import { useAuth } from "../App";
+import Spinner from "../components/Spinner";
+import { NoUserFound } from "./NotFound";
 
 function Profile() {
 	const [ref, isVisible] = useElementOnScreen({ rootMargin: "-60px" });
 	const { id } = useParams();
 	const { user } = useAuth();
-	const { currentData, isFetching } = useGetUserQuery(id);
+	const { currentData = [], isLoading, isFetching, isError } = useGetUserQuery(id);
 	const location = useLocation();
 
+	if (isError) return <NoUserFound />;
+	if (isLoading) return <Spinner />;
 	return (
 		<>
 			<ProfileTopSection loading={isFetching} element={ref} user={currentData} />
