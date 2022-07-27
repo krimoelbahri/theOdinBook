@@ -49,7 +49,7 @@ export const SearchContainer = styled.div`
 	}
 	input {
 		background-color: ${({ theme }) => theme.searchBGC};
-		width: ${({ iconOpacity }) => (iconOpacity ? "200px" : "210px")};
+		width: ${({ iconOpacity }) => (iconOpacity ? "180px" : "210px")};
 		height: 90%;
 		border: none;
 		outline: none;

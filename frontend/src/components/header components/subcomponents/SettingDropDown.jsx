@@ -10,7 +10,7 @@ function SettingDropDown() {
 	const [height, setHeight] = useState("250px");
 	useEffect(() => {
 		if (settingsDDContent === "main") setHeight("250px");
-		if (settingsDDContent === "display") setHeight("300px");
+		if (settingsDDContent === "display") setHeight("200px");
 		if (settingsDDContent === "setting") setHeight("350px");
 	}, [settingsDDContent]);
 

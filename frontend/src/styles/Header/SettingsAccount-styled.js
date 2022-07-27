@@ -39,6 +39,7 @@ export const SettingsDropDownContainer = styled.div`
 	margin-top: -5px;
 	border-radius: 10px;
 	background-color: ${({ theme }) => theme.cardsBGC};
+	box-shadow: ${({ theme }) => theme.mainBS};
 	display: flex;
 	flex-direction: column;
 	transition: height 200ms;
@@ -119,7 +120,7 @@ export const IconContainer = styled.div`
 export const DisplayDDHeader = styled.div`
 	width: 100%;
 	padding-right: 35px;
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -130,7 +131,7 @@ export const DisplayDDHeader = styled.div`
 `;
 export const DisplayDiv = styled.div`
 	width: 100%;
-	min-height: 150px;
+	min-height: 120px;
 	padding-left: 10px;
 	display: flex;
 	flex-direction: row;
@@ -153,7 +154,7 @@ export const DisplayDiv = styled.div`
 	}
 	.toggle {
 		width: 100%;
-		height: 40px;
+		height: 30px;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;

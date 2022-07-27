@@ -64,7 +64,33 @@ export const userApi = createApi({
 					},
 				};
 			},
+			invalidatesTags: ["Users", "currentUser"],
+		}),
+		friendRequest: builder.mutation({
+			query: ({ token, ...data }) => {
+				return {
+					url: "friend-request",
+					method: "PUT",
+					body: data,
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				};
+			},
 			invalidatesTags: ["Users"],
+		}),
+		friendRequestreply: builder.mutation({
+			query: ({ token, ...data }) => {
+				return {
+					url: "friend-request-reply",
+					method: "PUT",
+					body: data,
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				};
+			},
+			invalidatesTags: ["Users", "currentUser"],
 		}),
 	}),
 });
@@ -77,4 +103,6 @@ export const {
 	useSignupMutation,
 	useLogoutMutation,
 	useUpdateUserMutation,
+	useFriendRequestMutation,
+	useFriendRequestreplyMutation,
 } = userApi;

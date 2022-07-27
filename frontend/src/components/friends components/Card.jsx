@@ -1,71 +1,68 @@
 import { CardContainer, CardButton } from "../../styles/friends";
-import { friendRequest } from "../../features/auth/userSlice";
-import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { errorNotification } from "../../helpers/notification";
+import { useFriendRequestMutation } from "../../features/auth/user-api-query";
 
-export default function Card({ user, currentuser, setUsers }) {
-	const dispatch = useDispatch();
-
-	const [cardUser, setCardUser] = useState(user);
+export default function Card({ user, currentuser, token }) {
 	const [requested, setRequested] = useState(false);
-	const [loading, setLoading] = useState(true);
-
-	function handleRemoveCard() {
-		setUsers((state) => state.filter((cardUser) => cardUser._id !== user._id));
-	}
+	const [requestFriend, { isLoading }] = useFriendRequestMutation();
+	function handleRemoveCard() {}
 
 	async function handleFriendRequest(id, action) {
 		try {
-			setLoading(true);
-			let updatedUser = await dispatch(
-				friendRequest({ author: currentuser._id, friend: id, action }),
-			).unwrap();
-			setCardUser(updatedUser);
-			setLoading(false);
+			await requestFriend({ author: currentuser._id, friend: id, action, token }).unwrap();
 		} catch (error) {
 			errorNotification(error.data.message, "card-error");
-			setLoading(false);
 		}
 	}
 
 	useEffect(() => {
-		if (cardUser.friendRequests?.every((friend) => friend._id !== currentuser._id)) {
+		if (user.friendRequests?.every((friend) => friend._id !== currentuser._id)) {
 			setRequested(false);
 		} else {
 			setRequested(true);
 		}
-		setLoading(false);
-	}, [currentuser, cardUser]);
+	}, [currentuser, user]);
 
 	return (
 		<CardContainer>
-			<img src={cardUser?.profilePic.url} alt='Ball' className='m-b-10' />
-			<h2 className='m-b-10'>{cardUser?.name}</h2>
-			{!requested && !loading && (
+			<img src={user?.profilePic.url} alt='Ball' className='m-b-10' />
+			<h2 className='m-b-10'>{user?.name}</h2>
+			{!isLoading && (
 				<>
-					<CardButton
-						onClick={() => handleFriendRequest(cardUser._id, "request")}
-						className='m-b-10'
-						fontColor={"#1877F2"}
-						bgColor={"#E7F3FF"}
-					>
-						Add friend
-					</CardButton>
-					<CardButton className='m-b-10' onClick={handleRemoveCard}>
-						Remove
-					</CardButton>
+					{!requested && (
+						<>
+							<CardButton
+								onClick={() => {
+									handleFriendRequest(user._id, "request");
+									setRequested(true);
+								}}
+								className='m-b-10'
+								fontColor={"#1877F2"}
+								bgColor={"#E7F3FF"}
+							>
+								Add friend
+							</CardButton>
+							<CardButton className='m-b-10' onClick={handleRemoveCard}>
+								Remove
+							</CardButton>
+						</>
+					)}
+					{requested && (
+						<CardButton
+							className='m-b-10'
+							onClick={() => {
+								handleFriendRequest(user._id, "cancel");
+								setRequested(false);
+							}}
+						>
+							Cancel
+						</CardButton>
+					)}
 				</>
 			)}
-			{requested && !loading && (
-				<CardButton
-					className='m-b-10'
-					onClick={() => handleFriendRequest(cardUser._id, "cancel")}
-				>
-					Cancel
-				</CardButton>
-			)}
-			{loading && (
+
+			{isLoading && (
 				<CardButton>
 					<i className='fa-solid fa-spinner fa-spin-pulse'></i>
 				</CardButton>

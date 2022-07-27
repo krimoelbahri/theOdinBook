@@ -33,7 +33,9 @@ function MainDD() {
 			<SettingsDiv>
 				<div
 					className='hv fr-sb'
-					onClick={() => dispatch(handleSettingDDContent("setting"))}
+					onClick={() => {
+						/*TODO: handle settings DD */
+					}}
 				>
 					<div className='fr-sb'>
 						<IconContainer>

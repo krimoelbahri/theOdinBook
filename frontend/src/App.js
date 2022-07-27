@@ -3,7 +3,7 @@ import Modals from "./pages/Modals";
 import GlobalFonts from "./fonts/fonts";
 import MyRoutes from "./MyRoutes";
 import { useGetCurrentUserQuery } from "./features/auth/user-api-query";
-import Spinner from "./components/Spinner";
+import { Loading } from "./components/Spinner";
 
 const AuthContext = React.createContext();
 export function useAuth() {
@@ -12,9 +12,15 @@ export function useAuth() {
 
 function App() {
 	const { currentData, isFetching } = useGetCurrentUserQuery();
-	if (isFetching && !currentData) return <Spinner />;
+	if (isFetching && !currentData) return <Loading />;
 	return (
-		<AuthContext.Provider value={{ user: currentData?.user, token: currentData?.token }}>
+		<AuthContext.Provider
+			value={{
+				user: currentData?.user,
+				token: currentData?.token,
+				currentUserFetching: isFetching,
+			}}
+		>
 			<MyRoutes />
 			<Modals />
 			<GlobalFonts />

@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 // Generate JWT
 const generateToken = (id) => {
 	return jwt.sign({ id }, process.env.JWT_SECRET, {
-		expiresIn: "30d",
+		expiresIn: "1d",
 	});
 };
 
@@ -219,6 +219,10 @@ exports.friendRequestReply = asyncHandler(async function (req, res) {
 			user.friends.push(friend);
 			_friend.friends.push(author);
 			user.friendRequests.splice(user.friendRequests.indexOf(friend), 1);
+		}
+		if (action === "remove") {
+			user.friends.splice(user.friends.indexOf(friend), 1);
+			_friend.friends.splice(user.friends.indexOf(author), 1);
 		}
 
 		if (action === "deny") {

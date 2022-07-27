@@ -17,12 +17,7 @@ function Profile() {
 
 	return (
 		<>
-			<ProfileTopSection
-				loading={isFetching}
-				currentUser={id === user._id}
-				element={ref}
-				user={currentData}
-			/>
+			<ProfileTopSection loading={isFetching} element={ref} user={currentData} />
 			<ProfileNavSection visible={isVisible} location={location} user={currentData} />
 			<ProfileBottomSection
 				loading={isFetching}

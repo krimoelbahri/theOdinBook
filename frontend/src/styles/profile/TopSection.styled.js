@@ -113,14 +113,14 @@ export const ProfileName = styled.div`
 export const ProfilButtons = styled.div`
 	height: 100%;
 	width: auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: row;
 	flex-grow: 1;
 	position: relative;
 	button {
-		width: 120px;
 		height: 30px;
-		position: absolute;
-		bottom: 30%;
-		right: 5%;
 		padding: 0px 10px;
 		border-radius: 5px;
 		border: none;
@@ -130,6 +130,9 @@ export const ProfilButtons = styled.div`
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+	}
+	i {
+		margin-right: 10px;
 	}
 `;
 export const LineWrapper = styled.div`

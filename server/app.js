@@ -1,9 +1,11 @@
 const express = require("express");
 const session = require("express-session");
+const path = require("path");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
+
 const { errorHandler } = require("./middleware/errorMiddleware");
 const { Local, Facebook } = require("./middleware/passport");
 const authRouter = require("./routes/authRoute");
@@ -41,6 +43,17 @@ app.use(cookieParser());
 //Using routes
 app.use("/api/posts", postsRouter);
 app.use("/api/user", authRouter);
+
+//serve frontend
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+	app.get("*", (req, res) =>
+		res.sendFile(path.resolve(__dirname, "../", "frontend", "build", "index.html")),
+	);
+} else {
+	app.get("/", (req, res) => res.send("Please set to production"));
+}
 
 app.use(errorHandler);
 app.listen(port, () => console.log(`Server Listening on port ${port}`));

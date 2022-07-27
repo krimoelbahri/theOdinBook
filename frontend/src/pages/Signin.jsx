@@ -3,16 +3,20 @@ import { useNavigate, Link } from "react-router-dom";
 import { Container, Form, FacebookButton } from "../styles/signin.signup.styled";
 import { useLoginMutation } from "../features/auth/user-api-query";
 import { useAuth } from "../App";
+import { errorNotification } from "../helpers/notification";
 
 const Signin = () => {
 	const [userData, setUserData] = useState({});
-	const [login, { isError, isLoading, isSuccess, error }] = useLoginMutation();
+	const [login, { isLoading, isSuccess }] = useLoginMutation();
 	const { user } = useAuth();
 	const navigate = useNavigate();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await login(userData).unwrap();
-		//dispatch(signin(userData));
+		try {
+			await login(userData).unwrap();
+		} catch (error) {
+			errorNotification(error.data.message, "logIn");
+		}
 	};
 	const handleFacebooklogin = () => {
 		//dispatch(facebookSignin());
@@ -44,7 +48,6 @@ const Signin = () => {
 				</p>
 			</Form>
 			<FacebookButton onClick={handleFacebooklogin}>Sign In with Facebook</FacebookButton>
-			<p>{isError && error.data.message}</p>
 		</Container>
 	);
 };

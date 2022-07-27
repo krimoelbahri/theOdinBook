@@ -24,7 +24,10 @@ function DisplayDD() {
 				</IconContainer>
 				<div className='content'>
 					<span>
-						<h6>Dark Mode</h6>
+						<h6>
+							Dark Mode <p style={{ color: "red" }}>*Comming Soon*</p>
+							{/*TODO: delete this when finishing dark mode */}
+						</h6>
 						<p>
 							Adjust the appearance of SocialBook to reduce glare and give your eyes a
 							break.

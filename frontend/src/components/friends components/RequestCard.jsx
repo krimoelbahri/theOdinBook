@@ -1,24 +1,15 @@
 import { CardContainer, CardButton } from "../../styles/friends";
-import { friendRequestreply } from "../../features/auth/userSlice";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
 import { errorNotification } from "../../helpers/notification";
+import { useFriendRequestreplyMutation } from "../../features/auth/user-api-query";
 
-export default function RequestCard({ user, currentuser }) {
-	const dispatch = useDispatch();
-
-	const [loading, setLoading] = useState(false);
+export default function RequestCard({ user, currentuser, token, currentUserFetching }) {
+	const [requestFriend, { isLoading }] = useFriendRequestreplyMutation();
 
 	async function respondToFriendRequest(id, action) {
 		try {
-			setLoading(true);
-			await dispatch(
-				friendRequestreply({ author: currentuser._id, friend: id, action }),
-			).unwrap();
-			setLoading(false);
+			await requestFriend({ author: currentuser._id, friend: id, action, token }).unwrap();
 		} catch (error) {
 			errorNotification(error.data.message, "req-card-error");
-			setLoading(false);
 		}
 	}
 
@@ -26,7 +17,7 @@ export default function RequestCard({ user, currentuser }) {
 		<CardContainer>
 			<img src={user?.profilePic.url} alt='Ball' className='m-b-10' />
 			<h2 className='m-b-10'>{user?.name}</h2>
-			{!loading && (
+			{!isLoading && !currentUserFetching && (
 				<>
 					<CardButton
 						className='m-b-10'
@@ -45,7 +36,7 @@ export default function RequestCard({ user, currentuser }) {
 					</CardButton>
 				</>
 			)}
-			{loading && (
+			{isLoading && (
 				<CardButton>
 					<i className='fa-solid fa-spinner fa-spin-pulse'></i>
 				</CardButton>

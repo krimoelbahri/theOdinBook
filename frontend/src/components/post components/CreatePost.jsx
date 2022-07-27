@@ -10,8 +10,8 @@ function CreatePost() {
 	return (
 		<CreatePostContainer>
 			<div className='subdiv up b-b'>
-				<Link to={`/${user._id}`}>
-					<img className='c-p' src={user.profilePic.url} alt='Pr' />
+				<Link to={`/${user?._id}`}>
+					<img className='c-p' src={user?.profilePic?.url} alt='Pr' />
 				</Link>
 
 				{user && (
