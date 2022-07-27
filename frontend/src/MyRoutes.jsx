@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./App";
-import { HeaderLayout, Home, Friends, Watch, Profile, Signin, Signup } from "./pages";
+import { HeaderLayout, Home, Friends, Watch, Profile, Signin, Signup, NotFound } from "./pages";
 
 function MyRoutes() {
 	const { user } = useAuth();
@@ -14,6 +14,7 @@ function MyRoutes() {
 				<Route path='signup' element={!user ? <Signup /> : <Navigate to={"/"} />} />
 				<Route path='signin' element={!user ? <Signin /> : <Navigate to={"/"} />} />
 			</Route>
+			<Route path='*' element={<NotFound />} />
 		</Routes>
 	);
 }
