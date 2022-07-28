@@ -34,6 +34,9 @@ export const MainContainer = styled.div`
 	width: 450px;
 	min-height: 100%;
 	position: relative;
+	@media (max-width: 700px) {
+		margin-bottom: 60px;
+	}
 `;
 /* LeftBar styling */
 export const LBContainer = styled(SideBarContainer)`
@@ -144,7 +147,6 @@ export const CreatePostContainer = styled(PostContainer)`
 		padding: 5px 10px 10px 10px;
 		p {
 			width: calc(100% - 50px);
-			height: 40px;
 			line-height: 20px;
 			padding: 10px 20px;
 			border-radius: 20px;
