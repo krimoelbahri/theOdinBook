@@ -47,6 +47,16 @@ function ProfilePicModal() {
 			</div>
 			<ModalMediaSectionContainer>
 				<ModalMediaarea active={true}>
+					{url && (
+						<span
+							className='item'
+							onClick={() => {
+								setUrl(null);
+							}}
+						>
+							<i className='fa-solid fa-xmark'></i>
+						</span>
+					)}
 					<AddPhoto url={url} setUrl={setUrl} setData={setData} />
 				</ModalMediaarea>
 			</ModalMediaSectionContainer>
