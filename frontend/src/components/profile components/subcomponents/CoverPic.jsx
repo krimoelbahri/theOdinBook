@@ -15,7 +15,7 @@ function CoverPic({ profileUser, loading }) {
 			{user?._id === profileUser?._id && (
 				<button onClick={() => dispatch(handleCPModal(true))}>
 					<i className='fa-solid fa-camera'></i>
-					Edit Cover Photo
+					<p>Edit Cover Photo</p>
 				</button>
 			)}
 		</Skeleton>
