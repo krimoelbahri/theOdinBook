@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { uploadImage } = require("../middleware/firebase");
+const { uploadFile } = require("../middleware/firebase");
 
 // Require controller modules.
 var postsController = require("../controllers/postsController");
@@ -20,7 +20,7 @@ router.get("/:id", postsController.getPost);
 
 // Adding new Post
 // URL /api/posts/
-router.post("/", protect, uploadImage.single("imgFile"), postsController.addPost);
+router.post("/", protect, uploadFile, postsController.addPost);
 
 // Adding new comment
 //URL /api/posts/:id/comment

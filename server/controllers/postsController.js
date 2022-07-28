@@ -87,8 +87,7 @@ exports.getPost = asyncHandler(async function (req, res) {
 	res.status(200).json(post);
 });
 
-// POST adding post
-exports.addPost = asyncHandler(async function (req, res) {
+exports.addPost = asyncHandler(async function (req, res, next) {
 	let { description, author } = req.body;
 	let postImage = { url: req.file?.publicUrl, path: req.file?.fileRef.name };
 
@@ -264,7 +263,6 @@ exports.updatePost = asyncHandler(async function (req, res) {
 // DELETE a post
 // route DELETE /api/posts/:id
 exports.deletePost = asyncHandler(async function (req, res) {
-	console.log("hi");
 	let id = req.params.id;
 	const deletedPost = await Post.findByIdAndDelete(id).populate("comments");
 	for (const element of deletedPost.comments) {

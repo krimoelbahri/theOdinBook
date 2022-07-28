@@ -28,5 +28,13 @@ const uploadImage = Multer({
 		}
 	},
 });
-
-module.exports = { uploadImage };
+const uploadFile = function (req, res, next) {
+	uploadImage.single("imgFile")(req, res, (err) => {
+		if (err) {
+			res.status(400);
+			next(err);
+		}
+		next();
+	});
+};
+module.exports = { uploadFile };

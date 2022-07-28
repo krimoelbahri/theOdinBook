@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { protect } = require("../middleware/authMiddleware");
-const { uploadImage } = require("../middleware/firebase");
+const { uploadFile } = require("../middleware/firebase");
 
 // Require controller modules.
 var authController = require("../controllers/authController");
@@ -48,6 +48,6 @@ router.put("/friend-request-reply", protect, authController.friendRequestReply);
 
 //Update user
 //Link: /api/user/:id
-router.put("/:id", protect, uploadImage.single("imgFile"), authController.updateUser);
+router.put("/:id", protect, uploadFile, authController.updateUser);
 
 module.exports = router;
