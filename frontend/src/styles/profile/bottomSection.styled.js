@@ -15,6 +15,9 @@ export const BottomSectionContainer = styled.div`
 		@media (max-width: 850px) {
 			justify-content: center;
 		}
+		@media (max-width: 700px) {
+			margin-bottom: 60px;
+		}
 	}
 `;
 export const ProfileLeftBar = styled.div`
