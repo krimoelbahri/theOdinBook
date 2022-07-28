@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ModalContainer, Loader } from "../../styles/Modals";
 import { handlePostModal } from "../../features/Modal/modalSlice";
@@ -13,7 +13,7 @@ function PostModal() {
 	//using Redux
 	const dispatch = useDispatch();
 	const { user, token } = useAuth();
-	const [addPost] = useAddPostMutation();
+	const [addPost, addPostResult] = useAddPostMutation();
 
 	//useState state handeling post data
 	const [media, setMedia] = useState(false);
@@ -33,6 +33,11 @@ function PostModal() {
 		}
 		setIsLoading(false);
 	}
+
+	useEffect(() => {
+		if (addPostResult.isError)
+			errorNotification(addPostResult.error.data.message, "profilePic-update");
+	}, [addPostResult.isError, addPostResult.error]);
 
 	return (
 		<ModalContainer onSubmit={handleSubmit}>

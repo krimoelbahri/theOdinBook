@@ -100,27 +100,32 @@ exports.addPost = asyncHandler(async function (req, res) {
 		res.status(400);
 		throw new Error("all fields are required");
 	}
-	const post = await Post.create({
-		description,
-		postImage,
-		author,
-		comments: [],
-		likes: [],
-	});
-	await post.populate([
-		{ path: "author", select: "name profilePic", model: "User" },
-		{
-			path: "comments",
-			model: "Comment",
-			populate: {
-				path: "author",
-				select: "name profilePic ",
-				model: "User",
+	try {
+		const post = await Post.create({
+			description,
+			postImage,
+			author,
+			comments: [],
+			likes: [],
+		});
+		await post.populate([
+			{ path: "author", select: "name profilePic", model: "User" },
+			{
+				path: "comments",
+				model: "Comment",
+				populate: {
+					path: "author",
+					select: "name profilePic ",
+					model: "User",
+				},
 			},
-		},
-		{ path: "likes", select: "name", model: "User" },
-	]);
-	res.status(200).json(post);
+			{ path: "likes", select: "name", model: "User" },
+		]);
+		res.status(200).json(post);
+	} catch (error) {
+		res.status(400);
+		throw new Error(error);
+	}
 });
 
 // Add a new Comment
