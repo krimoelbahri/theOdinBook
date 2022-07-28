@@ -10,7 +10,7 @@ export const ShortcutsContainer = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	@media (max-width: 700px) {
-		width: 100%;
+		width: 100vw;
 		background-color: ${({ theme }) => theme.cardsBGC};
 		box-shadow: ${({ theme }) => theme.mainBS};
 		padding: 5px 30px;
