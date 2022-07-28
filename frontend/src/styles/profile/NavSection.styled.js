@@ -13,6 +13,7 @@ export const NavWraper = styled.div`
 	width: 100%;
 	max-width: 850px;
 	height: 100%;
+	overflow-y: scroll;
 	margin: 0 auto;
 	visibility: ${({ visible }) => (visible ? "visible" : "hidden")};
 	opacity: ${({ visible }) => (visible ? "1" : "0")};
