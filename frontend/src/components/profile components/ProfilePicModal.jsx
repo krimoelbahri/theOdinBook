@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
 	ModalContainer,
@@ -34,11 +34,6 @@ function ProfilePicModal() {
 			errorNotification(error.data.message, "profilePic-update");
 		}
 	}
-
-	useEffect(() => {
-		if (updateUserResult.isError)
-			errorNotification(updateUserResult.error.data.message, "profilePic-update");
-	}, [updateUserResult.isError, updateUserResult.error]);
 
 	return (
 		<ModalContainer onSubmit={handleSubmit}>
