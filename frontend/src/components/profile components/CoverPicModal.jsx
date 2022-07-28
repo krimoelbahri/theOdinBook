@@ -39,7 +39,7 @@ function CoverPicModal() {
 		<ModalContainer onSubmit={handleSubmit}>
 			<div className='top-section'>
 				<ModalHeader className='b-b'>
-					<h2>Update Profile Picture</h2>
+					<h2>Update Cover Picture</h2>
 					<span className='item' onClick={() => dispatch(handleCPModal(false))}>
 						<i className='fa-solid fa-xmark'></i>
 					</span>
