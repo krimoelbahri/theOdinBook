@@ -71,9 +71,10 @@ exports.signupUser = asyncHandler(async function (req, res) {
 		throw new Error("all fields are required");
 	}
 
-	const userExists = await User.findOne({ email });
+	const userExistsEmail = await User.findOne({ email });
+	const userExistsName = await User.findOne({ name });
 
-	if (userExists) {
+	if (userExistsEmail || userExistsName) {
 		res.status(400);
 		throw new Error("User already exists");
 	}
@@ -101,7 +102,7 @@ exports.signupUser = asyncHandler(async function (req, res) {
 				res.status(400);
 				throw new Error("login error");
 			}
-			res.status(201).json(user);
+			res.status(201).json(" user created");
 		});
 	} else {
 		res.status(400);
@@ -109,6 +110,7 @@ exports.signupUser = asyncHandler(async function (req, res) {
 	}
 });
 
+//Signin
 exports.localSigninUser = asyncHandler(async function (req, res, next) {
 	passport.authenticate("local", function (err, user, info) {
 		if (err) {
@@ -156,7 +158,6 @@ exports.logout = function (req, res) {
 };
 
 //Update User
-//Link: /api/user/:id
 exports.updateUser = asyncHandler(async function (req, res) {
 	if (!req.file) {
 		res.status(400);
@@ -168,15 +169,11 @@ exports.updateUser = asyncHandler(async function (req, res) {
 	let id = req.params.id;
 
 	try {
-		const user = await User.findById(id).select("-password");
+		const user = await User.findById(id);
 		if (action === "profile") user.profilePic = data;
 		if (action === "cover") user.coverPic = data;
 		await user.save();
-		await user.populate([
-			{ path: "friends", model: "User", select: "name profilePic" },
-			{ path: "friendRequests", model: "User", select: "name profilePic" },
-		]);
-		res.status(200).json(user);
+		res.status(200).json({ profilePic: user.profilePic, coverPic: user.coverPic });
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -188,20 +185,17 @@ exports.friendRequest = asyncHandler(async function (req, res) {
 	let { author, friend, action } = req.body;
 	try {
 		const requestedFriend = await User.findById(friend).select("-password");
-		if (action === "cancel") {
+		if (action === "cancel" && requestedFriend.friendRequests.includes(author)) {
 			requestedFriend.friendRequests.splice(
 				requestedFriend.friendRequests.indexOf(author),
 				1,
 			);
-		} else {
+		}
+		if (action === "request" && !requestedFriend.friendRequests.includes(author)) {
 			requestedFriend.friendRequests.push(author);
 		}
 		await requestedFriend.save();
-		await requestedFriend.populate([
-			{ path: "friends", model: "User", select: "name profilePic" },
-			{ path: "friendRequests", model: "User", select: "name profilePic" },
-		]);
-		res.status(200).json(requestedFriend);
+		res.status(200).json(requestedFriend.friendRequests);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -212,29 +206,36 @@ exports.friendRequest = asyncHandler(async function (req, res) {
 exports.friendRequestReply = asyncHandler(async function (req, res) {
 	let { author, friend, action } = req.body;
 	try {
-		const _friend = await User.findById(friend).select("-password");
-		const user = await User.findById(author).select("-password");
+		const _friend = await User.findById(friend);
+		const user = await User.findById(author);
 
-		if (action === "accept") {
+		if (
+			action === "accept" &&
+			!user.friends.includes(friend) &&
+			user.friendRequests.includes(friend) &&
+			!_friend.friends.includes(author)
+		) {
 			user.friends.push(friend);
 			_friend.friends.push(author);
 			user.friendRequests.splice(user.friendRequests.indexOf(friend), 1);
 		}
-		if (action === "remove") {
+
+		if (
+			action === "remove" &&
+			user.friends.includes(friend) &&
+			_friend.friends.includes(author)
+		) {
 			user.friends.splice(user.friends.indexOf(friend), 1);
 			_friend.friends.splice(user.friends.indexOf(author), 1);
 		}
 
-		if (action === "deny") {
+		if (action === "deny" && user.friendRequests.includes(friend)) {
 			user.friendRequests.splice(user.friendRequests.indexOf(friend), 1);
 		}
 		await _friend.save();
 		await user.save();
-		await user.populate([
-			{ path: "friends", model: "User", select: "name profilePic" },
-			{ path: "friendRequests", model: "User", select: "name profilePic" },
-		]);
-		res.status(200).json(user);
+
+		res.status(200).json({ userFriends: user.friends, userFriendsReq: user.friendRequests });
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
