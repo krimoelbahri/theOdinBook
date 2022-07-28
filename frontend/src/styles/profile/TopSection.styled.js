@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const TopSectionContainer = styled.div`
 	width: 100%;
-	height: calc(100vh - 135px);
 	position: relative;
 	margin-top: 60px;
 	margin-bottom: 1px;
@@ -11,7 +10,7 @@ export const TopSectionContainer = styled.div`
 `;
 export const CoverPicWrapper = styled.div`
 	width: 100%;
-	height: 70%;
+	max-height: 350px;
 	background: linear-gradient(
 		0deg,
 		white 0%,
@@ -47,25 +46,40 @@ export const CoverPicWrapper = styled.div`
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+			@media (max-width: 700px) {
+				width: unset;
+				border-radius: 50%;
+				bottom: 20px;
+				p {
+					display: none;
+				}
+			}
 		}
 	}
 `;
 export const ProfileInfoWrapper = styled.div`
 	width: 100%;
-	height: 30%;
+	max-height: 150px;
 	background-color: ${({ theme }) => theme.cardsBGC};
 	display: flex;
 	justify-content: center;
 	z-index: 1;
+	@media (max-width: 700px) {
+		max-height: unset;
+	}
 	.wrapper {
 		max-width: 900px;
 		width: 100%;
-		height: 100%;
 		padding: 0 20px;
 		position: relative;
 		display: flex;
 		flex-direction: row;
 		align-items: flex-end;
+		@media (max-width: 700px) {
+			flex-direction: column;
+			padding: 0;
+			align-items: center;
+		}
 	}
 `;
 export const ProfilePicWrapper = styled.div`
@@ -77,6 +91,10 @@ export const ProfilePicWrapper = styled.div`
 	border: 5px solid white;
 	background-color: ${({ theme }) => theme.cardsBGC};
 	z-index: 1;
+	@media (max-width: 700px) {
+		top: -30px;
+		margin: 0;
+	}
 	img {
 		opacity: ${({ visible }) => (visible ? "1" : "0")};
 		border-radius: 50%;
@@ -106,6 +124,11 @@ export const ProfileName = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
+	@media (max-width: 700px) {
+		position: relative;
+		top: -20px;
+		align-items: center;
+	}
 	h1 {
 		font-size: 2rem;
 	}
@@ -119,6 +142,9 @@ export const ProfilButtons = styled.div`
 	flex-direction: row;
 	flex-grow: 1;
 	position: relative;
+	@media (max-width: 700px) {
+		top: -10px;
+	}
 	button {
 		height: 30px;
 		padding: 0px 10px;
