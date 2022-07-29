@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const path = require("path");
 require("dotenv").config();
 const mongoose = require("mongoose");
@@ -33,7 +34,21 @@ passport.deserializeUser(function (id, done) {
 	});
 });
 //----------------
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(
+	session({
+		secret: "odin_secret",
+		store: MongoStore.create({
+			mongoUrl: mongoDB,
+			autoRemove: "native",
+			touchAfter: 24 * 3600,
+			crypto: {
+				secret: process.env.JWT_SECRET,
+			},
+		}),
+		resave: false,
+		saveUninitialized: true,
+	}),
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());

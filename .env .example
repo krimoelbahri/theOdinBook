@@ -1,0 +1,26 @@
+PORT= Number # 8080  
+NODE_ENV = # development || production
+
+#mongodb URI
+MONGODB_URI_DEV = "MONGODB URI"
+
+#secrets
+JWT_SECRET= String 
+
+
+#facebook credentials 
+# if you don't know what are these google how to get them.
+FACEBOOK_APP_ID= 
+FACEBOOK_APP_SECRET= 
+
+#multer firebas storage conf
+# if you don't know what are these google how to get them.
+
+PRIVATEKEY=-----BEGIN PRIVATE KEY-----\"THE KEY"\n-----END PRIVATE KEY-----\n
+PROJECTID=
+STORAGEBUCKET=
+CLIENTEMAIL=
+
+#user pics
+USER_PIC= IMG URL
+COVER_PIC= IMG URL
