@@ -204,11 +204,11 @@ Project Link: [https://github.com/krimoelbahri/theOdinBook](https://github.com/k
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/karim-guezlane
 [product-screenshot]: images/screenshot.png
-[redux.js]: https://img.shields.io/badge/Redux-000000?style=for-the-badge&logo=Redux&logoColor=white
+[redux.js]: https://img.shields.io/badge/Redux-20232A?style=for-the-badge&logo=Redux&logoColor=61DAFB
 [redux-url]: https://redux-toolkit.js.org/
 [react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [react-url]: https://reactjs.org/
 [express.js]: https://img.shields.io/badge/Express-20232A?style=for-the-badge&logo=Express&logoColor=61DAFB
 [express-url]: https://expressjs.com/
-[passport.js]: https://img.shields.io/badge/Passport-35495E?style=for-the-badge&logo=Passport&logoColor=4FC08D
+[passport.js]: https://img.shields.io/badge/Passport-20232A?style=for-the-badge&logo=Passport&logoColor=61DAFB
 [passport-url]: https://www.passportjs.org/
