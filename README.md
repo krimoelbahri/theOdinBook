@@ -75,7 +75,7 @@
 TODO: add this later
 [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-This project is made as the Final project in the node.js path for _The Odin Project_ curriculum .
+This project is made as the Final project in the node.js path for **_The Odin Project_** curriculum .
 It's a facebook clone with a lot of the main site features like:
 
 -   Authentication
@@ -115,7 +115,6 @@ It's a facebook clone with a lot of the main site features like:
     npm install
     ```
 3. Install NPM packages inside the frontend folder
-   Install NPM packages
     ```sh
     npm install
     ```
