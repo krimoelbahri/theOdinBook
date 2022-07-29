@@ -119,7 +119,8 @@ It's a facebook clone with a lot of the main site features like:
     ```sh
     npm install
     ```
-4. Make a .env file based on the .env.example
+4. Make a `.env` file based on the `.env.example`
+
 5. Run the app
     ```sh
     npm run dev
