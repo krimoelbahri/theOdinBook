@@ -73,9 +73,16 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!--
+TODO: add this later
+[![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `krimoelbahri`, `theOdinBook`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+This project is made as the Final project in the node.js path for _The Odin Project_ curriculum .
+It's a facebook clone with a lot of the main site features like:
+
+-   Authentication
+-   CRUD functionalities on Posts, Users.
+-   Handeling friend requests & friend requests responses & unfriending
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -92,12 +99,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
 
 -   npm
     ```sh
@@ -106,29 +108,24 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
     ```sh
     git clone https://github.com/krimoelbahri/theOdinBook.git
     ```
-3. Install NPM packages
+2. Install NPM packages
     ```sh
     npm install
     ```
-4. Enter your API in `config.js`
-    ```js
-    const API_KEY = "ENTER YOUR API";
+3. Install NPM packages inside the frontend folder
+   Install NPM packages
+    ```sh
+    npm install
     ```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- USAGE EXAMPLES -->
-
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+4. Make a .env file based on the .env.example
+5. Run the app
+    ```sh
+    npm run dev
+    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -136,10 +133,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
--   [ ] Feature 1
--   [ ] Feature 2
--   [ ] Feature 3
-    -   [ ] Nested Feature
+-   [ ] Add live chat feature
+-   [ ] Make live updates between users
+-   [ ] Handeling queries state all around the app
 
 See the [open issues](https://github.com/krimoelbahri/theOdinBook/issues) for a full list of proposed features (and known issues).
 
@@ -185,6 +181,7 @@ Project Link: [https://github.com/krimoelbahri/theOdinBook](https://github.com/k
 ## Acknowledgments
 
 -   [Font Awesome](https://fontawesome.com)
+-   [Mantine ](https://mantine.dev/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
