@@ -116,6 +116,7 @@ It's a facebook clone with a lot of the main site features like:
     ```
 3. Install NPM packages inside the frontend folder
     ```sh
+    cd frontend
     npm install
     ```
 4. Make a `.env` file based on the `.env.example`
