@@ -33,8 +33,6 @@
 <h3 align="center">The Odin-Book "b-sociale"</h3>
 
   <p align="center">
-    project_description
-    <br />
     <a href="https://b-sociale.herokuapp.com/">View Demo</a>
     ·
     <a href="https://github.com/krimoelbahri/theOdinBook/issues">Report Bug</a>
