@@ -23,6 +23,7 @@ exports.getPosts = asyncHandler(async function (req, res) {
 		.catch((err) => {
 			res.status(400);
 			throw new Error(err);
+			return
 		});
 	res.status(200).json(posts);
 });
@@ -49,6 +50,7 @@ exports.getUserPosts = asyncHandler(async function (req, res) {
 		.catch((err) => {
 			res.status(400);
 			throw new Error("something went wrong");
+			return
 		});
 	res.status(200).json(posts);
 });
@@ -82,6 +84,7 @@ exports.getPost = asyncHandler(async function (req, res) {
 		.catch((err) => {
 			res.status(400);
 			throw new Error("Post not found");
+			return
 		});
 
 	res.status(200).json(post);
@@ -94,10 +97,12 @@ exports.addPost = asyncHandler(async function (req, res, next) {
 	if (description && description !== "null" && !req.file) {
 		res.status(400);
 		throw new Error("Please include an image");
+		return
 	}
 	if (!description || description === "null") {
 		res.status(400);
 		throw new Error("all fields are required");
+		return
 	}
 	try {
 		const post = await Post.create({
@@ -120,7 +125,7 @@ exports.addPost = asyncHandler(async function (req, res, next) {
 			},
 			{ path: "likes", select: "name", model: "User" },
 		]);
-		res.status(200).json(post);
+		return res.status(200).json(post);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -135,6 +140,7 @@ exports.addComment = asyncHandler(async function (req, res) {
 	if (!text || !author) {
 		res.status(400);
 		throw new Error("all fields are required");
+		return
 	}
 	try {
 		let post = await Post.findById(postId);
@@ -182,7 +188,7 @@ exports.deleteComment = asyncHandler(async function (req, res) {
 			post.comments.splice(post.comments.indexOf(commentId), 1);
 		}
 		let savedPost = await post.save();
-		res.status(200).json(savedPost);
+		return res.status(200).json(savedPost);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -197,6 +203,7 @@ exports.addLike = asyncHandler(async function (req, res) {
 	if (!author) {
 		res.status(400);
 		throw new Error("no user");
+		return
 	}
 	try {
 		let post = await Post.findById(postId);
@@ -227,7 +234,7 @@ exports.addLike = asyncHandler(async function (req, res) {
 				model: "User",
 			},
 		]);
-		res.status(200).json(post);
+		return res.status(200).json(post);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -242,6 +249,7 @@ exports.updatePost = asyncHandler(async function (req, res) {
 	if (!title || !text || !author || !status) {
 		res.status(400);
 		throw new Error("all fields are required");
+		return
 	}
 	const post = await Post.findById(id);
 	const updatedFields = { title, text, author, status };
@@ -253,7 +261,7 @@ exports.updatePost = asyncHandler(async function (req, res) {
 		)
 			.populate("author")
 			.populate("comments");
-		res.status(200).json(updatedPost);
+		return res.status(200).json(updatedPost);
 	} else {
 		res.status(400);
 		throw new Error("something went wrong");
@@ -264,9 +272,16 @@ exports.updatePost = asyncHandler(async function (req, res) {
 // route DELETE /api/posts/:id
 exports.deletePost = asyncHandler(async function (req, res) {
 	let id = req.params.id;
-	const deletedPost = await Post.findByIdAndDelete(id).populate("comments");
+	try {
+		const deletedPost = await Post.findByIdAndDelete(id).populate("comments");
+	} catch (err) {
+		res.status(400);
+		throw new Error("something went wrong");
+		return
+	}
+
 	for (const element of deletedPost.comments) {
 		await Comment.findByIdAndDelete(element.id);
 	}
-	res.status(201).json({ id: deletedPost.id });
+	return res.status(201).json({ id: deletedPost.id });
 });

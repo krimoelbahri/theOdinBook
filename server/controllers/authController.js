@@ -21,7 +21,7 @@ exports.getUser = asyncHandler(async function (req, res) {
 				{ path: "friends", model: "User", select: "name profilePic" },
 				{ path: "friendRequests", model: "User", select: "name profilePic" },
 			]);
-		res.status(200).json(user);
+		return res.status(200).json(user);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -37,7 +37,7 @@ exports.getUsers = asyncHandler(async function (req, res) {
 				{ path: "friends", model: "User", select: "name profilePic" },
 				{ path: "friendRequests", model: "User", select: "name profilePic" },
 			]);
-		res.status(200).json(users);
+		return res.status(200).json(users);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -56,7 +56,7 @@ exports.getCurrentUser = asyncHandler(async function (req, res) {
 				{ path: "friendRequests", model: "User", select: "name profilePic" },
 			]);
 		let token = generateToken(user?._id);
-		res.status(200).json({ user, token });
+		return res.status(200).json({ user, token });
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -69,6 +69,7 @@ exports.signupUser = asyncHandler(async function (req, res) {
 	if (!name || !email || !password || !confirmPassword) {
 		res.status(400);
 		throw new Error("all fields are required");
+		return
 	}
 
 	const userExistsEmail = await User.findOne({ email });
@@ -77,11 +78,13 @@ exports.signupUser = asyncHandler(async function (req, res) {
 	if (userExistsEmail || userExistsName) {
 		res.status(400);
 		throw new Error("User already exists");
+		return
 	}
 
 	if (password !== confirmPassword) {
 		res.status(400);
 		throw new Error("Passwords didn't match");
+		return
 	}
 
 	//hashing password
@@ -101,8 +104,9 @@ exports.signupUser = asyncHandler(async function (req, res) {
 			if (err) {
 				res.status(400);
 				throw new Error("login error");
+				return
 			}
-			res.status(201).json(" user created");
+			return res.status(201).json(" user created");
 		});
 	} else {
 		res.status(400);
@@ -126,7 +130,7 @@ exports.localSigninUser = asyncHandler(async function (req, res, next) {
 				res.status(400);
 				return next(Error(loginErr));
 			}
-			res.json(user);
+			return res.json(user);
 		});
 	})(req, res, next);
 });
@@ -162,6 +166,7 @@ exports.updateUser = asyncHandler(async function (req, res) {
 	if (!req.file) {
 		res.status(400);
 		throw new Error("Please include an image");
+		return
 	}
 
 	let { action } = req.body;
@@ -173,7 +178,7 @@ exports.updateUser = asyncHandler(async function (req, res) {
 		if (action === "profile") user.profilePic = data;
 		if (action === "cover") user.coverPic = data;
 		await user.save();
-		res.status(200).json({ profilePic: user.profilePic, coverPic: user.coverPic });
+		return res.status(200).json({ profilePic: user.profilePic, coverPic: user.coverPic });
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -195,7 +200,7 @@ exports.friendRequest = asyncHandler(async function (req, res) {
 			requestedFriend.friendRequests.push(author);
 		}
 		await requestedFriend.save();
-		res.status(200).json(requestedFriend.friendRequests);
+		return res.status(200).json(requestedFriend.friendRequests);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -235,7 +240,7 @@ exports.friendRequestReply = asyncHandler(async function (req, res) {
 		await _friend.save();
 		await user.save();
 
-		res.status(200).json({ userFriends: user.friends, userFriendsReq: user.friendRequests });
+		return res.status(200).json({ userFriends: user.friends, userFriendsReq: user.friendRequests });
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
