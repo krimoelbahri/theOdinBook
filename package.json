@@ -1,6 +1,10 @@
 {
 	"name": "theodinbook",
 	"version": "1.0.0",
+	"engines": {
+		"node": "17.x",
+		"npm": "8.x"
+	},
 	"description": "Social Media App",
 	"main": "index.js",
 	"scripts": {
