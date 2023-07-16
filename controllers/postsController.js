@@ -23,7 +23,7 @@ exports.getPosts = asyncHandler(async function (req, res) {
 		.catch((err) => {
 			res.status(400);
 			throw new Error(err);
-			return
+			return;
 		});
 	res.status(200).json(posts);
 });
@@ -50,7 +50,7 @@ exports.getUserPosts = asyncHandler(async function (req, res) {
 		.catch((err) => {
 			res.status(400);
 			throw new Error("something went wrong");
-			return
+			return;
 		});
 	res.status(200).json(posts);
 });
@@ -84,7 +84,7 @@ exports.getPost = asyncHandler(async function (req, res) {
 		.catch((err) => {
 			res.status(400);
 			throw new Error("Post not found");
-			return
+			return;
 		});
 
 	res.status(200).json(post);
@@ -97,12 +97,12 @@ exports.addPost = asyncHandler(async function (req, res, next) {
 	if (description && description !== "null" && !req.file) {
 		res.status(400);
 		throw new Error("Please include an image");
-		return
+		return;
 	}
 	if (!description || description === "null") {
 		res.status(400);
 		throw new Error("all fields are required");
-		return
+		return;
 	}
 	try {
 		const post = await Post.create({
@@ -140,7 +140,7 @@ exports.addComment = asyncHandler(async function (req, res) {
 	if (!text || !author) {
 		res.status(400);
 		throw new Error("all fields are required");
-		return
+		return;
 	}
 	try {
 		let post = await Post.findById(postId);
@@ -203,7 +203,7 @@ exports.addLike = asyncHandler(async function (req, res) {
 	if (!author) {
 		res.status(400);
 		throw new Error("no user");
-		return
+		return;
 	}
 	try {
 		let post = await Post.findById(postId);
@@ -249,7 +249,7 @@ exports.updatePost = asyncHandler(async function (req, res) {
 	if (!title || !text || !author || !status) {
 		res.status(400);
 		throw new Error("all fields are required");
-		return
+		return;
 	}
 	const post = await Post.findById(id);
 	const updatedFields = { title, text, author, status };
@@ -277,7 +277,7 @@ exports.deletePost = asyncHandler(async function (req, res) {
 	} catch (err) {
 		res.status(400);
 		throw new Error("something went wrong");
-		return
+		return;
 	}
 
 	for (const element of deletedPost.comments) {
